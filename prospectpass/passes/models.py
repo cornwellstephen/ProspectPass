@@ -1,13 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
 
 # Create your models here.
-class User(models.Model): # Have to fix this section to be a proper Django user
+class User(AbstractBaseUser): # It's now an abstract base user
 	user_netid = models.CharField(max_length = 200)
-	user_name = models.CharField(max_length = 200)
+	username = models.CharField(max_length=40, unique=True)
+	first_name = models.CharField(max_length=40, blank=True)
+	last_name = models.CharField(max_length=40, blank=True)
 	user_club = models.CharField(max_length = 200)
 	password = models.TextField()
-	is_staff = models.BooleanField()
-
+	is_admin = models.BooleanField(default=False)
+	def __str__(self):
+			return self.user_name
 
 class Pass(models.Model):
 	club_name = models.CharField(max_length = 200)
