@@ -3,8 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser
 
 # Create your models here.
 class User(AbstractBaseUser): # It's now an abstract base user
-	user_netid = models.CharField(max_length = 200)
-	username = models.CharField(max_length=40, unique=True)
+	username = models.CharField(max_length=40, unique=True) # use the netid as the username
 	first_name = models.CharField(max_length=40, blank=True)
 	last_name = models.CharField(max_length=40, blank=True)
 	user_club = models.CharField(max_length = 200)
