@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/userHmpg.js"></script>
+        <script type="text/javascript" src="js/passDetail.js"></script>
+    </head>
+
+    <body ng-app="ProspectPassApp" ng-controller="ProspectUserCtrl as ctrl">
+        <h1>User Passes, {{ctrl.name}}</h1>
+        <pass-detail 
+            ng-repeat="pass in ctrl.passes" 
+            pass-obj="pass">
+        </pass-detail>
+    </body>
+</html>
