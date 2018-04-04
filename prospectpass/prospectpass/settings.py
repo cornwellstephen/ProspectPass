@@ -27,10 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_cas_ng',
     'passes.apps.PassesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,6 +51,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MIDDLEWARE_CLASSES = [
+    'django_cas_ng.middleware.CASMiddleware',
+    ]
 
 ROOT_URLCONF = 'prospectpass.urls'
 
@@ -98,6 +104,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas_ng.backends.CASBackend',
 ]
 
 

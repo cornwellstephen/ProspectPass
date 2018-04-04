@@ -25,4 +25,6 @@ from passes.views import StudentViewSet
 urlpatterns = [
 	# url(r'^api/v1/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
+    url(r'accounts/login/$', django_cas_ng.views.login, name='cas_ng_login'),
+    url(r'accounts/logout/$', django_cas_ng.views.logout, name='cas_ng_logout'),
 ]
