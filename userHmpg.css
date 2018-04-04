@@ -1,0 +1,12 @@
+/*  USER HOMEPAGE STYLESHEET
+    Defines main page elements such as footers, headers. */
+
+.main-cont {
+    padding: 20px;
+}
+
+.main-hmpg-pass-date-cont {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

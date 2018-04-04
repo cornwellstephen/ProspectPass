@@ -1,3 +1,138 @@
-<p style="border: 1px solid #666">
-    {{$ctrl.passObj.club}}: {{$ctrl.passObj.name}}
-</p>
+<div class="pass-detail-cont"
+    style="background-color: {{$ctrl.passObj.color}}"
+    data-toggle="modal" 
+    data-target="#passDetailModal{{$ctrl.passNum}}"> 
+    <!-- <div class="pass-detail-hmpg-feedback"> -->
+        <p class="pass-detail-modal-hmpg-club">
+            {{$ctrl.passObj.club}}
+        </p>
+        <!-- <img class="pass-detail-hmpg-logo" 
+            src="logos/{{$ctrl.passObj.image}}"> -->
+</div>
+
+<!-- Modal -->
+<div class="modal" 
+    id="passDetailModal{{$ctrl.passNum}}" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="exampleModalCenterTitle" 
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" 
+        role="document">
+        <div class="modal-content">
+            <!-- style="background-color: {{$ctrl.passObj.color}}" -->
+            <div class="pass-detail-header-cont"
+                style="background-color: {{$ctrl.passObj.color}}">
+                <button type="button" 
+                    class="close pass-detail-modal-close float-right" 
+                    data-dismiss="modal" 
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-header">
+                    <div class="pass-detail-clubname-cont">
+                        <h1 class="pass-detail-modal-clubname">
+                            {{$ctrl.passObj.club}}
+                        </h1>
+                        <p class="pass-detail-modal-date">
+                            {{$ctrl.passObj.date}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p>&nbsp;</p>
+                <p class="pass-detail-modal-field">
+                    <strong>Pass Holder Name:</strong>
+                </p>
+                <p class="pass-detail-modal-value">
+                    {{$ctrl.passObj.name}}
+                </p>
+                <p>&nbsp;</p>
+                <p class="pass-detail-modal-field">
+                    <strong>Club Member Name:</strong> 
+                </p>
+                <p class="pass-detail-modal-value">
+                    {{$ctrl.passObj.memberName}}
+                </p>
+
+            </div>
+            <!-- FOOTER WITH ACTIVATE AND TRANSFER OPTIONS -->
+            <div class="modal-footer pass-detail-modal-footer"
+                ng-if="$ctrl.passObj.transferable">
+                <button type="button" 
+                    class="btn btn-light pass-detail-modal-btn" 
+                    data-dismiss="modal">
+                    Activate
+                </button>
+                <button type="button" 
+                    class="btn btn-info pass-detail-modal-btn"
+                    data-toggle="modal" 
+                    data-target="#passTransferModal{{$ctrl.passNum}}"
+                    ng-click="$ctrl.swapModalDetailToTransfer()">
+                    Transfer
+                </button>
+            </div>
+            <!-- FOOTER WITH COLORED BAR -->
+            <div class="modal-footer pass-detail-modal-footer pass-detail-modal-footer-activated"
+                ng-if="!$ctrl.passObj.transferable">
+                <div class="pass-detail-modal-btn">
+                    <p>Activated Pass</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PASS TRANSFER SCREEN -->
+<div class="modal" 
+    id="passTransferModal{{$ctrl.passNum}}" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="exampleModalCenterTitle" 
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" 
+        role="document">
+        <div class="modal-content">
+            <!-- style="background-color: {{$ctrl.passObj.color}}" -->
+            <div class="pass-detail-header-cont"
+                style="background-color: {{$ctrl.passObj.color}}">
+                <button type="button" 
+                    class="close pass-detail-modal-close float-right" 
+                    data-dismiss="modal" 
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-header">
+                    <div class="pass-detail-clubname-cont">
+                        <h1 class="pass-detail-modal-clubname">
+                            {{$ctrl.passObj.club}}
+                        </h1>
+                        <p class="pass-detail-modal-date">
+                            {{$ctrl.passObj.date}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p>ADD TRANSFER CONTENT</p>
+            </div>
+            <!-- FOOTER WITH CANCEL AND TRANSFER OPTIONS -->
+            <div class="modal-footer pass-detail-modal-footer"
+                ng-if="$ctrl.passObj.transferable">
+                <button type="button" 
+                    class="btn btn-danger pass-detail-modal-btn" 
+                    data-toggle="modal" 
+                    data-target="#passDetailModal{{$ctrl.passNum}}"
+                    ng-click="$ctrl.swapModalTransferToDetail()">
+                    Cancel
+                </button>
+                <button type="button" 
+                    class="btn btn-info pass-detail-modal-btn">
+                    Transfer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
