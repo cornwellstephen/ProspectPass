@@ -4,7 +4,7 @@ from rest_framework import permissions, viewsets
 
 from passes.models import Student
 from passes.permissions import IsStudentOwner
-from passes.serializer import StudentSerializer
+from passes.serializers import StudentSerializer
 # Create your views here.
 
 class StudentViewSet(viewsets.ModelViewSet):
@@ -28,5 +28,5 @@ class StudentViewSet(viewsets.ModelViewSet):
 			return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
 		return Response({
 			'status': 'Bad request',
-			'message': 'Account could not be created with received data.'
+			'message': 'Student could not be created with received data.'
 		}, status=status.HTTP_400_BAD_REQUEST)
