@@ -13,18 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 
 # from rest_framework_nested import routers
 from passes.views import StudentViewSet
+import django_cas_ng.views
 
 # router = routers.SimpleRouter()
 # router.register(r'students',StudentViewSet)
 
 urlpatterns = [
 	# url(r'^api/v1/', include(router.urls)),
+	url(r'^', include('passes.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'accounts/login/$', django_cas_ng.views.login, name='cas_ng_login'),
-    url(r'accounts/logout/$', django_cas_ng.views.logout, name='cas_ng_logout'),
+    url(r'login/$', django_cas_ng.views.login, name='cas_ng_login'),
+    url(r'logout/$', django_cas_ng.views.logout, name='cas_ng_logout'),
 ]

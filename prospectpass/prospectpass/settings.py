@@ -131,4 +131,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    '/Users/Yijia/Documents/princetonpy/static/',
+)
+
 AUTH_USER_MODEL = 'passes.Student'

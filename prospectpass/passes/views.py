@@ -5,7 +5,26 @@ from rest_framework import permissions, viewsets
 from passes.models import Student
 from passes.permissions import IsStudentOwner
 from passes.serializers import StudentSerializer
+
+from django.views import generic
+from rest_framework import mixins
+from rest_framework import generics
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 # Create your views here.
+class Index(generic.ListView):
+	template_name = 'index.html'
+
+	def get_queryset(self):
+		return
+
+class Homepage(LoginRequiredMixin, generic.ListView):
+	template_name = 'homepage.html'
+	login_url = 'login/'
+	raise_exception = False
+	def get_queryset(self):
+		return
 
 class StudentViewSet(viewsets.ModelViewSet):
 	lookup_field = 'NetId'
