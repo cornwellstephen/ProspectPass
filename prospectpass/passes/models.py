@@ -33,29 +33,18 @@ class Student(AbstractUser): # It's now an abstract base user
 	first_name = models.CharField(max_length=40, blank=True)
 	last_name = models.CharField(max_length=40, blank=True)
 	user_club = models.CharField(max_length = 200)
-	# password = models.TextField()
-	# is_staff = models.BooleanField(
-	# 	('staff status'),
-	# 	default=False,
-	# 	help_text=('Designates whether the user can log into this admin site.'),
-	# 	)
-	# is_superuser = models.BooleanField(default=False)
 
-	# objects = StudentManager()
+	def get_passes(self):
+		return self.passes.all()
 
-	# USERNAME_FIELD = 'NetId'
+	def sendpass(self, _pass, user_netid):
+		user = Student.objects.all().filter(NetId=user_netid)[0]
+		_pass.pass_user = user
+		_pass.save()
 
 	# def __str__(self):
-	# 	return self.USERNAME_FIELD
+	# 	return self.first_name + " " + self.last_name
 
-	# def __unicode__(self):
-	# 	return self.NetId
-
-	# def get_full_name(self):
-	# 	return ' '.join([self.first_name, self.last_name])
-
-	# def get_short_name(self):
-	# 	return self.first_name
 
 
 class Pass(models.Model):
@@ -65,4 +54,4 @@ class Pass(models.Model):
 	pass_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='passes')
 	pass_source = models.CharField(max_length = 200)
 	def __str__(self):
-		return self.pass_user.user_NetId + ': Passes'
+		return self.pass_user.NetId + ': ' + self.club_name + ' | ' + str(self.pass_date)
