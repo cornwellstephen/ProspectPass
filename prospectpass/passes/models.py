@@ -4,6 +4,9 @@ from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.conf import settings
 
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.models import Group, Permission
+
 # Create your models here.
 # class StudentManager(BaseUserManager):
 # 	def create_user(self, NetId, password=None, **kwargs):
@@ -32,7 +35,8 @@ class Student(AbstractUser): # It's now an abstract base user
 	NetId = models.CharField(max_length=40, blank=True)
 	first_name = models.CharField(max_length=40, blank=True)
 	last_name = models.CharField(max_length=40, blank=True)
-	user_club = models.CharField(max_length = 200)
+	user_club = models.CharField(max_length = 200, blank=True)
+	officer_status = models.BooleanField(default=False)
 
 	def get_passes(self):
 		return self.passes.all()
@@ -41,6 +45,42 @@ class Student(AbstractUser): # It's now an abstract base user
 		user = Student.objects.all().filter(NetId=user_netid)[0]
 		_pass.pass_user = user
 		_pass.save()
+
+	# def is_officer(user):
+	#     return Student.groups.filter(name="Club Officers").exists()
+
+	# creates and distributes the pass to club members
+	def createpass(self, p_date, num_passes):
+		if self.officer_status is True:
+			for student in Student.objects.all().filter(user_club=self.user_club):
+				while num_passes > 0:
+					_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.first_name + ' ' + student.last_name)
+					_pass.save()
+					num_passes = num_passes - 1
+		else:
+			pass
+
+	def assignOfficer(person):
+		if self.officer_status is True:
+			person.officer_status = True
+			person.save()
+		else:
+			pass
+
+	def officersend(self, p_date, user_netid):
+		if self.officer_status is True:
+			student = Student.objects.all().filter(NetId=user_netid)[0]
+			_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=self.first_name + ' ' + self.last_name)
+			_pass.save()
+			self.sendpass(_pass, user_netid)
+		else:
+			pass
+
+	class Meta:
+		permissions = (
+			("can_create_pass", "To create a pass"),
+			("can_distribute_pass", "To distribute passes")
+		)
 
 	# def __str__(self):
 	# 	return self.first_name + " " + self.last_name
@@ -52,6 +92,7 @@ class Pass(models.Model):
 	pass_date = models.DateField()
 	club_picture = models.FileField(upload_to='uploads/')
 	pass_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='passes')
-	pass_source = models.CharField(max_length = 200)
+	pass_source = models.CharField(max_length = 200, blank=True)
+	# this is how a pass will be displayed as a string
 	def __str__(self):
 		return self.pass_user.NetId + ': ' + self.club_name + ' | ' + str(self.pass_date)
