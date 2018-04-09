@@ -4,32 +4,9 @@ from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.conf import settings
 
-<<<<<<< Updated upstream
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.models import Group, Permission
 
-# Create your models here.
-# class StudentManager(BaseUserManager):
-# 	def create_user(self, NetId, password=None, **kwargs):
-
-# 		if not NetId:
-# 			raise ValueError('Users must have a valid NetId.')
-
-# 		student = self.model(
-# 			NetId=self.normalize_email(NetId)
-# 		)
-		
-# 		student.set_password(password)
-# 		student.save()
-
-# 		return student
-
-# 	def create_superuser(self, NetId, password=None, **kwargs):
-# 		student = self.create_user(NetId, password, **kwargs)
-# 		student.is_superuser = True
-# 		student.is_staff = True
-# 		student.save()
-# 		return student
 
 
 class Student(AbstractUser): # It's now an abstract base user
