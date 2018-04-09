@@ -46,17 +46,26 @@ class Student(AbstractUser): # It's now an abstract base user
 		_pass.pass_user = user
 		_pass.save()
 
+	def activate(self, _pass):
+		_pass.activated = True
+		_pass.save()
+
 	# def is_officer(user):
 	#     return Student.groups.filter(name="Club Officers").exists()
 
 	# creates and distributes the pass to club members
-	def createpass(self, p_date, num_passes):
+	def officerClubSend(self, p_date, num_passes):
 		if self.officer_status is True:
 			for student in Student.objects.all().filter(user_club=self.user_club):
-				while num_passes > 0:
+				# one pass for the officer when bulk creating
+				if student.officer_status is True:
 					_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.first_name + ' ' + student.last_name)
 					_pass.save()
-					num_passes = num_passes - 1
+				else:
+					while num_passes > 0:
+						_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.first_name + ' ' + student.last_name)
+						_pass.save()
+						num_passes = num_passes - 1
 		else:
 			pass
 
@@ -67,12 +76,12 @@ class Student(AbstractUser): # It's now an abstract base user
 		else:
 			pass
 
-	def officersend(self, p_date, user_netid):
+	def officerDirectSend(self, _pass, user_netid):
 		if self.officer_status is True:
 			student = Student.objects.all().filter(NetId=user_netid)[0]
-			_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=self.first_name + ' ' + self.last_name)
-			_pass.save()
-			self.sendpass(_pass, user_netid)
+			newpass = Pass(club_name=self.user_club, pass_date=_pass.pass_date, pass_user=student,pass_source=self.first_name + ' ' + self.last_name)
+			newpass.save()
+			self.sendpass(newpass, user_netid)
 		else:
 			pass
 
@@ -93,6 +102,8 @@ class Pass(models.Model):
 	club_picture = models.FileField(upload_to='uploads/')
 	pass_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='passes')
 	pass_source = models.CharField(max_length = 200, blank=True)
+	activated = models.BooleanField(default=False)
+	transferrable = models.BooleanField(default=False)
 	# this is how a pass will be displayed as a string
 	def __str__(self):
 		return self.pass_user.NetId + ': ' + self.club_name + ' | ' + str(self.pass_date)
