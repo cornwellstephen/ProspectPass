@@ -25,6 +25,7 @@ import django_cas_ng.views
 
 urlpatterns = [
 	# url(r'^api/v1/', include(router.urls)),
+    
 	url(r'^', include('passes.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'login/$', django_cas_ng.views.login, name='cas_ng_login'),
