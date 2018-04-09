@@ -30,15 +30,13 @@ from django.contrib.auth.models import Group, Permission
 # 		student.is_staff = True
 # 		student.save()
 # 		return student
-=======
->>>>>>> Stashed changes
+
 
 class Student(AbstractUser): # It's now an abstract base user
 	# username = models.CharField(max_length=40, blank=True) # use the NetId as the username
 	NetId = models.CharField(max_length=40, blank=True)
 	first_name = models.CharField(max_length=40, blank=True)
 	last_name = models.CharField(max_length=40, blank=True)
-<<<<<<< Updated upstream
 	user_club = models.CharField(max_length = 200, blank=True)
 	officer_status = models.BooleanField(default=False)
 
@@ -97,11 +95,6 @@ class Student(AbstractUser): # It's now an abstract base user
 
 	# def __str__(self):
 	# 	return self.first_name + " " + self.last_name
-
-=======
-	user_club = models.CharField(max_length = 200)
->>>>>>> Stashed changes
-
 
 class Pass(models.Model):
 	club_name = models.CharField(max_length = 200)
