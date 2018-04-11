@@ -14,8 +14,12 @@ router.register(prefix="students", viewset=StudentViewSet)
 # 	url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
 # ]
 urlpatterns = [
+<<<<<<< HEAD
 	url(r'^$', views.Index.as_view(), name = 'index'),
 	url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
 	url(r'^restapi/', include(router.urls)),
+=======
+	url(r'^', include(router.urls)),
+>>>>>>> 276740a2075c293a09853272c9e7fea5506dbf46
 	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
