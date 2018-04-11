@@ -151,6 +151,3 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 AUTH_USER_MODEL = 'passes.Student'
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
