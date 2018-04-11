@@ -1,0 +1,1 @@
+web: gunicorn prospectpass.wsgi --log-file -
