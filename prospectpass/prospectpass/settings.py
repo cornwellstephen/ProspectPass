@@ -151,15 +151,5 @@ CORS_ORIGIN_WHITELIST = (
 '127.0.0.1:8081',
 )
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
-}
-
-CORS_ORIGIN_WHITELIST = (
-'localhost:8081',
-'127.0.0.1:8081',
-)
 
 AUTH_USER_MODEL = 'passes.Student'
