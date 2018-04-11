@@ -43,8 +43,11 @@
           <div class="inner cover">
             <h1 class="cover-heading">Welcome, {{user.username}}</h1>
             <p class="lead">Easy access to the street</p>
-            <p class="lead">
+            {% for pass in user.passes.all %}
+            <p class="lead">{{pass}}</p>
+            {% endfor %}
               <a href="../information" class="btn btn-lg btn-default">Login</a>
+            }
             </p>
           </div>
 

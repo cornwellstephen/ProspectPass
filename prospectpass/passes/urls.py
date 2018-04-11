@@ -10,10 +10,12 @@ router.register(prefix="students", viewset=StudentViewSet)
 
 
 # urlpatterns = [
-# 	url(r'^$', views.Index.as_view(), name = 'index'),
-# 	url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
+	# url(r'^$', views.Index.as_view(), name = 'index'),
+	# url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
 # ]
 urlpatterns = [
-	url(r'^', include(router.urls)),
+	url(r'^$', views.Index.as_view(), name = 'index'),
+	url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
+	url(r'^restapi/', include(router.urls)),
 	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

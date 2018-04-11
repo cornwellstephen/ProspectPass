@@ -1,6 +1,6 @@
 pass.factory('Student', function($resource) {
         return $resource(
-            'http://localhost:8000/students/',
+            'http://localhost:8000/restapi/students/',
             {},
             {
                 'query': {
