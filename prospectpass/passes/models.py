@@ -76,7 +76,7 @@ class Student(AbstractUser): # It's now an abstract base user
 class Pass(models.Model):
 	club_name = models.CharField(max_length = 200)
 	pass_date = models.DateField()
-	club_picture = models.FileField(upload_to='uploads/')
+	club_picture = models.FileField(upload_to='uploads/', blank=True)
 	pass_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='passes')
 	pass_source = models.CharField(max_length = 200, blank=True)
 	activated = models.BooleanField(default=False)

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="SampleApplication">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,12 +41,17 @@
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">Welcome, {{user.first_name}}</h1>
+            <h1 class="cover-heading">Welcome, {{ user.first_name }}</h1>
             <p class="lead">Easy access to the street</p>
-            <p class="lead">
+            {% for pass in user.passes.all %}
+            <p class="lead">{{pass}}</p>
+            {% endfor %}
               <a href="../information" class="btn btn-lg btn-default">Login</a>
             </p>
           </div>
+
+
+        <ui-view></ui-view>
 
           <div class="mastfoot">
             <div class="inner">
@@ -59,6 +64,18 @@
       </div>
 
     </div>
+    <!--  Angular Setup -->
+    <script src="../static/js/angular.js"></script>
+    <script src="../static/js/angular-ui-router.js"></script>
+    <script src="../static/js/angular-resource.min.js"></script>
+
+    <!-- Application Setup -->
+    <script src="../static/app.js"></script>
+    <script src="../static/appRoutes.js"></script>
+
+    <!--  Controllers -->
+    <script src="../static/pass.control.js"></script>
+    <script src="../static/student.service.js"></script>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -132,7 +136,19 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    '/Users/Yijia/Documents/princetonpy/static/',
+    '/Users/Yijia/Documents/Princeton/ProspectPass/prospectpass/static',
+    '/Users/Yijia/Documents/Princeton/ProspectPass/prospectpass/client',
+)
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+CORS_ORIGIN_WHITELIST = (
+'localhost:8081',
+'127.0.0.1:8081',
 )
 
 AUTH_USER_MODEL = 'passes.Student'

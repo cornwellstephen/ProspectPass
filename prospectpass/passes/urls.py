@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from passes import views
 from django.views.generic import TemplateView
@@ -13,4 +13,9 @@ router.register(prefix="students", viewset=StudentViewSet)
 # 	url(r'^$', views.Index.as_view(), name = 'index'),
 # 	url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
 # ]
-urlpatterns = router.urls # note that this fucks up the above url patterns, testing just for angular
+urlpatterns = [
+	url(r'^$', views.Index.as_view(), name = 'index'),
+	url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
+	url(r'^restapi/', include(router.urls)),
+	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+]

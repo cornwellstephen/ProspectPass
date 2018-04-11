@@ -1,0 +1,13 @@
+<div ng-controller="PassController">
+	Students
+    <div ng-repeat="student in students">
+		<div style="margin-left: 20px;">
+			NetId: {{ student.NetId }} <br/>
+			First Name: {{ student.first_name }} <br/>
+			Last Name: {{ student.last_name }} <br/>
+			Club: {{ student.user_club }} <br/>
+			<hr/>
+		</div>
+    </div>
+    <br/>
+</div>
