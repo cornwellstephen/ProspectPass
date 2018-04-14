@@ -12,22 +12,15 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
+
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -38,7 +31,7 @@ SECRET_KEY = '34&m^3_w6d*2akgu!a8*bq-jfb$ge_v1jd(*aj!rkz-h583s&m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['prospectpass.herokuapp.com']
 
 CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
 
@@ -67,6 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -142,17 +136,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.normpath(os.path.join(BASE_DIR, 'static')),
-)
-
-STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
@@ -162,6 +145,15 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = (
 'localhost:8081',
 '127.0.0.1:8081',
+'prospectpass.herokuapp.com'
 )
 
 AUTH_USER_MODEL = 'passes.Student'
+
+STATICFILES_DIRS = (
+    os.path.normpath(os.path.join(BASE_DIR, 'static')),
+)
+
+STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
+
+STATIC_URL = '/static/'
