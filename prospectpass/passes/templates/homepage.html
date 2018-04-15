@@ -43,9 +43,17 @@
             <h1 class="cover-heading">Welcome, {{user.first_name}}</h1>
             {% for pass in user.passes.all %}
                 <p class="lead">{{pass.club_name}}</p>
+<!--                 <script> var pass = PassSerializer({{pass}})</script> -->
+                <script>
+                var django_variables = {};
+                django_variables.pass_date = '{{ pass.pass_date }}';
+                django_variables.pass_club = '{{ pass.club_name }}';
+                django_variables.pass_user = '{{ pass.pass_user }}';
+                django_variables.pass_source = '{{ pass.pass_source }}';
+                </script>
                 <pass-detail
                     pass-num="0"
-                    pass-obj="pass">
+                    pass-obj= "pass">
                 </pass-detail>
             {% endfor %}
         </div>
@@ -59,12 +67,13 @@
 
     <!-- ANGULAR -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
     <!-- JS -->
     <base href="{% static '' %}" />
     <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/userHmpg.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/passDetail.js' %}"></script>
+
+
 
   </body>
 </html>
