@@ -71,8 +71,8 @@ class Student(AbstractUser): # It's now an abstract base user
 			("can_distribute_pass", "To distribute passes")
 		)
 
-	# def __str__(self):
-	# 	return self.first_name + " " + self.last_name
+	def __str__(self):
+		return self.first_name + " " + self.last_name
 
 class Pass(models.Model):
 	club_name = models.CharField(max_length = 200)

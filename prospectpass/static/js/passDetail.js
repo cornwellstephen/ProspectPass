@@ -12,7 +12,7 @@ function PassDetailController($scope, $attrs, $element) {
     // $scope.pass = $scope.m.in[Constants.get("pass")];
     // $scope.pass_date = django_variables.pass_date;
     // $scope.club_name = django_variables.club_name;
-    // $scope.pass_user = django_variables.pass_user;
+    $scope.pass_user = django_variables.pass_user;
     // $scope.pass_source = django_variables.pass_source;
     this.$onInit = function() {
         console.log(this.passObj);

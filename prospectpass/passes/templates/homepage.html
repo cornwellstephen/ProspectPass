@@ -44,14 +44,13 @@
             {% for pass in user.passes.all %}
                 <p class="lead">{{pass.club_name}}</p>
 <!--                 <script> var pass = PassSerializer({{pass}})</script> -->
-<!--                 <script>
+                <script>
                 var django_variables = {};
-                django_variables.pass_date = '{{ pass.pass_date }}';
-                django_variables.pass_club = '{{ pass.club_name }}';
+                // django_variables.pass_date = '{{ pass.pass_date }}';
+                // django_variables.pass_club = '{{ pass.club_name }}';
                 django_variables.pass_user = '{{ pass.pass_user }}';
-                django_variables.pass_source = '{{ pass.pass_source }}';
-                </script> -->
-                <p>{{pass}}</p>
+                // django_variables.pass_source = '{{ pass.pass_source }}';
+                </script>
                 <pass-detail
                     pass-num='{{ forloop.counter }}'
                     pass-obj= '{{ pass }}'>
