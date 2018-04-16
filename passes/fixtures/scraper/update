@@ -1,0 +1,26 @@
+for i in a b c d e f g h i j k l m n o p q r s t u v w x y z
+do
+  for j in a b c d e f g h i j k l m n o p q r s t u v w x y z
+  do
+    ./scraper $i$j >x.out$i$j
+  done
+done
+
+for i in x.out??
+do
+  if wc $i | grep -s -q ' 200  '
+  then
+    id=`echo $i | sed 's/x.out//'`
+    for j in a b c d e f g h i j k l m n o p q r s t u v w x y z
+    do
+        ./scraper $id$j >x.out$id$j
+    done
+  fi
+done
+
+sort -u x.out* |
+awk '$NF ~ /^20(18|19|20|21)$/ {if(NF>4){print $1,$3,$4,$5}else{print $1,$2,$3,$4}}' > latest
+./reformat > allNames
+rm x.out*
+rm latest
+exit
