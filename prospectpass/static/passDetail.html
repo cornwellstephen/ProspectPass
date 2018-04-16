@@ -5,7 +5,7 @@
     data-target="#passDetailModal{{$ctrl.passNum}}"> 
     <!-- <div class="pass-detail-hmpg-feedback"> -->
         <p class="pass-detail-modal-hmpg-club">
-            {{club_name}}
+            {{$ctrl.passObj.fields.club_name}}
         </p>
         <!-- <img class="pass-detail-hmpg-logo" 
             src="logos/{{$ctrl.passObj.image}}"> -->
@@ -33,10 +33,10 @@
                 <div class="modal-header">
                     <div class="pass-detail-clubname-cont">
                         <h1 class="pass-detail-modal-clubname">
-                            {{club_name}}
+                            {{$ctrl.passObj.fields.club_name}}
                         </h1>
                         <p class="pass-detail-modal-date">
-                            {{pass_date}}
+                            {{$ctrl.passObj.fields.pass_date}}
                         </p>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     <strong>Club Member Name:</strong> 
                 </p>
                 <p class="pass-detail-modal-value">
-                    {{pass_source}}
+                    {{$ctrl.passObj.fields.pass_source}}
                 </p>
 
             </div>
@@ -107,10 +107,10 @@
                 <div class="modal-header">
                     <div class="pass-detail-clubname-cont">
                         <h1 class="pass-detail-modal-clubname">
-                            {{$ctrl.passObj.club}}
+                            {{$ctrl.passObj.fields.club_name}}
                         </h1>
                         <p class="pass-detail-modal-date">
-                            {{$ctrl.passObj.date}}
+                            {{$ctrl.passObj.fields.pass_date}}
                         </p>
                     </div>
                 </div>
