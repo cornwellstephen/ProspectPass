@@ -3,10 +3,11 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from passes import views
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
-from passes.views import StudentViewSet
+from passes.views import StudentViewSet, PassViewSet
 
 router = DefaultRouter()
 router.register(prefix="students", viewset=StudentViewSet)
+router.register(prefix="passes", viewset=PassViewSet)
 
 
 # urlpatterns = [

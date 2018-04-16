@@ -2,7 +2,7 @@ from django.contrib.auth import update_session_auth_hash
 
 from rest_framework import serializers
 
-from passes.models import Student
+from passes.models import Student, Pass
 
 class StudentSerializer(serializers.ModelSerializer):
 	
@@ -24,5 +24,11 @@ class StudentSerializer(serializers.ModelSerializer):
 
 		# 	update_session_auth_hash(self.context.get('request'), instance)
 		# 	return instance
+
+class PassSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model= Pass
+		fields = ('club_name', 'pass_date', 'club_picture', 'pass_user', 'pass_source', 'activated', 'transferrable')
 
 

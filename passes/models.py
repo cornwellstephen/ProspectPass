@@ -6,6 +6,7 @@ from django.conf import settings
 
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.models import Group, Permission
+from django.core import serializers
 
 
 
@@ -76,11 +77,12 @@ class Student(AbstractUser): # It's now an abstract base user
 class Pass(models.Model):
 	club_name = models.CharField(max_length = 200)
 	pass_date = models.DateField()
-	club_picture = models.FileField(upload_to='uploads/')
+	club_picture = models.FileField(upload_to='uploads/', blank=True)
 	pass_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='passes')
 	pass_source = models.CharField(max_length = 200, blank=True)
 	activated = models.BooleanField(default=False)
 	transferrable = models.BooleanField(default=False)
 	# this is how a pass will be displayed as a string
 	def __str__(self):
-		return self.pass_user.NetId + ': ' + self.club_name + ' | ' + str(self.pass_date)
+		return serializers.serialize('json', [self, ])
+

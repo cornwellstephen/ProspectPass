@@ -2,9 +2,9 @@ from django.shortcuts import render
 
 from rest_framework import permissions, viewsets
 
-from passes.models import Student
+from passes.models import Student, Pass
 from passes.permissions import IsStudentOwner
-from passes.serializers import StudentSerializer
+from passes.serializers import StudentSerializer, PassSerializer
 
 from django.views import generic
 from rest_framework import mixins
@@ -31,6 +31,9 @@ class StudentViewSet(viewsets.ModelViewSet):
 	queryset = Student.objects.all()
 	serializer_class = StudentSerializer
 
+class PassViewSet(viewsets.ModelViewSet):
+	queryset = Pass.objects.all()
+	serializer_class = PassSerializer
 	# def get_permissions(self):
 	# 	if self.request.method in permissions.SAFE_METHODS:
 	# 		return (permissions.AllowAny(),)
