@@ -1,12 +1,16 @@
 <button class="pass-detail-cont"
-    style="background-color: {{$ctrl.passObj.color}}"
+    style="background-color: {{$ctrl.buttonColor}}"
+    ng-mouseenter="$ctrl.changeBackgroundColorDark()"
+    ng-mouseleave="$ctrl.changeBackgroundColorLight()"
     data-toggle="modal" 
     data-target="#passDetailModal{{$ctrl.passNum}}"> 
     <!-- <div class="pass-detail-hmpg-feedback"> -->
         <p class="pass-detail-modal-hmpg-club">
             {{$ctrl.passObj[0].fields.club_name}}
         </p>
-        <p><em>{{$ctrl.passObj[0].fields.pass_date}}</em></p>
+        <p class="pass-detail-hmpg-date">
+            <em>{{ $ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) }}</em>
+        </p>
         <!-- <img class="pass-detail-hmpg-logo" 
             src="logos/{{$ctrl.passObj.image}}"> -->
 </button>
@@ -21,9 +25,8 @@
     <div class="modal-dialog modal-dialog-centered" 
         role="document">
         <div class="modal-content">
-            <!-- style="background-color: {{$ctrl.passObj.color}}" -->
             <div class="pass-detail-header-cont"
-                style="background-color: {{$ctrl.passObj.color}}">
+                style="background-color: {{$ctrl.colors[$ctrl.randomColorIndex]}}">
                 <button type="button" 
                     class="close pass-detail-modal-close float-right" 
                     data-dismiss="modal" 
@@ -120,8 +123,7 @@
                 <p>ADD TRANSFER CONTENT</p>
             </div>
             <!-- FOOTER WITH CANCEL AND TRANSFER OPTIONS -->
-            <div class="modal-footer pass-detail-modal-footer"
-                ng-if="$ctrl.passObj.transferable">
+            <div class="modal-footer pass-detail-modal-footer">
                 <button type="button" 
                     class="btn btn-danger pass-detail-modal-btn" 
                     data-toggle="modal" 

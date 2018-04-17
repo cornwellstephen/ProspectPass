@@ -37,13 +37,12 @@
                 </ul>
             </div>
         </nav>
-
+        <h1 class="cover-heading hmpg-welcome-banner">Welcome, {{user.first_name}}</h1>
         <div class="main-cont" 
             ng-app="ProspectPassApp" 
             ng-controller="ProspectUserCtrl as ctrl">
-            <h1 class="cover-heading">Welcome, {{user.first_name}}</h1>
             {% for pass in user.passes.all %}
-                <div class="main-hmpg-pass-date-cont col-sm-4">
+                <div class="main-hmpg-pass-date-cont">
                     <pass-detail
                         pass-num="{{ forloop.counter }}"
                         pass-obj= "{{ pass }}"
@@ -52,7 +51,34 @@
                 </div>
             {% endfor %}
             {% for pass in user.passes.all %}
-                <div class="main-hmpg-pass-date-cont col-sm-4">
+                <div class="main-hmpg-pass-date-cont">
+                    <pass-detail
+                        pass-num="{{ forloop.counter }}"
+                        pass-obj= "{{ pass }}"
+                        pass-user="{{ pass.pass_user}}">
+                    </pass-detail>
+                </div>
+            {% endfor %}
+            {% for pass in user.passes.all %}
+                <div class="main-hmpg-pass-date-cont">
+                    <pass-detail
+                        pass-num="{{ forloop.counter }}"
+                        pass-obj= "{{ pass }}"
+                        pass-user="{{ pass.pass_user}}">
+                    </pass-detail>
+                </div>
+            {% endfor %}
+            {% for pass in user.passes.all %}
+                <div class="main-hmpg-pass-date-cont">
+                    <pass-detail
+                        pass-num="{{ forloop.counter }}"
+                        pass-obj= "{{ pass }}"
+                        pass-user="{{ pass.pass_user}}">
+                    </pass-detail>
+                </div>
+            {% endfor %}
+            {% for pass in user.passes.all %}
+                <div class="main-hmpg-pass-date-cont">
                     <pass-detail
                         pass-num="{{ forloop.counter }}"
                         pass-obj= "{{ pass }}"

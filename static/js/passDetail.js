@@ -8,11 +8,55 @@ function PassDetailController($scope, $attrs, $element) {
         $("#passTransferModal"+this.passNum).modal('hide');
     };
 
+    this.colors = [
+        "#e24e42", 
+        "#e9b000", 
+        "#eb6e80", 
+        "#008f95", 
+        "#94618e", 
+        "#8fd8f2", 
+        "#273f5f", 
+        "#ee3377", 
+        "#e5e358", 
+        "#a7d2cb"
+    ];
+
+    this.colorsDarkened = [
+        "#d13d31", 
+        "#d8a000", 
+        "#da5d70", 
+        "#007e84", 
+        "#83507d", 
+        "#7ec7e1", 
+        "#062f4f", 
+        "#dd2266", 
+        "#d4d247", 
+        "#96c1ba"
+    ]
+
+    this.randomColorIndex = 
+        Math.floor(Math.random() * this.colors.length);
+
+    this.buttonColor = this.colors[this.randomColorIndex];
+
+    this.changeBackgroundColorDark = function() {
+        this.buttonColor = this.colorsDarkened[this.randomColorIndex];
+    }
+
+    this.changeBackgroundColorLight = function() {
+        this.buttonColor = this.colors[this.randomColorIndex];
+    }
+
+    this.getFormattedDate = function(dateString) {
+        var date = new Date(dateString);
+        return date.toDateString();
+    }
+
     // $scope.pass_user = django_variables.pass_user;
     // // $scope.pass_source = django_variables.pass_source;
     this.$onInit = function() {
-        console.log(this.passObj);
-        console.log(this.passNum);
+        // console.log(this.passObj);
+        // console.log(this.passNum);
         // console.log($scope.pass_date);
     };
 }

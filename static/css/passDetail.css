@@ -12,6 +12,7 @@
     border: 0px;
     margin: 0px;
     padding: 0px;
+    color: #fff;
 }
 
 .pass-detail-hmpg-feedback:hover {
@@ -19,12 +20,18 @@
 }
 
 .pass-detail-modal-hmpg-club {
-    font-size: 20px;
+    font-size: 23px;
     text-align: center;
-    margin: 15px;
-    font-variant: small-caps;
-    font-weight: 300;
+    font-weight: 800;
     letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+}
+
+.pass-detail-hmpg-date {
+    font-weight: 200;
+    margin-bottom: 0px;
+    font-size: 17px;
 }
 
 .pass-detail-hmpg-logo {
@@ -84,6 +91,7 @@
     letter-spacing: 3px;
     font-size: 33px;
     text-align: center;
+    color: #fff;
 }
 
 .pass-detail-clubname-cont {
@@ -99,6 +107,7 @@
     font-weight: 300;
     letter-spacing: 6px;
     font-family: helvetica;
+    color: #fff;
 }
 
 .pass-detail-modal-field {

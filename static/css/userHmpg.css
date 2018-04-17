@@ -3,11 +3,31 @@
 
 .main-cont {
     padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .main-hmpg-pass-date-cont {
     display: inline-block;
     flex-wrap: wrap;
     justify-content: center;
+    width: 300px;
+    margin: 10px;
     /*max-width: 300px;*/
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: #062f4f !important;
+}
+
+.hmpg-welcome-banner {
+    margin: 30px 20px 10px 20px;
+    color: #062f4f;
+    font-weight: bolder;
+    font-size: 45px;
+    border-left: 2px solid #062f4f;
+    padding: 15px 30px;
+    background-color: #8fd8f2;
 }
