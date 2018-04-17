@@ -1,4 +1,3 @@
-<p>{{$ctrl.passObj}}</p>
 <button class="pass-detail-cont"
     style="background-color: {{$ctrl.passObj.color}}"
     data-toggle="modal" 
@@ -7,6 +6,7 @@
         <p class="pass-detail-modal-hmpg-club">
             {{$ctrl.passObj[0].fields.club_name}}
         </p>
+        <p><em>{{$ctrl.passObj[0].fields.pass_date}}</em></p>
         <!-- <img class="pass-detail-hmpg-logo" 
             src="logos/{{$ctrl.passObj.image}}"> -->
 </button>
@@ -47,7 +47,7 @@
                     <strong>Pass Holder Name:</strong>
                 </p>
                 <p class="pass-detail-modal-value">
-                    {{pass_user}}
+                    {{$ctrl.passUser}}
                 </p>
                 <p>&nbsp;</p>
                 <p class="pass-detail-modal-field">
@@ -60,7 +60,7 @@
             </div>
             <!-- FOOTER WITH ACTIVATE AND TRANSFER OPTIONS -->
             <div class="modal-footer pass-detail-modal-footer"
-                ng-if="$ctrl.passObj.transferrable">
+                ng-if="$ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated">
                 <button type="button" 
                     class="btn btn-light pass-detail-modal-btn" 
                     data-dismiss="modal">
@@ -76,7 +76,8 @@
             </div>
             <!-- FOOTER WITH COLORED BAR -->
             <div class="modal-footer pass-detail-modal-footer pass-detail-modal-footer-activated"
-                ng-if="!$ctrl.passObj.transferrable">
+                ng-if="(!$ctrl.passObj.transferrable || $ctrl.passObj[0].fields.activated) 
+                    && !($ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated)">
                 <div class="pass-detail-modal-btn">
                     <p>Activated Pass</p>
                 </div>

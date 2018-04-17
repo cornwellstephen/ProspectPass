@@ -73,8 +73,7 @@
 .pass-detail-modal-footer {
     padding: 0px;
     align-items: stretch;
-    height: 15%;
-    max-height: 100px;
+    height: 100px;
     border: 1px 0px 0px 0px;
     overflow: hidden;
 }
