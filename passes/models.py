@@ -81,7 +81,8 @@ class Pass(models.Model):
 	pass_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='passes')
 	pass_source = models.CharField(max_length = 200, blank=True)
 	activated = models.BooleanField(default=False)
-	transferrable = models.BooleanField(default=False)
+	transferable = models.BooleanField(default=False)
+	color = models.CharField(max_length=200, blank=True)
 	# this is how a pass will be displayed as a string
 	def __str__(self):
 		return serializers.serialize('json', [self, ])

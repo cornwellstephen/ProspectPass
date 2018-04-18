@@ -12,6 +12,7 @@ from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
+from .forms import PassForm
 # Create your views here.
 class Index(generic.ListView):
 	template_name = 'index.html'
@@ -34,21 +35,26 @@ class StudentViewSet(viewsets.ModelViewSet):
 class PassViewSet(viewsets.ModelViewSet):
 	queryset = Pass.objects.all()
 	serializer_class = PassSerializer
-	# def get_permissions(self):
-	# 	if self.request.method in permissions.SAFE_METHODS:
-	# 		return (permissions.AllowAny(),)
 
-	# 	if self.request.method == 'POST':
-	# 		return (permissions.AllowAny(),)
+def send_pass(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = PassForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            netid = form.cleaned_data['target']
+            source = form.cleaned_data['source']
+            target_user = Student.objects.all().filter(NetId=netid)
+            source_user = Student.objects.all().filter(NetId=source)
+            
+            # return HttpResponseRedirect('/thanks/')
 
-	# 	return (permissions.IsAuthenticated(), IsStudentOwner(),)
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = PassForm()
 
-	# def create(self, request):
-	# 	serializer = self.serializer_class(data=request.data)
-	# 	if serializer.is_valid():
-	# 		Student.objects.create_user(**serializer.validated_data)
-	# 		return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
-	# 	return Response({
-	# 		'status': 'Bad request',
-	# 		'message': 'Student could not be created with received data.'
-	# 	}, status=status.HTTP_400_BAD_REQUEST)
+    return render(request, 'sendpass.html', {'form': form})
