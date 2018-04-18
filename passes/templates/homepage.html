@@ -49,43 +49,8 @@
                         <pass-detail
                             pass-num="{{ forloop.counter }}"
                             pass-obj= "{{ pass }}"
-                            pass-user="{{ pass.pass_user}}">
-                        </pass-detail>
-                    </div>
-                {% endfor %}
-                {% for pass in user.passes.all %}
-                    <div class="main-hmpg-pass-date-cont">
-                        <pass-detail
-                            pass-num="{{ forloop.counter }}"
-                            pass-obj= "{{ pass }}"
-                            pass-user="{{ pass.pass_user}}">
-                        </pass-detail>
-                    </div>
-                {% endfor %}
-                {% for pass in user.passes.all %}
-                    <div class="main-hmpg-pass-date-cont">
-                        <pass-detail
-                            pass-num="{{ forloop.counter }}"
-                            pass-obj= "{{ pass }}"
-                            pass-user="{{ pass.pass_user}}">
-                        </pass-detail>
-                    </div>
-                {% endfor %}
-                {% for pass in user.passes.all %}
-                    <div class="main-hmpg-pass-date-cont">
-                        <pass-detail
-                            pass-num="{{ forloop.counter }}"
-                            pass-obj= "{{ pass }}"
-                            pass-user="{{ pass.pass_user}}">
-                        </pass-detail>
-                    </div>
-                {% endfor %}
-                {% for pass in user.passes.all %}
-                    <div class="main-hmpg-pass-date-cont">
-                        <pass-detail
-                            pass-num="{{ forloop.counter }}"
-                            pass-obj= "{{ pass }}"
-                            pass-user="{{ pass.pass_user}}">
+                            pass-user="{{ pass.pass_user}}"
+                            pass-id="{{ pass.pk }}">
                         </pass-detail>
                     </div>
                 {% endfor %}
