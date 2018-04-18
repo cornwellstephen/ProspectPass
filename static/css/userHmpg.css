@@ -1,11 +1,66 @@
 /*  USER HOMEPAGE STYLESHEET
     Defines main page elements such as footers, headers. */
 
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.page-main-content {
+    flex: 1;
+}
+
+.index-hmpg-cont {
+    background-color: #8fd8f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lead {
+    text-align: center;
+}
+
+.login-button {
+    font-size: 21px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #8fd8f2;
+    background-color: #062f4f;
+    padding: 15px 50px;
+}
+
+.login-button:hover {
+    color: #e24e42;
+}
+
+.cover-heading {
+    font-weight: 700;
+    font-size: 50px;
+    padding: 0px 10px 10px 10px;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #e24e42;
+    color: #062f4f;
+}
+
 .main-cont {
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.active {
+    border-bottom: 2px solid #e24e42;
+    border-top: 2px solid #e24e42;
+    color: #062f4f;
 }
 
 .main-hmpg-pass-date-cont {
@@ -14,12 +69,15 @@
     justify-content: center;
     width: 300px;
     margin: 10px;
-    /*max-width: 300px;*/
 }
 
 .navbar-brand {
     font-weight: 600;
     color: #062f4f !important;
+}
+
+.navbar-hmpg-format {
+    height: 70px;
 }
 
 .hmpg-welcome-banner {
@@ -31,3 +89,20 @@
     padding: 15px 30px;
     background-color: #8fd8f2;
 }
+
+.modal-backdrop
+{
+    opacity:0.8 !important;
+}
+
+.navbar-text {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0px;
+    padding: 10px 0px 10px 0px;
+}
+
+
+
+
+

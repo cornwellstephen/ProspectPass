@@ -1,71 +1,82 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
 
-    <title>ProspectPass</title>
+        <title>ProspectPass</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-    <!-- Custom styles for this template -->
-    <link href="{% static "bootstrap/css/cover.css" %}" rel="stylesheet">
+        <!-- STYLESHEETS -->
+        <link rel="stylesheet" href="{% static "css/userHmpg.css" %}">
+        <link rel="stylesheet" href="{% static "css/passDetail.css" %}">
 
-  </head>
+    </head>
 
-  <body>
-
-    <div class="site-wrapper">
-
-      <div class="site-wrapper-inner">
-
-        <div class="cover-container">
-
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">ProspectPass</h3>
-              <nav>
-                <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="../homepage">Information</a></li>
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top navbar-hmpg-format">
+            <a class="navbar-brand active" 
+                href="../">
+                ProspectPass
+            </a>
+            <div id="navbarText">
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../homepage">Passes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
                 </ul>
-              </nav>
             </div>
-          </div>
+        </nav>
 
-          <div class="inner cover">
+        <div class="page-main-content index-hmpg-cont">
+
             <h1 class="cover-heading">ProspectPass</h1>
-            <p class="lead">Easy access to the street</p>
-            <p class="lead">
-              <a href="../homepage" class="btn btn-lg btn-default">Login</a>
-            </p>
-          </div>
-
-          <div class="mastfoot">
-            <div class="inner">
-              <p>COS333</p>
-            </div>
-          </div>
+            <p class="col-sm-6 lead">Your online passbook. Easily access and transfer passes.</p>
+            <a href="../homepage" 
+                class="btn btn-lg btn-default login-button">
+                Login
+            </a>
 
         </div>
 
-      </div>
 
-    </div>
+        <nav class="navbar bottom navbar-light bg-light">
+            <p class="navbar-text">
+                <strong>ProspectPass</strong> was created for COS 333, Spring 2018.
+            </p>
+            <p class="navbar-text">
+                Steven Cornwell '20, Yijia Lang '19, Will Arnesen '20, and Olivia Johnson '20.
+            </p>
+        </nav>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="{% static "bootstrap/js/bootstrap.min.js" %}" ></script>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="{% static "bootstrap/js/bootstrap.min.js" %}" ></script>
 
-  </body>
+        <!-- ANGULAR -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+        <!-- JS -->
+        <base href="{% static '' %}" />
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/userHmpg.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/passDetail.js' %}"></script>
+
+
+
+    </body>
 </html>

@@ -9,16 +9,16 @@ function PassDetailController($scope, $attrs, $element) {
     };
 
     this.colors = [
-        "#e24e42", 
-        "#e9b000", 
-        "#eb6e80", 
-        "#008f95", 
-        "#94618e", 
-        "#8fd8f2", 
-        "#273f5f", 
-        "#ee3377", 
-        "#e5e358", 
-        "#a7d2cb"
+        "#e24e42", // red
+        "#e9b000", // mustard
+        "#eb6e80", // pink
+        "#008f95", // greenish blue
+        "#94618e", // purple
+        "#8fd8f2", // light blue
+        "#273f5f", // dark blue
+        "#ee3377", // bright pink
+        "#e5e358", // bright green
+        "#a7d2cb"  // super light blue
     ];
 
     this.colorsDarkened = [
@@ -52,12 +52,8 @@ function PassDetailController($scope, $attrs, $element) {
         return date.toDateString();
     }
 
-    // $scope.pass_user = django_variables.pass_user;
-    // // $scope.pass_source = django_variables.pass_source;
     this.$onInit = function() {
-        // console.log(this.passObj);
-        // console.log(this.passNum);
-        // console.log($scope.pass_date);
+
     };
 }
 

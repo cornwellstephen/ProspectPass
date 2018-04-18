@@ -8,7 +8,7 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="../../favicon.ico">
+        <!-- <link rel="icon" href="../../favicon.ico"> -->
 
         <title>ProspectPass</title>
 
@@ -19,91 +19,104 @@
         <link rel="stylesheet" href="{% static "css/userHmpg.css" %}">
         <link rel="stylesheet" href="{% static "css/passDetail.css" %}">
 
-
     </head>
 
-  <body>
+    <body>
 
-        <nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top navbar-hmpg-format">
             <a class="navbar-brand" 
-                href="#">
+                href="../">
                 ProspectPass
             </a>
             <div id="navbarText">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Passes</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
                 </ul>
             </div>
         </nav>
-        <h1 class="cover-heading hmpg-welcome-banner">Welcome, {{user.first_name}}</h1>
-        <div class="main-cont" 
-            ng-app="ProspectPassApp" 
-            ng-controller="ProspectUserCtrl as ctrl">
-            {% for pass in user.passes.all %}
-                <div class="main-hmpg-pass-date-cont">
-                    <pass-detail
-                        pass-num="{{ forloop.counter }}"
-                        pass-obj= "{{ pass }}"
-                        pass-user="{{ pass.pass_user}}">
-                    </pass-detail>
-                </div>
-            {% endfor %}
-            {% for pass in user.passes.all %}
-                <div class="main-hmpg-pass-date-cont">
-                    <pass-detail
-                        pass-num="{{ forloop.counter }}"
-                        pass-obj= "{{ pass }}"
-                        pass-user="{{ pass.pass_user}}">
-                    </pass-detail>
-                </div>
-            {% endfor %}
-            {% for pass in user.passes.all %}
-                <div class="main-hmpg-pass-date-cont">
-                    <pass-detail
-                        pass-num="{{ forloop.counter }}"
-                        pass-obj= "{{ pass }}"
-                        pass-user="{{ pass.pass_user}}">
-                    </pass-detail>
-                </div>
-            {% endfor %}
-            {% for pass in user.passes.all %}
-                <div class="main-hmpg-pass-date-cont">
-                    <pass-detail
-                        pass-num="{{ forloop.counter }}"
-                        pass-obj= "{{ pass }}"
-                        pass-user="{{ pass.pass_user}}">
-                    </pass-detail>
-                </div>
-            {% endfor %}
-            {% for pass in user.passes.all %}
-                <div class="main-hmpg-pass-date-cont">
-                    <pass-detail
-                        pass-num="{{ forloop.counter }}"
-                        pass-obj= "{{ pass }}"
-                        pass-user="{{ pass.pass_user}}">
-                    </pass-detail>
-                </div>
-            {% endfor %}
+        <div class="page-main-content">
+            <h1 class="hmpg-welcome-banner">Welcome, {{user.first_name}}</h1>
+            <div class="main-cont" 
+                ng-app="ProspectPassApp" 
+                ng-controller="ProspectUserCtrl as ctrl">
+                {% for pass in user.passes.all %}
+                    <div class="main-hmpg-pass-date-cont">
+                        <pass-detail
+                            pass-num="{{ forloop.counter }}"
+                            pass-obj= "{{ pass }}"
+                            pass-user="{{ pass.pass_user}}">
+                        </pass-detail>
+                    </div>
+                {% endfor %}
+                {% for pass in user.passes.all %}
+                    <div class="main-hmpg-pass-date-cont">
+                        <pass-detail
+                            pass-num="{{ forloop.counter }}"
+                            pass-obj= "{{ pass }}"
+                            pass-user="{{ pass.pass_user}}">
+                        </pass-detail>
+                    </div>
+                {% endfor %}
+                {% for pass in user.passes.all %}
+                    <div class="main-hmpg-pass-date-cont">
+                        <pass-detail
+                            pass-num="{{ forloop.counter }}"
+                            pass-obj= "{{ pass }}"
+                            pass-user="{{ pass.pass_user}}">
+                        </pass-detail>
+                    </div>
+                {% endfor %}
+                {% for pass in user.passes.all %}
+                    <div class="main-hmpg-pass-date-cont">
+                        <pass-detail
+                            pass-num="{{ forloop.counter }}"
+                            pass-obj= "{{ pass }}"
+                            pass-user="{{ pass.pass_user}}">
+                        </pass-detail>
+                    </div>
+                {% endfor %}
+                {% for pass in user.passes.all %}
+                    <div class="main-hmpg-pass-date-cont">
+                        <pass-detail
+                            pass-num="{{ forloop.counter }}"
+                            pass-obj= "{{ pass }}"
+                            pass-user="{{ pass.pass_user}}">
+                        </pass-detail>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="{% static "bootstrap/js/bootstrap.min.js" %}" ></script>
+        <nav class="navbar bottom navbar-light bg-light">
+            <p class="navbar-text">
+                <strong>ProspectPass</strong> was created for COS 333, Spring 2018.
+            </p>
+            <p class="navbar-text">
+                Steven Cornwell '20, Yijia Lang '19, Will Arnesen '20, and Olivia Johnson '20.
+            </p>
+        </nav>
 
-    <!-- ANGULAR -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <!-- JS -->
-    <base href="{% static '' %}" />
-    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/userHmpg.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/passDetail.js' %}"></script>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="{% static "bootstrap/js/bootstrap.min.js" %}" ></script>
+
+        <!-- ANGULAR -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <!-- JS -->
+        <base href="{% static '' %}" />
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/userHmpg.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/passDetail.js' %}"></script>
 
 
 
-  </body>
+    </body>
 </html>
