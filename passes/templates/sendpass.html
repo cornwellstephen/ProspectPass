@@ -1,6 +1,9 @@
 <form action="" method="post">
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
     <input type="hidden" name="source" value= {{user.username}} />
     <input type="submit" value="Submit" />
 </form>
+<!-- <script> document.getElementByName(id).innerHTML = sessionStorage.getItem("passId"); </script> -->
+<!-- <script> console.log(sessionStorage.getItem("passId")); </script> -->
+<!-- <script> console.log("hello");</script> -->

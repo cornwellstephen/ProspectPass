@@ -51,6 +51,7 @@
                 </p>
                 <p class="pass-detail-modal-value">
                     {{$ctrl.passUser}}
+
                 </p>
                 <p>&nbsp;</p>
                 <p class="pass-detail-modal-field">
@@ -89,6 +90,8 @@
     </div>
 </div>
 
+
+
 <!-- PASS TRANSFER SCREEN -->
 <div class="modal" 
     id="passTransferModal{{$ctrl.passNum}}" 
@@ -99,6 +102,7 @@
     <div class="modal-dialog modal-dialog-centered" 
         role="document">
         <div class="modal-content">
+<!--             <script> sessionStorage.setItem("passId", $('[ng-app="ProspectPassApp"]').$ctrl.passId;); </script> -->
             <!-- style="background-color: {{$ctrl.passObj.color}}" -->
             <div class="pass-detail-header-cont"
                 style="background-color: {{$ctrl.passObj.color}}">
@@ -120,7 +124,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                <iframe src="/sendpass" frameborder="0">
+                <iframe src={{$ctrl.sendUrl}} frameborder="0">
             </div>
             <!-- FOOTER WITH CANCEL AND TRANSFER OPTIONS -->
             <div class="modal-footer pass-detail-modal-footer">

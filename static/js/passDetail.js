@@ -53,8 +53,10 @@ function PassDetailController($scope, $attrs, $element) {
     }
 
     this.$onInit = function() {
-
+        this.sendUrl = "/sendpass/" + this.passId;
     };
+
+    
 }
 
 angular.module('ProspectPassApp').component('passDetail', {
@@ -63,7 +65,8 @@ angular.module('ProspectPassApp').component('passDetail', {
     bindings: {
         passObj: '=',
         passNum: '<',
-        passUser: '@'
+        passUser: '@',
+        passId: '@',
     }
 });
 

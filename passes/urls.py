@@ -17,7 +17,8 @@ router.register(prefix="passes", viewset=PassViewSet)
 urlpatterns = [
 	url(r'^$', views.Index.as_view(), name = 'index'),
 	url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
-	url(r'^sendpass/$', views.send_pass, name= 'sendpass'),
+	url(r'^sendpass/(?P<pk>\d+)/$', views.send_pass, name= 'sendpass'),
+	url(r'^sentpass/$', views.SentPass.as_view(), name= 'sentpass'),
 	url(r'^restapi/', include(router.urls)),
 	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
