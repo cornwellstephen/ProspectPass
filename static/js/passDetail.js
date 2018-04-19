@@ -32,19 +32,18 @@ function PassDetailController($scope, $attrs, $element) {
         "#dd2266", 
         "#d4d247", 
         "#96c1ba"
-    ]
+    ]   
 
-    this.randomColorIndex = 
-        Math.floor(Math.random() * this.colors.length);
+    this.buttonColor;
 
-    this.buttonColor = this.colors[this.randomColorIndex];
+    this.sendUrl;
 
     this.changeBackgroundColorDark = function() {
-        this.buttonColor = this.colorsDarkened[this.randomColorIndex];
+        this.buttonColor = this.colorsDarkened[this.passObj[0].fields.color];
     }
 
     this.changeBackgroundColorLight = function() {
-        this.buttonColor = this.colors[this.randomColorIndex];
+        this.buttonColor = this.colors[this.passObj[0].fields.color];
     }
 
     this.getFormattedDate = function(dateString) {
@@ -54,6 +53,8 @@ function PassDetailController($scope, $attrs, $element) {
 
     this.$onInit = function() {
         this.sendUrl = "/sendpass/" + this.passId;
+
+        this.buttonColor = this.colors[this.passObj[0].fields.color];
     };
 
     

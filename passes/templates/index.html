@@ -32,9 +32,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../homepage">Passes</a>
                     </li>
+                    {% if user.officer_status %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="../admin-homepage">Admin</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

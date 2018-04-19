@@ -26,7 +26,7 @@
         role="document">
         <div class="modal-content">
             <div class="pass-detail-header-cont"
-                style="background-color: {{$ctrl.colors[$ctrl.randomColorIndex]}}">
+                style="background-color: {{$ctrl.colors[$ctrl.passObj[0].fields.color]}}">
                 <button type="button" 
                     class="close pass-detail-modal-close float-right" 
                     data-dismiss="modal" 
@@ -39,7 +39,7 @@
                             {{$ctrl.passObj[0].fields.club_name}}
                         </h1>
                         <p class="pass-detail-modal-date">
-                            {{$ctrl.passObj[0].fields.pass_date}}
+                            {{ $ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) }}
                         </p>
                     </div>
                 </div>

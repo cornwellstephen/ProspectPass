@@ -28,6 +28,13 @@ class Homepage(LoginRequiredMixin, generic.ListView):
 	def get_queryset(self):
 		return
 
+class AdminHomepage(LoginRequiredMixin, generic.ListView):
+    template_name = 'admin-homepage.html'
+    login_url = 'login/'
+    raise_exception = False
+    def get_queryset(self):
+        return
+
 class StudentViewSet(viewsets.ModelViewSet):
 	# lookup_field = 'NetId'
 	queryset = Student.objects.all()

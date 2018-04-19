@@ -31,33 +31,37 @@
             <div id="navbarText">
                 <ul class="navbar-nav justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link active" href="../homepage">Passes</a>
+                        <a class="nav-link" href="../homepage">Passes</a>
                     </li>
                     {% if user.officer_status %}
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin-homepage">Admin</a>
+                        <a class="nav-link active" href="../admin-homepage">Admin</a>
                     </li>
                     {% endif %}
                 </ul>
             </div>
         </nav>
+        {% if user.officer_status %}
         <div class="page-main-content">
             <h1 class="hmpg-welcome-banner">Welcome, {{user.first_name}}</h1>
             <div class="main-cont" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
-                {% for pass in user.passes.all %}
-                    <div class="main-hmpg-pass-date-cont">
-                        <pass-detail
-                            pass-num="{{ forloop.counter }}"
-                            pass-obj= "{{ pass }}"
-                            pass-user="{{ pass.pass_user}}"
-                            pass-id="{{ pass.pk }}">
-                        </pass-detail>
-                    </div>
-                {% endfor %}
+                <p>CLUB OFFICER LANDING PAGE</p>
             </div>
         </div>
+        {% endif %}
+
+        {% if not user.officer_status %}
+        <div class="page-main-content">
+            <h1 class="hmpg-welcome-banner">Welcome, {{user.first_name}}</h1>
+            <div class="main-cont" 
+                ng-app="ProspectPassApp" 
+                ng-controller="ProspectUserCtrl as ctrl">
+                <p>You aren't an officer!</p>
+            </div>
+        </div>
+        {% endif %}
 
         <nav class="navbar bottom navbar-light bg-light">
             <p class="navbar-text">
