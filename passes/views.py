@@ -12,7 +12,7 @@ from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import PassForm
+from .forms import PassForm, AddOfficerForm
 from django.http import HttpResponseRedirect
 # Create your views here.
 class Index(generic.ListView):
@@ -49,6 +49,11 @@ class SentPass(generic.ListView):
     def get_queryset(self):
         return
 
+class AddedOfficer(generic.ListView):
+    template_name = 'addedofficer.html'
+    def get_queryset(self):
+        return
+
 def send_pass(request, pk):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -64,7 +69,10 @@ def send_pass(request, pk):
             # passId = form.cleaned_data['passId']
             source_user = Student.objects.all().filter(NetId=source)[0]
             target_pass = Pass.objects.all().filter(pk=pk)[0]
-            source_user.sendpass(target_pass, netid)
+            if source_user.officer_status is True:
+                source_user.officerDirectSend(target_pass, netid)
+            else:
+                source_user.sendpass(target_pass, netid)
             return HttpResponseRedirect('/sentpass')
 
     # if a GET (or any other method) we'll create a blank form
@@ -72,3 +80,18 @@ def send_pass(request, pk):
         form = PassForm()
 
     return render(request, 'sendpass.html', {'form': form})
+
+def add_officer(request):
+    if request.method == 'POST':
+        form = AddOfficerForm(request.POST)
+        if form.is_valid():
+            netid = form.cleaned_data['target']
+            source = form.cleaned_data['source']
+            source_user = Student.objects.all().filter(NetId=source)[0]
+            new_officer = Student.objects.all().filter(NetId=netid)[0]
+            if source_user.officer_status is True:
+                source_user.assignOfficer(new_officer)
+            return HttpResponseRedirect('/addedofficer')
+    else:
+        form = AddOfficerForm()
+    return render(request, 'addofficer.html', {'form': form})

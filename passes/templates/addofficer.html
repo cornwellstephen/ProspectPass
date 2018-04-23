@@ -1,0 +1,7 @@
+<form action="" method="post">
+    {% csrf_token %}
+    Add an officer!
+    {{ form.as_p }}
+    <input type="hidden" name="source" value= {{user.username}} />
+    <input type="submit" value="Submit" />
+</form>
