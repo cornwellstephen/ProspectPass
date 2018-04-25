@@ -19,6 +19,17 @@
         <link rel="stylesheet" href="{% static 'css/userHmpg.css' %}">
         <link rel="stylesheet" href="{% static 'css/passDetail.css' %}">
 
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $('.datetime-input').datepicker({
+                    format:'YYYY-MM-DD'
+                });
+            });
+        </script>
     </head>
 
     <body>
@@ -52,8 +63,25 @@
             <div class="main-cont" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
-                <iframe src='/addofficer' frameborder="0">
+                <form method="post">
+                    {% csrf_token %}
+                    Add an officer!
+                    {{ forms.addofficer.as_p }}
+                    <input type="hidden" name="source" value= {{user.username}} />
+                    <input type="submit" value="Submit" />
+                </form>
+
+                <form method="post">
+                    {% csrf_token %}
+                    Make a pass here!
+                    {{ forms.addpass.as_p }}
+                    <input type="hidden" name="source" value= {{user.username}} />
+                    <input type="submit" value="Submit" />
+                </form>
+
             </div>
+
+
         </div>
         {% endif %}
 
@@ -80,7 +108,8 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script> -->
         <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
         <script src="{% static "bootstrap/js/bootstrap.min.js" %}" ></script>
 
@@ -91,7 +120,6 @@
         <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/userHmpg.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/passDetail.js' %}"></script>
-
 
 
     </body>

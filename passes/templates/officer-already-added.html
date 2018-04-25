@@ -52,21 +52,23 @@
             <div class="main-cont" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
-                Officer Added!
-                <button id="return"> Return to admin-hompage </button>
-				<script type="text/javascript">
-				    document.getElementById("return").onclick = function () {
-				        location.href = "/admin-homepage";
-				    };
-				</script>
-                <form method="post">
+                The person you're trying to add is already an officer.
+
+<!--                 <form method="post">
                     {% csrf_token %}
                     Make a pass here!
                     {{ forms.addpass.as_p }}
                     <input type="hidden" name="source" value= {{user.username}} />
                     <input type="submit" value="Submit" />
-                </form>
+                </form> -->
+                <button id="return"> Return to admin-homepage </button>
+                <script type="text/javascript">
+                    document.getElementById("return").onclick = function () {
+                        location.href = "/admin-homepage";
+                    };
+                </script>
             </div>
+
 
 
         </div>

@@ -64,7 +64,7 @@
             </div>
             <!-- FOOTER WITH ACTIVATE AND TRANSFER OPTIONS -->
             <div class="modal-footer pass-detail-modal-footer"
-                ng-if="$ctrl.passObj[0].fields.transferable && !$ctrl.passObj[0].fields.activated">
+                ng-if="$ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated">
                 <button type="button" 
                     class="btn btn-light pass-detail-modal-btn" 
                     data-dismiss="modal">
@@ -81,7 +81,7 @@
             <!-- FOOTER WITH COLORED BAR -->
             <div class="modal-footer pass-detail-modal-footer pass-detail-modal-footer-activated"
                 ng-if="(!$ctrl.passObj.transferable || $ctrl.passObj[0].fields.activated) 
-                    && !($ctrl.passObj[0].fields.transferable && !$ctrl.passObj[0].fields.activated)">
+                    && !($ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated)">
                 <div class="pass-detail-modal-btn">
                     <p>Activated Pass</p>
                 </div>

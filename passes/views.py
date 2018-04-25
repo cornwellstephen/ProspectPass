@@ -12,8 +12,10 @@ from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import PassForm, AddOfficerForm
+from .forms import PassForm, AddOfficerForm, MakePassForm
 from django.http import HttpResponseRedirect
+from .multiforms import MultiFormsView
+from django.urls import reverse, reverse_lazy
 # Create your views here.
 class Index(generic.ListView):
 	template_name = 'index.html'
@@ -54,6 +56,16 @@ class AddedOfficer(generic.ListView):
     def get_queryset(self):
         return
 
+class OfficerAlreadyAdded(generic.ListView):
+    template_name = 'officer-already-added.html'
+    def get_queryset(self):
+        return
+
+class MadePass(generic.ListView):
+    template_name = 'madepass.html'
+    def get_queryset(self):
+        return
+
 def send_pass(request, pk):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -81,17 +93,66 @@ def send_pass(request, pk):
 
     return render(request, 'sendpass.html', {'form': form})
 
-def add_officer(request):
-    if request.method == 'POST':
-        form = AddOfficerForm(request.POST)
-        if form.is_valid():
-            netid = form.cleaned_data['target']
-            source = form.cleaned_data['source']
-            source_user = Student.objects.all().filter(NetId=source)[0]
-            new_officer = Student.objects.all().filter(NetId=netid)[0]
-            if source_user.officer_status is True:
-                source_user.assignOfficer(new_officer)
-            return HttpResponseRedirect('/addedofficer')
-    else:
-        form = AddOfficerForm()
-    return render(request, 'addofficer.html', {'form': form})
+
+class MultipleFormsDemoView(MultiFormsView):
+    template_name = "admin-homepage.html"
+    form_classes = {'addofficer': AddOfficerForm,
+                    'addpass': MakePassForm,
+                    }
+
+    success_urls = {
+        'addofficer': 'addedofficer',
+        'addpass': 'madepass',
+    }
+
+    def addofficer_form_valid(self, form):
+        netid = form.cleaned_data['target']
+        source = form.cleaned_data['source']
+        source_user = Student.objects.all().filter(NetId=source)[0]
+        target_user = Student.objects.all().filter(NetId=netid)[0]
+        if target_user.officer_status is True:
+            return HttpResponseRedirect('/admin-homepage/officer-already-added')
+        if source_user.officer_status is True:
+            source_user.assignOfficer(netid)
+        return HttpResponseRedirect('/addedofficer')
+
+    def addpass_form_valid(self, form):
+        pass_date = form.cleaned_data['pass_date']
+        color = form.cleaned_data['color']
+        number = form.cleaned_data['number']
+        source = form.cleaned_data['source']
+        transferrable = form.cleaned_data['transferrable']
+        source_user = Student.objects.all().filter(NetId=source)[0]
+        # need to add stuff here
+        source_user.officerClubSend(pass_date, number, color, transferrable)
+        return HttpResponseRedirect('/madepass')
+
+# def add_officer(request):
+#     if request.method == 'POST':
+#         form = AddOfficerForm(request.POST, prefix='officer')
+#         if form.is_valid():
+#             netid = form.cleaned_data['target']
+#             source = form.cleaned_data['source']
+#             source_user = Student.objects.all().filter(NetId=source)[0]
+#             if source_user.officer_status is True:
+#                 source_user.assignOfficer(netid)
+#             return HttpResponseRedirect('/addedofficer')
+#     else:
+#         form = AddOfficerForm()
+#     return render(request, 'admin-homepage.html', {'officerForm': form})
+
+# def add_pass(request):
+#     if request.method == 'POST':
+#         form = MakePassForm(request.POST, prefix='pass')
+#         if form.is_valid():
+#             pass_date = form.cleaned_data['pass_date']
+#             print(pass_date)
+#             color = form.cleaned_data['color']
+#             number = form.cleaned_data['number']
+#             source = form.cleaned_data['source']
+#             source_user = Student.objects.all().filter(NetId=source)[0]
+#             # source_user.officerClubSend(pass_date, number, color)
+#             return HttpResponseRedirect('/madepass')
+#     else:
+#         form = MakePassForm()
+#     return render(request, 'admin-homepage.html', {'form': form})

@@ -34,25 +34,27 @@ class Student(AbstractUser): # It's now an abstract base user
 	#     return Student.groups.filter(name="Club Officers").exists()
 
 	# creates and distributes the pass to club members
-	def officerClubSend(self, p_date, num_passes):
+	def officerClubSend(self, p_date, num_passes, color_num, transferrable):
 		if self.officer_status is True:
 			for student in Student.objects.all().filter(user_club=self.user_club):
 				# one pass for the officer when bulk creating
 				if student.officer_status is True:
-					_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.first_name + ' ' + student.last_name)
+					_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.first_name + ' ' + student.last_name,color=color_num,transferrable=transferrable)
 					_pass.save()
 				else:
 					while num_passes > 0:
-						_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.first_name + ' ' + student.last_name)
+						_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.first_name + ' ' + student.last_name,color=color_num,transferrable=transferrable)
 						_pass.save()
 						num_passes = num_passes - 1
 		else:
 			pass
 
-	def assignOfficer(person):
+	def assignOfficer(self, netid, *args, **kwargs):
 		if self.officer_status is True:
-			person.officer_status = True
-			person.save()
+			print(Student.objects.all().filter(NetId=netid))
+			new_officer = Student.objects.all().filter(NetId=netid)[0]
+			new_officer.officer_status = True
+			new_officer.save()
 		else:
 			pass
 
@@ -81,8 +83,8 @@ class Pass(models.Model):
 	pass_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='passes')
 	pass_source = models.CharField(max_length = 200, blank=True)
 	activated = models.BooleanField(default=False)
-	transferable = models.BooleanField(default=False)
-	color = models.CharField(max_length=200, blank=True)
+	transferrable = models.BooleanField(default=False)
+	color = models.IntegerField(blank=True)
 	# this is how a pass will be displayed as a string
 	def __str__(self):
 		return serializers.serialize('json', [self, ])
