@@ -126,7 +126,11 @@
                 </div>
             </div>
             <div class="modal-body">
-                <iframe src={{$ctrl.sendUrl}} frameborder="0">
+                <!-- <iframe src={{$ctrl.sendUrl}} frameborder="0"> -->
+                <form>
+                    NetId: <input type="text" ng-model="netid">
+                    Transferrable: <input type="checkbox" ng-model="transferrable">
+                </form>
             </div>
             <!-- FOOTER WITH CANCEL AND TRANSFER OPTIONS -->
             <div class="modal-footer pass-detail-modal-footer">
@@ -138,7 +142,9 @@
                     Cancel
                 </button>
                 <button type="button" 
-                    class="btn btn-info pass-detail-modal-btn">
+                    class="btn btn-info pass-detail-modal-btn"
+                    ng-click="$ctrl.transfer($scope.netid, $scope.transferrable)"
+                    onclick="location.href='/sentpass/';">
                     Transfer
                 </button>
             </div>

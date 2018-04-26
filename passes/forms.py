@@ -19,6 +19,7 @@ COLOR_CHOICES= [
 class PassForm(forms.Form):
     target = forms.CharField(label='NetId', max_length=100)
     source = forms.CharField(max_length=50, widget=forms.HiddenInput())
+    transferrable = forms.BooleanField()
     # passId = forms.CharField(max_length=50, widget=forms.HiddenInput())
 
 class ActivateForm(forms.Form):

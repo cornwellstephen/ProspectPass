@@ -71,7 +71,8 @@ def send_pass(request, pk):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = PassForm(request.POST)
+        form = PassForm(json.loads(request.body))
+        print(json.loads(request.body))
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -79,13 +80,14 @@ def send_pass(request, pk):
             # redirect to a new URL:
             netid = form.cleaned_data['target']
             source = form.cleaned_data['source']
+            transferrable = form.cleaned_data['transferrable']
             # passId = form.cleaned_data['passId']
             source_user = Student.objects.all().filter(NetId=source)[0]
             target_pass = Pass.objects.all().filter(pk=pk)[0]
             if source_user.officer_status is True:
-                source_user.officerDirectSend(target_pass, netid)
+                source_user.officerDirectSend(target_pass, netid, transferrable)
             else:
-                source_user.sendpass(target_pass, netid)
+                source_user.sendpass(target_pass, netid, transferrable)
             return HttpResponseRedirect('/sentpass')
 
     # if a GET (or any other method) we'll create a blank form

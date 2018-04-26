@@ -52,8 +52,7 @@ function PassDetailController($scope, $attrs, $element, $http) {
     }
 
     this.$onInit = function() {
-        this.sendUrl = "/sendpass/" + this.passId;
-
+        this.sendUrl = "/sendpass/" + this.passId + "/";
         this.buttonColor = this.colors[this.passObj[0].fields.color];
     };
 
@@ -61,6 +60,14 @@ function PassDetailController($scope, $attrs, $element, $http) {
       return $http.post('/activatepass/', {
         'pass_id': this.passId,
       });
+    }
+
+    this.transfer = function(netid, transferrable) {
+       return $http.post(this.sendUrl, {
+        'target': $scope.netid,
+        'source': this.passUserNetid,
+        'transferrable': $scope.transferrable
+      });       
     }
     
 }
@@ -73,6 +80,7 @@ angular.module('ProspectPassApp').component('passDetail', {
         passNum: '<',
         passUser: '@',
         passId: '@',
+        passUserNetid: '@',
     }
 });
 
