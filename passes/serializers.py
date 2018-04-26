@@ -29,6 +29,6 @@ class PassSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model= Pass
-		fields = ('club_name', 'pass_date', 'club_picture', 'pass_user', 'pass_source', 'activated', 'transferrable')
+		fields = ('club_name', 'pass_date', 'club_picture', 'pass_user', 'pass_source', 'activated', 'transferrable', 'color')
 
 

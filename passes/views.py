@@ -12,10 +12,11 @@ from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import PassForm, AddOfficerForm, MakePassForm
+from .forms import PassForm, AddOfficerForm, MakePassForm, ActivateForm
 from django.http import HttpResponseRedirect
 from .multiforms import MultiFormsView
 from django.urls import reverse, reverse_lazy
+import simplejson as json
 # Create your views here.
 class Index(generic.ListView):
 	template_name = 'index.html'
@@ -93,6 +94,18 @@ def send_pass(request, pk):
 
     return render(request, 'sendpass.html', {'form': form})
 
+def activate_pass(request):
+    if request.method == 'POST':
+        form = ActivateForm(json.loads(request.body))
+        if form.is_valid():
+            pass_id = form.cleaned_data['pass_id']
+            target_pass = Pass.objects.all().filter(pk=pass_id)[0]
+            target_pass.activated = True
+            target_pass.save()
+            return HttpResponseRedirect('/homepage/')
+    else:
+        form = ActivateForm()
+    return render(request, 'homepage.html', {'form': form})
 
 class MultipleFormsDemoView(MultiFormsView):
     template_name = "admin-homepage.html"

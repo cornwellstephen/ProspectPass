@@ -67,7 +67,9 @@
                 ng-if="$ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated">
                 <button type="button" 
                     class="btn btn-light pass-detail-modal-btn" 
-                    data-dismiss="modal">
+                    data-dismiss="modal"
+                    ng-click="$ctrl.activate($ctrl.passObj[0].fields.passId)"
+                    onclick="location.href='/homepage/';">
                     Activate
                 </button>
                 <button type="button" 

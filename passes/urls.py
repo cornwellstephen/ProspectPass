@@ -18,6 +18,7 @@ urlpatterns = [
 	url(r'^$', views.Index.as_view(), name = 'index'),
 	url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
 	url(r'^sendpass/(?P<pk>\d+)/$', views.send_pass, name = 'sendpass'),
+    url(r'^activatepass/$', views.activate_pass, name = 'activatepass'),
 	# url(r'^admin-homepage/$', views.add_pass, name = 'addpass'),
 	# url(r'^admin-homepage/$', views.add_officer, name = 'addofficer'),
     url(r'^admin-homepage/$', views.MultipleFormsDemoView.as_view(), name = 'admin-homepage'),

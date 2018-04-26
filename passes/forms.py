@@ -21,6 +21,9 @@ class PassForm(forms.Form):
     source = forms.CharField(max_length=50, widget=forms.HiddenInput())
     # passId = forms.CharField(max_length=50, widget=forms.HiddenInput())
 
+class ActivateForm(forms.Form):
+	pass_id = forms.IntegerField(min_value=0)
+
 class MultipleForm(forms.Form):
     action = forms.CharField(max_length=60, widget=forms.HiddenInput())
 

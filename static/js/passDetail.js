@@ -1,4 +1,4 @@
-function PassDetailController($scope, $attrs, $element) {
+function PassDetailController($scope, $attrs, $element, $http) {
     
     this.swapModalDetailToTransfer = function() {
         $("#passDetailModal"+this.passNum).modal('hide');
@@ -57,6 +57,11 @@ function PassDetailController($scope, $attrs, $element) {
         this.buttonColor = this.colors[this.passObj[0].fields.color];
     };
 
+    this.activate = function(passId) {
+      return $http.post('/activatepass/', {
+        'pass_id': this.passId,
+      });
+    }
     
 }
 
