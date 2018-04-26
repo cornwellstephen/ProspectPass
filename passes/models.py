@@ -21,9 +21,10 @@ class Student(AbstractUser): # It's now an abstract base user
 	def get_passes(self):
 		return self.passes.all()
 
-	def sendpass(self, _pass, user_netid):
+	def sendpass(self, _pass, user_netid, transferrable):
 		user = Student.objects.all().filter(NetId=user_netid)[0]
 		_pass.pass_user = user
+		_pass.transferrable = transferrable
 		_pass.save()
 
 	def activate(self, _pass):
