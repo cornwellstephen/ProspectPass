@@ -61,7 +61,7 @@ class Student(AbstractUser): # It's now an abstract base user
 	def officerDirectSend(self, _pass, user_netid):
 		if self.officer_status is True:
 			student = Student.objects.all().filter(NetId=user_netid)[0]
-			newpass = Pass(club_name=self.user_club, pass_date=_pass.pass_date, pass_user=student,pass_source=self.first_name + ' ' + self.last_name)
+			newpass = Pass(club_name=self.user_club, pass_date=_pass.pass_date, pass_user=student,pass_source=self.first_name + ' ' + self.last_name,color=_pass.color)
 			newpass.save()
 			self.sendpass(newpass, user_netid)
 		else:
