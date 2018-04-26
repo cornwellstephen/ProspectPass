@@ -37,8 +37,18 @@ body {
     padding: 15px 50px;
 }
 
-.login-button:hover {
-    color: #e24e42;
+.admin-hmpg-submit-button {
+    font-size: 21px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #fff;
+    background-color: #11895a;
+    padding: 5px 25px;
+}
+
+.admin-hmpg-submit-button:hover {
+    background-color: #e24e42;
 }
 
 .cover-heading {
@@ -50,11 +60,15 @@ body {
     color: #062f4f;
 }
 
-.main-cont {
+.main-cont, .main-cont-club-admin {
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.main-cont-club-admin {
+    flex-direction: column;
 }
 
 .active {
@@ -69,6 +83,33 @@ body {
     justify-content: center;
     width: 300px;
     margin: 10px;
+    margin-top: 0px;
+}
+
+form.admin-hmpg-form {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-hmpg-field-desc {
+    margin-bottom: 10px;
+}
+
+label {
+    width: 120px;
+}
+
+.admin-hmpg-form-input {
+    display: inline-block;
+}
+
+.admin-hmpg-form-checkbox {
+    display: inline-block;
+    width: auto;
+}
+
+.admin-hmpg-form-confirm {
+    color: #e24e42;
 }
 
 .navbar-brand {

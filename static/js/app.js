@@ -1,4 +1,6 @@
-angular.module('ProspectPassApp', []);
+angular.module('ProspectPassApp', []).config(function($interpolateProvider){
+    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+});
 
 angular.module('ProspectPassApp', []).
   config(function($httpProvider) {
