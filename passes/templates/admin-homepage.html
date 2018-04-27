@@ -66,7 +66,7 @@
                     action="{% url 'admin-homepage' %}">
                     {% csrf_token %}
                     <h3>Set New Club Officer</h3>
-                    <p class="text-muted admin-hmpg-field-desc">
+                    <p class="text-muted form-text">
                         Anyone you indicate in this field will have full officer privileges. This means they will be able to create unlimited passes for your club, distribute passes to anyone with a netid, and appoint other students who will also have unlimited site privileges.
                     </p>
                     {{ forms.addofficer.as_p }}
@@ -86,7 +86,7 @@
                     action="{% url 'admin-homepage' %}">
                     {% csrf_token %}
                     <h3>Create and Distribute New Pass</h3>
-                    <p class="text-muted admin-hmpg-field-desc">
+                    <p class="text-muted form-text">
                         On submit, a pass will be created for your club with the provided attributes and distributed to all of the club members. Once a pass is created, it cannot be recollected.
                     </p>
                     {{ forms.addpass.as_p }}
@@ -110,7 +110,7 @@
             <div class="main-cont" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
-                <p>You aren't an officer!</p>
+                <h3 class="text-muted">You aren't an officer! If you think this is a mistake, speak to an officer of your club.</h3>
             </div>
         </div>
         {% endif %}
@@ -127,7 +127,7 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-<!--         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script> -->
         <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
         <script src="{% static "bootstrap/js/bootstrap.min.js" %}" ></script>

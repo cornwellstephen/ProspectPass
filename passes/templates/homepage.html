@@ -58,6 +58,9 @@
                         </pass-detail>
                     </div>
                 {% endfor %}
+                {% if user.passes.all|length == 0 %}
+                    <h3 class="text-muted">You do not have any passes yet!</h3>
+                {% endif %}
             </div>
         </div>
 

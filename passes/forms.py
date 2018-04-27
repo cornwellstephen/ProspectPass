@@ -85,11 +85,12 @@ class MakePassForm(MultipleForm):
         )
     )
     transferrable = forms.BooleanField(
-        label='Transferrable?', 
+        label='Transferable:', 
         initial=True,
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'form-control admin-hmpg-form-checkbox'
+                'class': 'form-control admin-hmpg-form-checkbox',
+                'disabled': ''
             }
         )
     )
