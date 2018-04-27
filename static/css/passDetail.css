@@ -3,7 +3,7 @@
     /*width: 270px;*/
     width: 100%;
     /*min-width: 270px;*/
-    background-color: #e24e42;
+    background-color: tomato;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,11 +40,10 @@
 }
 
 .modal-content  {
-    -webkit-border-radius: 10px !important;
-    -moz-border-radius: 10px !important;
-    border-radius: 10px !important; 
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important; 
     height: 90% !important;
-    width: 90% !important;
     border: 0px;
     overflow: hidden;
 }
@@ -80,7 +79,6 @@
     display: flex;
     flex-direction: column;
     height: 35%;
-    background-color: #e24e42;
 }
 
 .pass-detail-modal-footer {
@@ -92,12 +90,11 @@
 }
 
 .pass-detail-modal-clubname {
-    font-size: 50px;
-    text-align: center;
-    font-weight: 800;
+    font-variant: small-caps;
+    font-weight: 700;
     letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 0px;
+    font-size: 33px;
+    text-align: center;
     color: #fff;
 }
 
@@ -109,9 +106,10 @@
 }
 
 .pass-detail-modal-date {
-    font-size: 22px;
+    font-size: 20px;
     text-align: center;
     font-weight: 300;
+    letter-spacing: 6px;
     font-family: helvetica;
     color: #fff;
 }
@@ -130,32 +128,6 @@
     display: flex;
     justify-content: center;
     border: 0px;
-}
-
-.pass-detail-modal-today {
-    background-color: #fff;
-    padding: 7px 15px;
-    color: #11895a;
-    margin: 0px;
-    display: flex;
-    align-items: center;
-    border-radius: 6px;
-    font-weight: 700;
-}
-
-.pass-detail-modal-nottoday {
-    background-color: #fff;
-    padding: 7px 15px;
-    color: #e24e42;
-    margin: 0px;
-    display: flex;
-    align-items: center;
-    border-radius: 6px;
-    font-weight: 700;
-}
-
-.pass-detail-hmpg-isday {
-    padding-left: 7px;
 }
 
 .pass-detail-modal-footer-activated {

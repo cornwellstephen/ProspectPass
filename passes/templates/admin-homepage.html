@@ -55,47 +55,28 @@
         {% if user.officer_status %}
         <div class="page-main-content">
             <h1 class="hmpg-welcome-banner">Welcome, {{user.first_name}}</h1>
-            <div class="main-cont-club-admin" 
+            <div class="main-cont" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
-                <p><strong>
-                    Club: {{ user.user_club }}
-                </strong></p>
-                <form method="post"
-                    class="admin-hmpg-form"
-                    action="{% url 'admin-homepage' %}">
+                <p>CLUB OFFICER LANDING PAGE</p>
+            </div>
+            <div class="main-cont" 
+                ng-app="ProspectPassApp" 
+                ng-controller="ProspectUserCtrl as ctrl">
+                <form method="post">
                     {% csrf_token %}
-                    <h3>Set New Club Officer</h3>
-                    <p class="text-muted admin-hmpg-field-desc">
-                        Anyone you indicate in this field will have full officer privileges. This means they will be able to create unlimited passes for your club, distribute passes to anyone with a netid, and appoint other students who will also have unlimited site privileges.
-                    </p>
+                    Add an officer!
                     {{ forms.addofficer.as_p }}
-                    <input type = "hidden" 
-                        name = "source" 
-                        value = "{{user.username}}" />
-                    <p class="admin-hmpg-form-confirm">
-                        Check that the entered NetId is correct before submitting.
-                    </p>
-                    <input type="submit" 
-                        class="btn btn-lg btn-default admin-hmpg-submit-button"
-                        value="Submit" />
+                    <input type="hidden" name="source" value= {{user.username}} />
+                    <input type="submit" value="Submit" />
                 </form>
 
-                <form method="post"
-                    class="admin-hmpg-form"
-                    action="{% url 'admin-homepage' %}">
+                <form method="post">
                     {% csrf_token %}
-                    <h3>Create and Distribute New Pass</h3>
-                    <p class="text-muted admin-hmpg-field-desc">
-                        On submit, a pass will be created for your club with the provided attributes and distributed to all of the club members. Once a pass is created, it cannot be recollected.
-                    </p>
+                    Make a pass here!
                     {{ forms.addpass.as_p }}
-                    <input type="hidden" 
-                        name="source" 
-                        value= "{{user.username}}" />
-                    <input type="submit" 
-                        class="btn btn-lg btn-default admin-hmpg-submit-button"
-                        value="Submit" />
+                    <input type="hidden" name="source" value= {{user.username}} />
+                    <input type="submit" value="Submit" />
                 </form>
 
             </div>

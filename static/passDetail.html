@@ -6,7 +6,7 @@
     data-target="#passDetailModal{{$ctrl.passNum}}"> 
     <!-- <div class="pass-detail-hmpg-feedback"> -->
         <p class="pass-detail-modal-hmpg-club">
-            {[{$ctrl.passObj[0].fields.club_name}]}
+            {{$ctrl.passObj[0].fields.club_name}}
         </p>
         <p class="pass-detail-hmpg-date">
             <em>{{ $ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) }}</em>
@@ -41,23 +41,11 @@
                         <p class="pass-detail-modal-date">
                             {{ $ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) }}
                         </p>
-                        <!-- DATE ISN'T TODAY -->
-                        <p ng-if="!$ctrl.isDateToday($ctrl.passObj[0].fields.pass_date)"
-                            class="pass-detail-modal-nottoday">
-                            Not Today
-                            <i class="fa fa-times-circle fa-lg pass-detail-hmpg-isday"></i>
-                        </p>
-                        <!-- DATE IS TODAY -->
-                        <p ng-if="$ctrl.isDateToday($ctrl.passObj[0].fields.pass_date)"
-                            class="pass-detail-modal-today">
-                            Today
-                            <i class="fa fa-check-circle fa-lg pass-detail-hmpg-isday"></i>
-
-                        </p>
                     </div>
                 </div>
             </div>
             <div class="modal-body">
+                <p>&nbsp;</p>
                 <p class="pass-detail-modal-field">
                     <strong>Pass Holder Name:</strong>
                 </p>
@@ -65,6 +53,7 @@
                     {{$ctrl.passUser}}
 
                 </p>
+                <p>&nbsp;</p>
                 <p class="pass-detail-modal-field">
                     <strong>Club Member Name:</strong> 
                 </p>
