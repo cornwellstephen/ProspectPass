@@ -18,7 +18,8 @@ function PassDetailController($scope, $attrs, $element, $http) {
         "#273f5f", // dark blue
         "#ee3377", // bright pink
         "#e5e358", // bright green
-        "#a7d2cb"  // super light blue
+        "#a7d2cb", // super light blue
+        "#11895a"  // green
     ];
 
     this.colorsDarkened = [
@@ -31,7 +32,8 @@ function PassDetailController($scope, $attrs, $element, $http) {
         "#062f4f", 
         "#dd2266", 
         "#d4d247", 
-        "#96c1ba"
+        "#96c1ba",
+        "#007849"
     ]   
 
     this.buttonColor;
@@ -47,8 +49,16 @@ function PassDetailController($scope, $attrs, $element, $http) {
     }
 
     this.getFormattedDate = function(dateString) {
-        var date = new Date(dateString);
+        var datebreak = dateString.split('-');
+        var date = new Date(datebreak[0], datebreak[1]-1, datebreak[2]);
         return date.toDateString();
+    }
+
+    this.isDateToday = function(dateString) {
+        var datebreak = dateString.split('-');
+        var date = new Date(datebreak[0], datebreak[1]-1, datebreak[2]);
+        var today = new Date();
+        return date.toDateString() == today.toDateString();
     }
 
     this.$onInit = function() {
@@ -83,5 +93,3 @@ angular.module('ProspectPassApp').component('passDetail', {
         passUserNetid: '@',
     }
 });
-
-// 'static/passDetail.html'

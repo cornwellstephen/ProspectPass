@@ -41,11 +41,23 @@
                         <p class="pass-detail-modal-date">
                             {{ $ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) }}
                         </p>
+                        <!-- DATE ISN'T TODAY -->
+                        <p ng-if="!$ctrl.isDateToday($ctrl.passObj[0].fields.pass_date)"
+                            class="pass-detail-modal-nottoday">
+                            Not Today
+                            <i class="fa fa-times-circle fa-lg pass-detail-hmpg-isday"></i>
+                        </p>
+                        <!-- DATE IS TODAY -->
+                        <p ng-if="$ctrl.isDateToday($ctrl.passObj[0].fields.pass_date)"
+                            class="pass-detail-modal-today">
+                            Today
+                            <i class="fa fa-check-circle fa-lg pass-detail-hmpg-isday"></i>
+
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="modal-body">
-                <p>&nbsp;</p>
                 <p class="pass-detail-modal-field">
                     <strong>Pass Holder Name:</strong>
                 </p>
@@ -53,7 +65,6 @@
                     {{$ctrl.passUser}}
 
                 </p>
-                <p>&nbsp;</p>
                 <p class="pass-detail-modal-field">
                     <strong>Club Member Name:</strong> 
                 </p>
@@ -107,7 +118,7 @@
 <!--             <script> sessionStorage.setItem("passId", $('[ng-app="ProspectPassApp"]').$ctrl.passId;); </script> -->
             <!-- style="background-color: {{$ctrl.passObj.color}}" -->
             <div class="pass-detail-header-cont"
-                style="background-color: {{$ctrl.passObj.color}}">
+                style="background-color: {{$ctrl.colors[$ctrl.passObj[0].fields.color]}}">
                 <button type="button" 
                     class="close pass-detail-modal-close float-right" 
                     data-dismiss="modal" 
@@ -151,4 +162,3 @@
         </div>
     </div>
 </div>
-
