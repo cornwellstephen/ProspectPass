@@ -145,7 +145,6 @@ class MultipleFormsDemoView(MultiFormsView):
         color = form.cleaned_data['color']
         number = form.cleaned_data['number']
         source = form.cleaned_data['source']
-        transferrable = form.cleaned_data['transferrable']
         source_user = Student.objects.all().filter(NetId=source)[0]
         # need to add stuff here
         source_user.officerClubSend(pass_date, number, color, transferrable)
