@@ -145,17 +145,11 @@ class MakePassForm(MultipleForm):
             }
         )
     )
-    transferrable = forms.BooleanField(
-        label='Transferable:', 
-        initial=True,
-        disabled=True,
-        widget=forms.CheckboxInput(
-            attrs={
-                'class': 'form-control admin-hmpg-form-checkbox',
-            }
-        )
-    )
     source = forms.CharField(
         max_length=50, 
         widget=forms.HiddenInput()
     )
+
+class UploadFileForm(MultipleForm):
+    file = forms.FileField()
+    source = forms.CharField(max_length=50, widget=forms.HiddenInput())

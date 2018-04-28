@@ -75,6 +75,7 @@ body {
     border-bottom: 2px solid #e24e42;
     border-top: 2px solid #e24e42;
     color: #062f4f;
+    margin-top: -2px;
 }
 
 .main-hmpg-pass-date-cont {
@@ -115,6 +116,7 @@ label {
 .navbar-brand {
     font-weight: 600;
     color: #062f4f !important;
+    margin-top: 0px; 
 }
 
 .navbar-hmpg-format {

@@ -13,10 +13,21 @@ from django.core import serializers
 class Student(AbstractUser): # It's now an abstract base user
 	# username = models.CharField(max_length=40, blank=True) # use the NetId as the username
 	NetId = models.CharField(max_length=40, blank=True)
-	first_name = models.CharField(max_length=40, blank=True)
-	last_name = models.CharField(max_length=40, blank=True)
+	name = models.CharField(max_length=60, blank=True)
 	user_club = models.CharField(max_length = 200, blank=True)
 	officer_status = models.BooleanField(default=False)
+
+	def clear_club(self):
+		for student in Student.objects.all().filter(user_club=self.user_club):
+			print(student.NetId)
+			if self.NetId != student.NetId:
+				student.user_club = "None"
+				student.save()
+
+	def addToClub(self, netid):
+		student = Student.objects.all().filter(NetId=netid)[0]
+		student.user_club = self.user_club
+		student.save()
 
 	def get_passes(self):
 		return self.passes.all()
@@ -40,11 +51,11 @@ class Student(AbstractUser): # It's now an abstract base user
 			for student in Student.objects.all().filter(user_club=self.user_club):
 				# one pass for the officer when bulk creating
 				if student.officer_status is True:
-					_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.first_name + ' ' + student.last_name,color=color_num,transferrable=transferrable)
+					_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.name,color=color_num,transferrable=transferrable)
 					_pass.save()
 				else:
 					while num_passes > 0:
-						_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.first_name + ' ' + student.last_name,color=color_num,transferrable=transferrable)
+						_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.name,color=color_num,transferrable=transferrable)
 						_pass.save()
 						num_passes = num_passes - 1
 		else:
@@ -62,7 +73,7 @@ class Student(AbstractUser): # It's now an abstract base user
 	def officerDirectSend(self, _pass, user_netid, transferrable):
 		if self.officer_status is True:
 			student = Student.objects.all().filter(NetId=user_netid)[0]
-			newpass = Pass(club_name=self.user_club, pass_date=_pass.pass_date, pass_user=student,pass_source=self.first_name + ' ' + self.last_name,color=_pass.color,transferrable=transferrable)
+			newpass = Pass(club_name=self.user_club, pass_date=_pass.pass_date, pass_user=student,pass_source=self.name,color=_pass.color,transferrable=transferrable)
 			newpass.save()
 			self.sendpass(newpass, user_netid)
 		else:
@@ -75,7 +86,7 @@ class Student(AbstractUser): # It's now an abstract base user
 		)
 
 	def __str__(self):
-		return self.first_name + " " + self.last_name
+		return self.name
 
 class Pass(models.Model):
 	club_name = models.CharField(max_length = 200)

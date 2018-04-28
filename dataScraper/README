@@ -1,0 +1,3 @@
+run ./scrape and all the data will be places in allNames
+./scraper accesses the data base but will return a max of 200 results
+./reformat places the data into the correct format for Django

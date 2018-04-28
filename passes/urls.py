@@ -26,6 +26,7 @@ urlpatterns = [
 	url(r'^addedofficer/$', views.AddedOfficer.as_view(), name = 'addedofficer'),
 	url(r'^admin-homepage/officer-already-added/$', views.OfficerAlreadyAdded.as_view(), name = 'officer-already-added'),
 	url(r'^madepass/$', views.MadePass.as_view(), name = 'madepass'),
+	url(r'^fileuploaded/$', views.FileUploaded.as_view(), name = 'fileuploaded'),
 	url(r'^restapi/', include(router.urls)),
 	url(r'^api-auth/', include('rest_framework.urls', namespace ='rest_framework')),
 ]
