@@ -114,6 +114,25 @@
                         class="btn btn-lg btn-default admin-hmpg-submit-button"
                         value="Submit" />
                 </form>
+
+                <form method="post" 
+                class="admin-hmpg-form"
+                action="{% url 'admin-homepage' %}" 
+                enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h3>Upload Members</h3>
+                    <p class="text-muted form-text">
+                        Upload a .csv file where one of the columns begins with "NetId" and 
+                        contains the NetId's of the clubs members.
+                    </p>
+                    {{ forms.uploadfile.as_p }}
+                    <input type="hidden" 
+                    name="source" 
+                    value= {{user.username}} />
+                    <input type="submit" 
+                        class="btn btn-lg btn-default admin-hmpg-submit-button"
+                        value="Submit" />
+                </form>
             </div>
 
 
