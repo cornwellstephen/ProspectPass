@@ -24,6 +24,7 @@ class MultiFormMixin(ContextMixin):
         kwargs = {}
         kwargs.update({'initial':self.get_initial(form_name)})
         kwargs.update({'prefix':self.get_prefix(form_name)})
+        kwargs.update({'netid':self.request.user.NetId})
         if self.request.method in ('POST', 'PUT'):
             kwargs.update({
                 'data': self.request.POST,
@@ -65,6 +66,7 @@ class ProcessMultipleFormsView(ProcessFormView):
     def get(self, request, *args, **kwargs):
         form_classes = self.get_form_classes()
         forms = self.get_forms(form_classes)
+        print(forms)
         return self.render_to_response(self.get_context_data(forms=forms))
      
     def post(self, request, *args, **kwargs):

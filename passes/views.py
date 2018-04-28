@@ -12,7 +12,7 @@ from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import PassForm, AddOfficerForm, MakePassForm, ActivateForm
+from .forms import PassForm, AddOfficerForm, MakePassForm, ActivateForm, SingleDist
 from django.http import HttpResponseRedirect
 from .multiforms import MultiFormsView
 from django.urls import reverse, reverse_lazy
@@ -113,11 +113,13 @@ class MultipleFormsDemoView(MultiFormsView):
     template_name = "admin-homepage.html"
     form_classes = {'addofficer': AddOfficerForm,
                     'addpass': MakePassForm,
+                    'singledist': SingleDist,
                     }
 
     success_urls = {
         'addofficer': 'addedofficer',
         'addpass': 'madepass',
+        'singledist': 'singledist',
     }
 
     def addofficer_form_valid(self, form):
@@ -141,6 +143,9 @@ class MultipleFormsDemoView(MultiFormsView):
         # need to add stuff here
         source_user.officerClubSend(pass_date, number, color, transferrable)
         return HttpResponseRedirect('/madepass')
+
+    def single_dist(self, form):
+        pass
 
 # def add_officer(request):
 #     if request.method == 'POST':
