@@ -66,7 +66,6 @@ class ProcessMultipleFormsView(ProcessFormView):
     def get(self, request, *args, **kwargs):
         form_classes = self.get_form_classes()
         forms = self.get_forms(form_classes)
-        print(forms)
         return self.render_to_response(self.get_context_data(forms=forms))
      
     def post(self, request, *args, **kwargs):

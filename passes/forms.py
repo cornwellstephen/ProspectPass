@@ -78,7 +78,7 @@ class SingleDist(MultipleForm):
         widget=forms.Select(
             attrs={
                 'class': 'form-control col-sm-8 admin-hmpg-form-input',
-                'placeholder': 'What color should this pass be?'
+                'placeholder': 'What pass do you want to send?'
             }
         )
     )
@@ -98,6 +98,16 @@ class SingleDist(MultipleForm):
         widget=forms.TextInput(
             attrs={
                 'class':'form-control col-sm-8 admin-hmpg-form-input'
+            }
+        )
+    )
+    number = forms.IntegerField(
+        label='Count', 
+        min_value=0,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control col-sm-8 admin-hmpg-form-input',
+                'placeholder': 'Number of passes the member will receive.'
             }
         )
     )

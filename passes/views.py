@@ -72,6 +72,11 @@ class MadePass(generic.ListView):
     def get_queryset(self):
         return
 
+class Distributed(generic.ListView):
+    template_name = 'distributed.html'
+    def get_queryset(self):
+        return
+
 def send_pass(request, pk):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -127,7 +132,7 @@ class MultipleFormsDemoView(MultiFormsView):
     success_urls = {
         'addofficer': 'addedofficer',
         'addpass': 'madepass',
-        'singledist': 'singledist',
+        'singledist': 'distributed',
         'uploadfile' : 'fileuploaded',
     }
 
@@ -149,45 +154,56 @@ class MultipleFormsDemoView(MultiFormsView):
         source = form.cleaned_data['source']
         source_user = Student.objects.all().filter(NetId=source)[0]
         # need to add stuff here
-        source_user.officerClubSend(pass_date, number, color, transferrable)
+        source_user.officerClubSend(pass_date, number, color)
         return HttpResponseRedirect('/madepass')
 
 
-    def single_dist(self, form):
-        pass
-      
+    def singledist_form_valid(self, form):
+        pk = form.cleaned_data['passes']
+        number = form.cleaned_data['number']
+        source = form.cleaned_data['source']
+        netid = form.cleaned_data['target']
+        transferrable = form.cleaned_data['transferrable']
+        source_user = Student.objects.all().filter(NetId=source)[0]
+        target_pass = Pass.objects.all().filter(pk=pk)[0]
+        number = form.cleaned_data['number']
+        while number > 0:
+            source_user.officerDirectSend(target_pass, netid, transferrable)
+            number = number - 1
+        return HttpResponseRedirect('/distributed')
+
     def uploadfile_form_valid(self, form):
-            csv_file = form.cleaned_data['file']
-            source = form.cleaned_data['source']
-            # if not csv_file.name.endswith('.csv'):
-            #     messages.error(request,'File is not CSV type')
-            #     return HttpResponseRedirect(reverse("myapp:upload_csv"))
-            #if file is too large, return
-            # if csv_file.multiple_chunks():
-            #     messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
-            #     return HttpResponseRedirect(reverse("myapp:upload_csv"))
+        csv_file = form.cleaned_data['file']
+        source = form.cleaned_data['source']
+        # if not csv_file.name.endswith('.csv'):
+        #     messages.error(request,'File is not CSV type')
+        #     return HttpResponseRedirect(reverse("myapp:upload_csv"))
+        #if file is too large, return
+        # if csv_file.multiple_chunks():
+        #     messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
+        #     return HttpResponseRedirect(reverse("myapp:upload_csv"))
 
-            file_data = csv_file.read().decode("utf-8")     
+        file_data = csv_file.read().decode("utf-8")     
 
-            lines = file_data.split("\n")
-            source_user = Student.objects.all().filter(NetId=source)[0]
-            source_user.clear_club()
-            i=-1
-            for line in lines:       
-                if i == -1:
-                    j = 0
-                    for entry in line.split(","):
-                        print(i)
-                        if entry.lower() == "netid":
-                            i = j
-                            break
-                        j+=1
-                else:
-                    fields = line.split(",")
-                    source_user = Student.objects.all().filter(NetId=source)[0]
-                    source_user.addToClub(fields[i])
-                    print(fields[i])
-            return HttpResponseRedirect('/fileuploaded')
+        lines = file_data.split("\n")
+        source_user = Student.objects.all().filter(NetId=source)[0]
+        source_user.clear_club()
+        i=-1
+        for line in lines:       
+            if i == -1:
+                j = 0
+                for entry in line.split(","):
+                    print(i)
+                    if entry.lower() == "netid":
+                        i = j
+                        break
+                    j+=1
+            else:
+                fields = line.split(",")
+                source_user = Student.objects.all().filter(NetId=source)[0]
+                source_user.addToClub(fields[i])
+                print(fields[i])
+        return HttpResponseRedirect('/fileuploaded')
 
     def uploadfile_form_valid(self, form):
         csv_file = form.cleaned_data['file']
