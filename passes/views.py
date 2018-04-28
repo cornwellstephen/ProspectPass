@@ -12,7 +12,7 @@ from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import PassForm, AddOfficerForm, MakePassForm, ActivateForm, UploadFileForm
+from .forms import PassForm, AddOfficerForm, MakePassForm, ActivateForm, UploadFileForm, SingleDist
 from django.http import HttpResponseRedirect
 from .multiforms import MultiFormsView
 from django.urls import reverse, reverse_lazy
@@ -120,12 +120,14 @@ class MultipleFormsDemoView(MultiFormsView):
     template_name = "admin-homepage.html"
     form_classes = {'addofficer': AddOfficerForm,
                     'addpass': MakePassForm,
+                    'singledist': SingleDist,
                     'uploadfile' : UploadFileForm,
                     }
 
     success_urls = {
         'addofficer': 'addedofficer',
         'addpass': 'madepass',
+        'singledist': 'singledist',
         'uploadfile' : 'fileuploaded',
     }
 
@@ -149,6 +151,43 @@ class MultipleFormsDemoView(MultiFormsView):
         # need to add stuff here
         source_user.officerClubSend(pass_date, number, color, transferrable)
         return HttpResponseRedirect('/madepass')
+
+
+    def single_dist(self, form):
+        pass
+      
+    def uploadfile_form_valid(self, form):
+            csv_file = form.cleaned_data['file']
+            source = form.cleaned_data['source']
+            # if not csv_file.name.endswith('.csv'):
+            #     messages.error(request,'File is not CSV type')
+            #     return HttpResponseRedirect(reverse("myapp:upload_csv"))
+            #if file is too large, return
+            # if csv_file.multiple_chunks():
+            #     messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
+            #     return HttpResponseRedirect(reverse("myapp:upload_csv"))
+
+            file_data = csv_file.read().decode("utf-8")     
+
+            lines = file_data.split("\n")
+            source_user = Student.objects.all().filter(NetId=source)[0]
+            source_user.clear_club()
+            i=-1
+            for line in lines:       
+                if i == -1:
+                    j = 0
+                    for entry in line.split(","):
+                        print(i)
+                        if entry.lower() == "netid":
+                            i = j
+                            break
+                        j+=1
+                else:
+                    fields = line.split(",")
+                    source_user = Student.objects.all().filter(NetId=source)[0]
+                    source_user.addToClub(fields[i])
+                    print(fields[i])
+            return HttpResponseRedirect('/fileuploaded')
 
     def uploadfile_form_valid(self, form):
         csv_file = form.cleaned_data['file']
