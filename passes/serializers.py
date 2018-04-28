@@ -8,7 +8,7 @@ class StudentSerializer(serializers.ModelSerializer):
 	
 	class Meta:
 		model = Student
-		fields = ('NetId', 'first_name', 'last_name', 'user_club')
+		fields = ('NetId', 'name', 'user_club')
 		# def create(self, validated_data):
 		# 	return Student.objects.create(**validated_data)
 

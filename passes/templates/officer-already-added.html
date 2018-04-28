@@ -43,7 +43,7 @@
         </nav>
         {% if user.officer_status %}
         <div class="page-main-content">
-            <h1 class="hmpg-welcome-banner">Welcome, {{user.first_name}}</h1>
+            <h1 class="hmpg-welcome-banner">Welcome, {{user.name}}</h1>
             <div class="main-cont" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
@@ -76,7 +76,7 @@
 
         {% if not user.officer_status %}
         <div class="page-main-content">
-            <h1 class="hmpg-welcome-banner">Welcome, {{user.first_name}}</h1>
+            <h1 class="hmpg-welcome-banner">Welcome, {{user.name}}</h1>
             <div class="main-cont" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">

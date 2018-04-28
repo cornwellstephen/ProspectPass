@@ -1,0 +1,28 @@
+for i in a b c d e f g h i j k l m n o p q r s t u v w x y z
+do
+  for j in a b c d e f g h i j k l m n o p q r s t u v w x y z
+  do
+    ./scraper $i$j >x.out$i$j
+  done
+done
+
+for i in x.out??
+do
+  if wc $i | grep -s -q ' 200  '
+  then
+    id=`echo $i | sed 's/x.out//'`
+    for i in a b c d e f g h i j k l m n o p q r s t u v w x y z
+    do
+        ./scraper $id$i >x.out$id$i
+    done
+  fi
+done
+
+sort -u x.out* > old
+awk '$NF ~ /^20(18|19|20|21)$/ {print $0}' old |
+sed 's/.\.//' > latest
+./reformat > allNames.json
+mv ./allNames.json ../passes/fixtures
+rm x.out* 
+rm latest old 
+exit

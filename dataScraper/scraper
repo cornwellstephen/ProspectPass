@@ -1,0 +1,29 @@
+#!/bin/sh
+
+/usr/bin/ldapsearch -x -h ldap.princeton.edu -u -b  \
+	o='Princeton University,c=US' \
+	"(uid=$1*)" uid cn telephoneNumber studenttelephoneNumber studentstreet street ou |
+awk '
+/^#/,NF==0 {
+	# print
+	if (/^#/) next
+	if (/^dn:|^ufn:/) next
+	if (/^cn:/) {
+		if (length($0) > length(cn)) cn = $0
+	}
+	if (/uid:/) out = out " (" $2 ")"
+	if (/telephoneNumber/) out = out " " $2
+	if (/street:/) out = out " " $0
+	if (/^ou:/) out = out " " $0
+	if (NF==0 && length(cn out) > 0) {
+		out = cn " " out
+		gsub(/Undergraduate Class of/, "", out)
+		gsub(/cn:|ou:|telephoneNumber:|(student)?street:/, "", out)
+		gsub(/@Princeton.EDU/, "", out)
+		print out
+		out = cn = ""
+	}
+ }
+' |
+grep -i ".*$2" |
+sed -e /Success/d 
