@@ -89,9 +89,11 @@ def send_pass(request, pk):
             # passId = form.cleaned_data['passId']
             source_user = Student.objects.all().filter(NetId=source)[0]
             target_pass = Pass.objects.all().filter(pk=pk)[0]
-            if source_user.officer_status is True:
+            if source_user.officer_status is True and source_user.user_club == target_pass.club_name:
+                print("WTF")
                 source_user.officerDirectSend(target_pass, netid, transferrable)
             else:
+                print("Still WTF")
                 source_user.sendpass(target_pass, netid, transferrable)
             return HttpResponseRedirect('/sentpass')
 
