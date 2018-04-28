@@ -46,16 +46,16 @@ class Student(AbstractUser): # It's now an abstract base user
 	#     return Student.groups.filter(name="Club Officers").exists()
 
 	# creates and distributes the pass to club members
-	def officerClubSend(self, p_date, num_passes, color_num, transferrable):
+	def officerClubSend(self, p_date, num_passes, color_num):
 		if self.officer_status is True:
 			for student in Student.objects.all().filter(user_club=self.user_club):
 				# one pass for the officer when bulk creating
 				if student.officer_status is True:
-					_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.name,color=color_num,transferrable=transferrable)
+					_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.name,color=color_num,transferrable=True)
 					_pass.save()
 				else:
 					while num_passes > 0:
-						_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.name,color=color_num,transferrable=transferrable)
+						_pass = Pass(club_name=self.user_club, pass_date=p_date, pass_user=student,pass_source=student.name,color=color_num,transferrable=True)
 						_pass.save()
 						num_passes = num_passes - 1
 		else:
@@ -75,7 +75,7 @@ class Student(AbstractUser): # It's now an abstract base user
 			student = Student.objects.all().filter(NetId=user_netid)[0]
 			newpass = Pass(club_name=self.user_club, pass_date=_pass.pass_date, pass_user=student,pass_source=self.name,color=_pass.color,transferrable=transferrable)
 			newpass.save()
-			self.sendpass(newpass, user_netid)
+			self.sendpass(newpass, user_netid, transferrable)
 		else:
 			pass
 

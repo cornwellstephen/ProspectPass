@@ -23,6 +23,7 @@ urlpatterns = [
 	# url(r'^admin-homepage/$', views.add_officer, name = 'addofficer'),
     url(r'^admin-homepage/$', views.MultipleFormsDemoView.as_view(), name = 'admin-homepage'),
 	url(r'^sentpass/$', views.SentPass.as_view(), name = 'sentpass'),
+	url(r'^distributed/$', views.Distributed.as_view(), name = 'distributed'),
 	url(r'^addedofficer/$', views.AddedOfficer.as_view(), name = 'addedofficer'),
 	url(r'^admin-homepage/officer-already-added/$', views.OfficerAlreadyAdded.as_view(), name = 'officer-already-added'),
 	url(r'^madepass/$', views.MadePass.as_view(), name = 'madepass'),
