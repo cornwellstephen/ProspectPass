@@ -17,6 +17,18 @@ class Student(AbstractUser): # It's now an abstract base user
 	user_club = models.CharField(max_length = 200, blank=True)
 	officer_status = models.BooleanField(default=False)
 
+	def clear_club(self):
+		for student in Student.objects.all().filter(user_club=self.user_club):
+			print(student.NetId)
+			if self.NetId != student.NetId:
+				student.user_club = "None"
+				student.save()
+
+	def addToClub(self, netid):
+		student = Student.objects.all().filter(NetId=netid)[0]
+		student.user_club = self.user_club
+		student.save()
+
 	def get_passes(self):
 		return self.passes.all()
 

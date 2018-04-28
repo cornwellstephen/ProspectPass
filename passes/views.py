@@ -12,11 +12,11 @@ from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
-from .forms import PassForm, AddOfficerForm, MakePassForm, ActivateForm
+from .forms import PassForm, AddOfficerForm, MakePassForm, ActivateForm, UploadFileForm
 from django.http import HttpResponseRedirect
 from .multiforms import MultiFormsView
 from django.urls import reverse, reverse_lazy
-import simplejson as json
+import json
 # Create your views here.
 class Index(generic.ListView):
 	template_name = 'index.html'
@@ -54,6 +54,11 @@ class SentPass(generic.ListView):
 
 class AddedOfficer(generic.ListView):
     template_name = 'addedofficer.html'
+    def get_queryset(self):
+        return
+
+class FileUploaded(generic.ListView):
+    template_name = 'fileuploaded.html'
     def get_queryset(self):
         return
 
@@ -113,11 +118,13 @@ class MultipleFormsDemoView(MultiFormsView):
     template_name = "admin-homepage.html"
     form_classes = {'addofficer': AddOfficerForm,
                     'addpass': MakePassForm,
+                    'uploadfile' : UploadFileForm,
                     }
 
     success_urls = {
         'addofficer': 'addedofficer',
         'addpass': 'madepass',
+        'uploadfile' : 'fileuploaded',
     }
 
     def addofficer_form_valid(self, form):
@@ -141,6 +148,39 @@ class MultipleFormsDemoView(MultiFormsView):
         # need to add stuff here
         source_user.officerClubSend(pass_date, number, color, transferrable)
         return HttpResponseRedirect('/madepass')
+
+    def uploadfile_form_valid(self, form):
+        csv_file = form.cleaned_data['file']
+        source = form.cleaned_data['source']
+        # if not csv_file.name.endswith('.csv'):
+        #     messages.error(request,'File is not CSV type')
+        #     return HttpResponseRedirect(reverse("myapp:upload_csv"))
+        #if file is too large, return
+        # if csv_file.multiple_chunks():
+        #     messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
+        #     return HttpResponseRedirect(reverse("myapp:upload_csv"))
+
+        file_data = csv_file.read().decode("utf-8")     
+
+        lines = file_data.split("\n")
+        source_user = Student.objects.all().filter(NetId=source)[0]
+        source_user.clear_club()
+        i=-1
+        for line in lines:       
+            if i == -1:
+                j = 0
+                for entry in line.split(","):
+                    print(i)
+                    if entry.lower() == "netid":
+                        i = j
+                        break
+                    j+=1
+            else:
+                fields = line.split(",")
+                source_user = Student.objects.all().filter(NetId=source)[0]
+                source_user.addToClub(fields[i])
+                print(fields[i])
+        return HttpResponseRedirect('/fileuploaded')
 
 # def add_officer(request):
 #     if request.method == 'POST':

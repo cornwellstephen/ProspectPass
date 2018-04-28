@@ -98,6 +98,16 @@
                         value="Submit" />
                 </form>
 
+                <form method="post" action="{% url 'admin-homepage' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    Upload Members
+                    {{ forms.uploadfile.as_p }}
+                    <input type="hidden" name="source" value= {{user.username}} />
+                    <input type="submit" 
+                        class="btn btn-lg btn-default admin-hmpg-submit-button"
+                        value="Submit" />
+                </form>
+
             </div>
 
 

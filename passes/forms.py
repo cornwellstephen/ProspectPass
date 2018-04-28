@@ -98,3 +98,7 @@ class MakePassForm(MultipleForm):
         max_length=50, 
         widget=forms.HiddenInput()
     )
+
+class UploadFileForm(MultipleForm):
+    file = forms.FileField()
+    source = forms.CharField(max_length=50, widget=forms.HiddenInput())
