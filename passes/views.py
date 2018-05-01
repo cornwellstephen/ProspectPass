@@ -81,8 +81,7 @@ def send_pass(request, pk):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = PassForm(json.loads(request.body))
-        print(json.loads(request.body))
+        form = PassForm(json.loads(request.body.decode('utf-8')))
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -95,10 +94,8 @@ def send_pass(request, pk):
             source_user = Student.objects.all().filter(NetId=source)[0]
             target_pass = Pass.objects.all().filter(pk=pk)[0]
             if source_user.officer_status is True and source_user.user_club == target_pass.club_name:
-                print("WTF")
                 source_user.officerDirectSend(target_pass, netid, transferrable)
             else:
-                print("Still WTF")
                 source_user.sendpass(target_pass, netid, transferrable)
             return HttpResponseRedirect('/sentpass')
 
@@ -110,7 +107,7 @@ def send_pass(request, pk):
 
 def activate_pass(request):
     if request.method == 'POST':
-        form = ActivateForm(json.loads(request.body))
+        form = ActivateForm(json.loads(request.body.decode('utf-8')))
         if form.is_valid():
             pass_id = form.cleaned_data['pass_id']
             target_pass = Pass.objects.all().filter(pk=pass_id)[0]
@@ -193,16 +190,18 @@ class MultipleFormsDemoView(MultiFormsView):
             if i == -1:
                 j = 0
                 for entry in line.split(","):
-                    print(i)
                     if entry.lower() == "netid":
+                        print("here")
                         i = j
+                        print(i)
                         break
                     j+=1
             else:
                 fields = line.split(",")
                 source_user = Student.objects.all().filter(NetId=source)[0]
+                print("here")
+                print(source_user)
                 source_user.addToClub(fields[i])
-                print(fields[i])
         return HttpResponseRedirect('/fileuploaded')
 
 # def add_officer(request):

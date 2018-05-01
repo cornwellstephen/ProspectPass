@@ -19,7 +19,6 @@ class Student(AbstractUser): # It's now an abstract base user
 
 	def clear_club(self):
 		for student in Student.objects.all().filter(user_club=self.user_club):
-			print(student.NetId)
 			if self.NetId != student.NetId:
 				student.user_club = "None"
 				student.save()
@@ -72,10 +71,13 @@ class Student(AbstractUser): # It's now an abstract base user
 
 	def officerDirectSend(self, _pass, user_netid, transferrable):
 		if self.officer_status is True:
-			student = Student.objects.all().filter(NetId=user_netid)[0]
-			newpass = Pass(club_name=self.user_club, pass_date=_pass.pass_date, pass_user=student,pass_source=self.name,color=_pass.color,transferrable=transferrable)
-			newpass.save()
-			self.sendpass(newpass, user_netid, transferrable)
+			if self.user_club == _pass.club_name:
+				student = Student.objects.all().filter(NetId=user_netid)[0]
+				newpass = Pass(club_name=self.user_club, pass_date=_pass.pass_date, pass_user=student,pass_source=self.name,color=_pass.color,transferrable=transferrable)
+				newpass.save()
+				self.sendpass(newpass, user_netid, transferrable)
+			else:
+				self.sendpass(_pass, user_netid, transferrable)
 		else:
 			pass
 
