@@ -1,23 +1,23 @@
 <button class="pass-detail-cont"
-    style="background-color: {{$ctrl.buttonColor}}"
+    style="background-color: {[$ctrl.buttonColor]}"
     ng-mouseenter="$ctrl.changeBackgroundColorDark()"
     ng-mouseleave="$ctrl.changeBackgroundColorLight()"
     data-toggle="modal" 
-    data-target="#passDetailModal{{$ctrl.passNum}}"> 
+    data-target="#passDetailModal{[$ctrl.passNum]}"> 
     <!-- <div class="pass-detail-hmpg-feedback"> -->
         <p class="pass-detail-modal-hmpg-club">
-            {{$ctrl.passObj[0].fields.club_name}}
+            {[$ctrl.passObj[0].fields.club_name]}
         </p>
         <p class="pass-detail-hmpg-date">
-            <em>{{ $ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) }}</em>
+            <em>{[ $ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) ]}</em>
         </p>
         <!-- <img class="pass-detail-hmpg-logo" 
-            src="logos/{{$ctrl.passObj.image}}"> -->
+            src="logos/{[$ctrl.passObj.image]}"> -->
 </button>
 
 <!-- Modal -->
 <div class="modal" 
-    id="passDetailModal{{$ctrl.passNum}}" 
+    id="passDetailModal{[$ctrl.passNum]}" 
     tabindex="-1" 
     role="dialog" 
     aria-labelledby="exampleModalCenterTitle" 
@@ -26,7 +26,7 @@
         role="document">
         <div class="modal-content">
             <div class="pass-detail-header-cont"
-                style="background-color: {{$ctrl.colors[$ctrl.passObj[0].fields.color]}}">
+                style="background-color: {[$ctrl.colors[$ctrl.passObj[0].fields.color]]}">
                 <button type="button" 
                     class="close pass-detail-modal-close float-right" 
                     data-dismiss="modal" 
@@ -36,10 +36,10 @@
                 <div class="modal-header">
                     <div class="pass-detail-clubname-cont">
                         <h1 class="pass-detail-modal-clubname">
-                            {{$ctrl.passObj[0].fields.club_name}}
+                            {[$ctrl.passObj[0].fields.club_name]}
                         </h1>
                         <p class="pass-detail-modal-date">
-                            {{ $ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) }}
+                            {[ $ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) ]}
                         </p>
                         <!-- DATE ISN'T TODAY -->
                         <p ng-if="!$ctrl.isDateToday($ctrl.passObj[0].fields.pass_date)"
@@ -62,14 +62,14 @@
                     <strong>Pass Holder Name:</strong>
                 </p>
                 <p class="pass-detail-modal-value">
-                    {{$ctrl.passUser}}
+                    {[$ctrl.passUser]}
 
                 </p>
                 <p class="pass-detail-modal-field">
                     <strong>Club Member Name:</strong> 
                 </p>
                 <p class="pass-detail-modal-value">
-                    {{$ctrl.passObj[0].fields.pass_source}}
+                    {[$ctrl.passObj[0].fields.pass_source]}
                 </p>
 
             </div>
@@ -86,7 +86,7 @@
                 <button type="button" 
                     class="btn btn-info pass-detail-modal-btn"
                     data-toggle="modal" 
-                    data-target="#passTransferModal{{$ctrl.passNum}}"
+                    data-target="#passTransferModal{[$ctrl.passNum]}"
                     ng-click="$ctrl.swapModalDetailToTransfer()">
                     Transfer
                 </button>
@@ -107,7 +107,7 @@
 
 <!-- PASS TRANSFER SCREEN -->
 <div class="modal" 
-    id="passTransferModal{{$ctrl.passNum}}" 
+    id="passTransferModal{[$ctrl.passNum]}" 
     tabindex="-1" 
     role="dialog" 
     aria-labelledby="exampleModalCenterTitle" 
@@ -116,9 +116,9 @@
         role="document">
         <div class="modal-content">
 <!--             <script> sessionStorage.setItem("passId", $('[ng-app="ProspectPassApp"]').$ctrl.passId;); </script> -->
-            <!-- style="background-color: {{$ctrl.passObj.color}}" -->
+            <!-- style="background-color: {[$ctrl.passObj.color]}" -->
             <div class="pass-detail-header-cont"
-                style="background-color: {{$ctrl.colors[$ctrl.passObj[0].fields.color]}}">
+                style="background-color: {[$ctrl.colors[$ctrl.passObj[0].fields.color]]}">
                 <button type="button" 
                     class="close pass-detail-modal-close float-right" 
                     data-dismiss="modal" 
@@ -128,34 +128,37 @@
                 <div class="modal-header">
                     <div class="pass-detail-clubname-cont">
                         <h1 class="pass-detail-modal-clubname">
-                            {{$ctrl.passObj[0].fields.club_name}}
+                            {[$ctrl.passObj[0].fields.club_name]}
                         </h1>
                         <p class="pass-detail-modal-date">
-                            {{$ctrl.passObj[0].fields.pass_date}}
+                            {[$ctrl.passObj[0].fields.pass_date]}
                         </p>
                     </div>
                 </div>
             </div>
             <div class="modal-body">
-                <!-- <iframe src={{$ctrl.sendUrl}} frameborder="0"> -->
-                <form>
-                    NetId: <input type="text" ng-model="netid">
+                <!-- <iframe src={[$ctrl.sendUrl]} frameborder="0"> -->
+                <p ng-if="$ctrl.transferError"> Error: you entered an invalid NetId </p>
+                <form name="TransferForm">
+                    NetId: <input name = "netid" type="text" ng-model="netid" required>
+                    <span ng-show="TransferForm.netid.$touched && TransferForm.netid.$invalid">This field is required.</span>
                     Transferrable: <input type="checkbox" ng-model="transferrable">
                 </form>
+
             </div>
             <!-- FOOTER WITH CANCEL AND TRANSFER OPTIONS -->
             <div class="modal-footer pass-detail-modal-footer">
                 <button type="button" 
                     class="btn btn-danger pass-detail-modal-btn" 
                     data-toggle="modal" 
-                    data-target="#passDetailModal{{$ctrl.passNum}}"
+                    data-target="#passDetailModal{[$ctrl.passNum]}"
                     ng-click="$ctrl.swapModalTransferToDetail()">
                     Cancel
                 </button>
                 <button type="button" 
                     class="btn btn-info pass-detail-modal-btn"
                     ng-click="$ctrl.transfer($scope.netid, $scope.transferrable)"
-                    onclick="location.href='/sentpass/';">
+                    >
                     Transfer
                 </button>
             </div>

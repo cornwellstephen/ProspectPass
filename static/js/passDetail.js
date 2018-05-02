@@ -1,4 +1,4 @@
-function PassDetailController($scope, $attrs, $element, $http) {
+function PassDetailController($scope, $attrs, $element, $http, $window) {
     
     this.swapModalDetailToTransfer = function() {
         $("#passDetailModal"+this.passNum).modal('hide');
@@ -38,7 +38,10 @@ function PassDetailController($scope, $attrs, $element, $http) {
 
     this.buttonColor;
 
-    this.sendUrl;
+    $scope.sendUrl;
+    $scope.passUserNetid
+    this.getUser;
+    this.transferError = false;
 
     this.changeBackgroundColorDark = function() {
         this.buttonColor = this.colorsDarkened[this.passObj[0].fields.color];
@@ -62,7 +65,8 @@ function PassDetailController($scope, $attrs, $element, $http) {
     }
 
     this.$onInit = function() {
-        this.sendUrl = "/sendpass/" + this.passId + "/";
+        $scope.sendUrl = "/sendpass/" + this.passId + "/";
+        $scope.passUserNetid = this.passUserNetid
         this.buttonColor = this.colors[this.passObj[0].fields.color];
     };
 
@@ -73,11 +77,21 @@ function PassDetailController($scope, $attrs, $element, $http) {
     }
 
     this.transfer = function(netid, transferrable) {
-       return $http.post(this.sendUrl, {
-        'target': $scope.netid,
-        'source': this.passUserNetid,
-        'transferrable': $scope.transferrable
-      });       
+        this.getUser = "/restapi/students/" + $scope.netid + "/"; 
+        $http({
+        method: 'GET',
+        url: this.getUser,
+        }).then(function successCallback(response) {
+                $window.location.href = '/homepage'; 
+                return $http.post($scope.sendUrl, {
+                'target': $scope.netid,
+                'source': $scope.passUserNetid,
+                'transferrable': $scope.transferrable
+                });
+            }, function errorCallback(response) {
+                this.transferError = true;
+                return;
+            });
     }
     
 }

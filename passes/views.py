@@ -17,6 +17,7 @@ from django.http import HttpResponseRedirect
 from .multiforms import MultiFormsView
 from django.urls import reverse, reverse_lazy
 import json
+from rest_framework import filters
 # Create your views here.
 class Index(generic.ListView):
 	template_name = 'index.html'
@@ -39,9 +40,10 @@ class AdminHomepage(LoginRequiredMixin, generic.ListView):
         return
 
 class StudentViewSet(viewsets.ModelViewSet):
-	# lookup_field = 'NetId'
-	queryset = Student.objects.all()
-	serializer_class = StudentSerializer
+    lookup_field = 'NetId'
+    serializer_class = StudentSerializer
+    def get_queryset(self):
+            return Student.objects.all()
 
 class PassViewSet(viewsets.ModelViewSet):
 	queryset = Pass.objects.all()
@@ -103,7 +105,7 @@ def send_pass(request, pk):
     else:
         form = PassForm()
 
-    return render(request, 'sendpass.html', {'form': form})
+    return render(request, 'homepage.html', {'form': form})
 
 def activate_pass(request):
     if request.method == 'POST':

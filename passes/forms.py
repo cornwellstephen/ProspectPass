@@ -36,6 +36,12 @@ class PassForm(forms.Form):
     transferrable = forms.BooleanField()
     # passId = forms.CharField(max_length=50, widget=forms.HiddenInput())
 
+    def clean_target(self):
+        target = self.cleaned_data['target']
+        if len(Student.objects.all().filter(NetId=target)) == 0:
+            raise forms.ValidationError("You have inputted an invalid NetId.")
+        return target
+
 class ActivateForm(forms.Form):
     pass_id = forms.IntegerField(min_value=0)
 
@@ -63,6 +69,18 @@ class AddOfficerForm(MultipleForm):
         max_length=50, 
         widget=forms.HiddenInput()
     )
+
+    def clean_target(self):
+        target = self.cleaned_data['target']
+        if len(Student.objects.all().filter(NetId=target)) == 0:
+            raise forms.ValidationError("You have inputted an invalid NetId.")
+        else: # check if already officer
+            student = Student.objects.all().filter(NetId=target)[0]
+            if student.officer_status == True:
+                raise forms.ValidationError("This person is already an officer.")
+        return target
+
+
 class SingleDist(MultipleForm):
     
     # def get_passes(user_netid):
