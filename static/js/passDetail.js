@@ -77,12 +77,15 @@ function PassDetailController($scope, $attrs, $element, $http, $window) {
     }
 
     this.transfer = function(netid, transferrable) {
+        if ($scope.transferrable != true) {
+            $scope.transferrable = false
+        }
         this.getUser = "/restapi/students/" + $scope.netid + "/"; 
         $http({
         method: 'GET',
         url: this.getUser,
         }).then(function successCallback(response) {
-                $window.location.href = '/homepage'; 
+                $window.location.href = '/homepage';
                 return $http.post($scope.sendUrl, {
                 'target': $scope.netid,
                 'source': $scope.passUserNetid,

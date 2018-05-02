@@ -33,7 +33,7 @@ class PassForm(forms.Form):
         max_length=50, 
         widget=forms.HiddenInput()
     )
-    transferrable = forms.BooleanField()
+    transferrable = forms.BooleanField(required=False)
     # passId = forms.CharField(max_length=50, widget=forms.HiddenInput())
 
     def clean_target(self):
