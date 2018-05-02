@@ -190,18 +190,14 @@ class MultipleFormsDemoView(MultiFormsView):
             if i == -1:
                 j = 0
                 for entry in line.split(","):
-                    if entry.lower() == "netid":
-                        print("here")
+                    if entry.lower().strip() == "netid":
                         i = j
-                        print(i)
                         break
                     j+=1
             else:
                 fields = line.split(",")
                 source_user = Student.objects.all().filter(NetId=source)[0]
-                print("here")
-                print(source_user)
-                source_user.addToClub(fields[i])
+                source_user.addToClub(fields[i].strip())
         return HttpResponseRedirect('/fileuploaded')
 
 # def add_officer(request):
