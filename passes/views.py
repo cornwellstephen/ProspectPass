@@ -20,17 +20,17 @@ import json
 from rest_framework import filters
 # Create your views here.
 class Index(generic.ListView):
-	template_name = 'index.html'
+    template_name = 'index.html'
 
-	def get_queryset(self):
-		return
+    def get_queryset(self):
+        return
 
 class Homepage(LoginRequiredMixin, generic.ListView):
-	template_name = 'homepage.html'
-	login_url = 'login/'
-	raise_exception = False
-	def get_queryset(self):
-		return
+    template_name = 'homepage.html'
+    login_url = 'login/'
+    raise_exception = False
+    def get_queryset(self):
+        return
 
 class AdminHomepage(LoginRequiredMixin, generic.ListView):
     template_name = 'admin-homepage.html'
@@ -46,8 +46,8 @@ class StudentViewSet(viewsets.ModelViewSet):
             return Student.objects.all()
 
 class PassViewSet(viewsets.ModelViewSet):
-	queryset = Pass.objects.all()
-	serializer_class = PassSerializer
+    queryset = Pass.objects.all()
+    serializer_class = PassSerializer
 
 class SentPass(generic.ListView):
     template_name = 'sentpass.html'
@@ -99,6 +99,7 @@ def send_pass(request, pk):
             if source_user.officer_status is True and source_user.user_club == target_pass.club_name:
                 source_user.officerDirectSend(target_pass, netid, transferrable)
             else:
+                print("Still WTF")
                 source_user.sendpass(target_pass, netid, transferrable)
             return HttpResponseRedirect('/sentpass')
 

@@ -15,6 +15,23 @@
     color: #fff;
 }
 
+.modal-transfer-form-checkbox {
+    height: 20px;
+    width: 20px;
+}
+
+.modal-transfer-field-label {
+    margin-bottom: 0px;
+}
+
+.modal-body {
+    padding: 15px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
 .pass-detail-hmpg-feedback:hover {
     opacity: 80%;
 }
@@ -42,7 +59,7 @@
 .modal-content  {
     -webkit-border-radius: 10px !important;
     -moz-border-radius: 10px !important;
-    border-radius: 10px !important; 
+    border-radius: 10px !important;
     height: 90% !important;
     width: 90% !important;
     border: 0px;
@@ -51,12 +68,26 @@
 
 .modal-dialog {
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
 }
 
 .pass-detail-modal-close {
     width: 50px;
     height: 50px;
     align-self: flex-end;
+}
+
+.pass-detail-modal-btn-activate {
+    font-size: 25px;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+    color: #fff;
 }
 
 .pass-detail-modal-btn {
@@ -66,11 +97,13 @@
     -webkit-border-radius: 0px !important;
     -moz-border-radius: 0px !important;
     border-radius: 0px !important;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    font-weight: 300;
-    font-size: 18px;
-    letter-spacing: 4px;
-    border: 0px;
+    margin-bottom: 0px;
+    /*color: #fff;*/
     align-items: center;
     justify-content: space-around;
     display: flex;
@@ -119,11 +152,14 @@
 .pass-detail-modal-field {
     text-align: center;
     font-size: 18px;
+    color: #666;
+    margin-bottom: 2px;
 }
 
 .pass-detail-modal-value {
     text-align: center;
-    font-size: 18px;
+    font-size: 25px;
+    margin-bottom: 30px;
 }
 
 .modal-header {
@@ -159,34 +195,26 @@
 }
 
 .pass-detail-modal-footer-activated {
-    animation: activated-animation 2s infinite;
+    -webkit-animation-name: activated-animation;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: normal; /* not "linear" */
+    -webkit-animation-fill-mode:forwards;
+    /*-webkit-animation-timing-function:steps(3, end);*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #e24e42;
 }
 
 @-webkit-keyframes activated-animation {
   0% {
-    background-color: #2FA6D4;
+    background-color: #000;
   }
-  15% {
-    background-color: #BFEBFF;
-  }
-  30% {
-    background-color: #BAE06B;
-  }
-  45% {
-    background-color: #FFF04A;
-  }
-  60% {
-    background-color: #FFD9D2;
-  }
-  75% {
-    background-color: #FFF04A;
-  }
-  90% {
-    background-color: #BAE06B;
-  }
-  100% {
-    background-color: #BFEBFF;
-  }
+/*  50% {
+    background-color: #000;
+  }*/
 }
 
 @keyframes bg-animation {

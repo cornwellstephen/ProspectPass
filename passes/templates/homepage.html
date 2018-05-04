@@ -48,7 +48,8 @@
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
                 {% for pass in user.passes.all %}
-                    <div class="main-hmpg-pass-date-cont">
+                    <div class="main-hmpg-pass-date-cont"
+                        ng-if="ctrl.hasDatePassed('{{ pass.pass_date }}')">
                         <pass-detail
                             pass-num="{{ forloop.counter }}"
                             pass-obj= "{{ pass }}"
@@ -61,7 +62,12 @@
                 {% endfor %}
                 {% if user.passes.all|length == 0 %}
                     <h3 class="text-muted">You do not have any passes yet!</h3>
+                    {[{ ctrl.user.name }]}
                 {% endif %}
+                <!-- NEED TO OUTPUT MESSAGE IF YOU HAVE NO CURRENT PASSES -->
+                <!-- <h3 ng-if="ctrl.hasCurrentPass( '{{user.passes.all}}' )"
+                    class="text-muted">You do not have any passes yet!
+                </h3> -->
             </div>
         </div>
 

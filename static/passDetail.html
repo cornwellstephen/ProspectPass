@@ -59,17 +59,20 @@
             </div>
             <div class="modal-body">
                 <p class="pass-detail-modal-field">
-                    <strong>Pass Holder Name:</strong>
+                    Pass Holder Name:
                 </p>
                 <p class="pass-detail-modal-value">
-                    {[$ctrl.passUser]}
-
+                    <strong>
+                        {[$ctrl.passUser]}
+                    </strong>
                 </p>
                 <p class="pass-detail-modal-field">
-                    <strong>Club Member Name:</strong> 
+                    Club Member Name:
                 </p>
                 <p class="pass-detail-modal-value">
-                    {[$ctrl.passObj[0].fields.pass_source]}
+                    <strong>
+                        {[$ctrl.passObj[0].fields.pass_source]}
+                    </strong>
                 </p>
 
             </div>
@@ -94,10 +97,9 @@
             <!-- FOOTER WITH COLORED BAR -->
             <div class="modal-footer pass-detail-modal-footer pass-detail-modal-footer-activated"
                 ng-if="(!$ctrl.passObj.transferable || $ctrl.passObj[0].fields.activated) 
-                    && !($ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated)">
-                <div class="pass-detail-modal-btn">
-                    <p>Activated Pass</p>
-                </div>
+                    && !($ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated)"
+                style="background-color: {{$ctrl.colors[$ctrl.passObj[0].fields.color]}}">
+                    <p class="pass-detail-modal-btn-activate">Activated Pass</p>
             </div>
         </div>
     </div>
@@ -131,18 +133,39 @@
                             {[$ctrl.passObj[0].fields.club_name]}
                         </h1>
                         <p class="pass-detail-modal-date">
-                            {[$ctrl.passObj[0].fields.pass_date]}
+                            {[$ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) ]}
                         </p>
                     </div>
                 </div>
             </div>
             <div class="modal-body">
-                <!-- <iframe src={[$ctrl.sendUrl]} frameborder="0"> -->
-                <p ng-if="$ctrl.transferError"> Error: you entered an invalid NetId </p>
+                <!-- <iframe src={{$ctrl.sendUrl}} frameborder="0"> -->
                 <form name="TransferForm">
-                    NetId: <input name = "netid" type="text" ng-model="netid" required>
-                    <span ng-show="TransferForm.netid.$touched && TransferForm.netid.$invalid">This field is required.</span>
-                    Transferrable: <input type="checkbox" ng-model="transferrable">
+                    <div style="margin-bottom: 20px;">
+                        <p ng-if="$ctrl.transferError"> Error: you entered an invalid NetId </p>
+                        <p class="modal-transfer-field-label">
+                            <strong>NetId</strong>
+                        </p>
+                        <small class="text-muted">
+                            What is the NetId of the student who should receive this pass?
+                        </small>
+                        <input type="text" 
+                            ng-model="netid"
+                            class="form-control admin-hmpg-form-input"
+                            required>
+                        <span ng-show="TransferForm.netid.$touched && TransferForm.netid.$invalid">This field is required.</span>
+                    </div>
+                    <div>
+                        <p class="modal-transfer-field-label">
+                            <strong>Transferable</strong>
+                        </p>
+                        <small class="text-muted">
+                            Should the student receiving this pass be able to transfer it to other students?
+                        </small>
+                        <input type="checkbox" 
+                            ng-model="transferrable"
+                            class="form-control modal-transfer-form-checkbox">
+                    </div>
                 </form>
 
             </div>

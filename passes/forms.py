@@ -71,7 +71,6 @@ class AddOfficerForm(MultipleForm):
         widget=forms.HiddenInput()
     )
 
-
     def clean_target(self):
         target = self.cleaned_data['target']
         if len(Student.objects.all().filter(NetId=target)) == 0:
