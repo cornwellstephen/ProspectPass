@@ -1,6 +1,7 @@
 from django import forms
 from passes.serializers import PassSerializer
 from passes.models import Pass, Student
+from django.utils.timezone import datetime
 
 
 COLOR_CHOICES= [
@@ -70,6 +71,7 @@ class AddOfficerForm(MultipleForm):
         widget=forms.HiddenInput()
     )
 
+
     def clean_target(self):
         target = self.cleaned_data['target']
         if len(Student.objects.all().filter(NetId=target)) == 0:
@@ -121,7 +123,7 @@ class SingleDist(MultipleForm):
     )
     number = forms.IntegerField(
         label='Count', 
-        min_value=0,
+        min_value=1,
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control col-sm-8 admin-hmpg-form-input',
@@ -139,7 +141,7 @@ class SingleDist(MultipleForm):
         self.pass_choices = []
         officer = Student.objects.all().filter(NetId=NETID)[0]
         for _pass in officer.passes.all():
-            if _pass.club_name == officer.user_club:
+            if _pass.club_name == officer.user_club and _pass.pass_date >= datetime.today().date():
                 self.pass_choices.append((_pass.pk, _pass.pass_date))
         self.fields['passes'].widget.choices = self.pass_choices
 
