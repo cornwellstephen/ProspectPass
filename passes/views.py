@@ -99,7 +99,6 @@ def send_pass(request, pk):
             if source_user.officer_status is True and source_user.user_club == target_pass.club_name:
                 source_user.officerDirectSend(target_pass, netid, transferrable)
             else:
-                print("Still WTF")
                 source_user.sendpass(target_pass, netid, transferrable)
             return HttpResponseRedirect('/sentpass')
 
@@ -151,7 +150,7 @@ class MultipleFormsDemoView(MultiFormsView):
     def addpass_form_valid(self, form):
         pass_date = form.cleaned_data['pass_date']
         color = form.cleaned_data['color']
-        number = form.cleaned_data['number']
+        number = form.cleaned_data['number_pass']
         source = form.cleaned_data['source']
         source_user = Student.objects.all().filter(NetId=source)[0]
         # need to add stuff here
@@ -163,7 +162,7 @@ class MultipleFormsDemoView(MultiFormsView):
         pk = form.cleaned_data['passes']
         number = form.cleaned_data['number']
         source = form.cleaned_data['source']
-        netid = form.cleaned_data['target']
+        netid = form.cleaned_data['person']
         transferrable = form.cleaned_data['transferrable']
         source_user = Student.objects.all().filter(NetId=source)[0]
         target_pass = Pass.objects.all().filter(pk=pk)[0]

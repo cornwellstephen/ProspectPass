@@ -76,9 +76,10 @@
                     <p class="admin-hmpg-form-confirm">
                         Check that the entered NetId is correct before submitting.
                     </p>
-                    <input type="submit" 
-                        class="btn btn-lg btn-default admin-hmpg-submit-button"
-                        value="Submit" />
+                    <button name='action'
+                        value='addofficer'
+                        type="submit"
+                        class="btn btn-lg btn-default admin-hmpg-submit-button"> Add Officer </button>
                 </form>
 
                 <form method="post"
@@ -87,15 +88,16 @@
                     {% csrf_token %}
                     <h3>Create and Distribute New Pass</h3>
                     <p class="text-muted form-text">
-                        On submit, a pass will be created for your club with the provided attributes and distributed to all of the club members. Once a pass is created, it cannot be recollected.
+                        On submit, a pass will be created for your club with the provided attributes and distributed to all of the club members. Once a pass is created, it cannot be recollected. The default pass color is red.
                     </p>
                     {{ forms.addpass.as_p }}
                     <input type="hidden" 
                         name="source" 
                         value= "{{user.username}}" />
-                    <input type="submit" 
-                        class="btn btn-lg btn-default admin-hmpg-submit-button"
-                        value="Submit" />
+                    <button name='action'
+                        value='addpass'
+                        type="submit"
+                        class="btn btn-lg btn-default admin-hmpg-submit-button"> Add Pass </button>
                 </form>
 
                 <form method="post"
@@ -104,15 +106,16 @@
                     {% csrf_token %}
                     <h3>Distribute a pass</h3>
                     <p class="text-muted form-text">
-                        Description here.
+                        Distribute to a single person a pass you have already created.
                     </p>
                     {{ forms.singledist.as_p }}
                     <input type="hidden" 
                         name="source" 
                         value= "{{user.username}}" />
-                    <input type="submit" 
-                        class="btn btn-lg btn-default admin-hmpg-submit-button"
-                        value="Submit" />
+                    <button name='action'
+                        value='singledist'
+                        type="submit"
+                        class="btn btn-lg btn-default admin-hmpg-submit-button"> Distribute </button>
                 </form>
 
                 <form method="post" 
@@ -129,9 +132,10 @@
                     <input type="hidden" 
                     name="source" 
                     value= {{user.username}} />
-                    <input type="submit" 
-                        class="btn btn-lg btn-default admin-hmpg-submit-button"
-                        value="Submit" />
+                    <button name='action' 
+                        value='uploadfile'
+                        type="submit"
+                        class="btn btn-lg btn-default admin-hmpg-submit-button"> Upload </button>
                 </form>
             </div>
 

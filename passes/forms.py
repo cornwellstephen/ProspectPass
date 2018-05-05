@@ -28,7 +28,7 @@ def setNetId(netid):
 class PassForm(forms.Form):
     target = forms.CharField(
         label='NetId', 
-        max_length=100
+        max_length=100,
     )
     source = forms.CharField(
         max_length=50, 
@@ -64,16 +64,18 @@ class AddOfficerForm(MultipleForm):
             attrs={
                 'class':'form-control col-sm-8 admin-hmpg-form-input'
             }
-        )
+        ),
+        required=False
     )
     source = forms.CharField(
         max_length=50, 
-        widget=forms.HiddenInput()
+        widget=forms.HiddenInput(),
     )
 
     def clean_target(self):
         target = self.cleaned_data['target']
-        if len(Student.objects.all().filter(NetId=target)) == 0:
+        print(target)
+        if target == None or len(Student.objects.all().filter(NetId=target)) == 0:
             raise forms.ValidationError("You have inputted an invalid NetId.")
         else: # check if already officer
             student = Student.objects.all().filter(NetId=target)[0]
@@ -99,7 +101,8 @@ class SingleDist(MultipleForm):
                 'class': 'form-control col-sm-8 admin-hmpg-form-input',
                 'placeholder': 'What pass do you want to send?'
             }
-        )
+        ),
+        required=False
     )
     transferrable = forms.BooleanField(
         label='Transferable:', 
@@ -109,16 +112,18 @@ class SingleDist(MultipleForm):
             attrs={
                 'class': 'form-control admin-hmpg-form-checkbox',
             }
-        )
+        ),
+        required=False
     )        
-    target = forms.CharField(
+    person = forms.CharField(
         label='NetId', 
         max_length=100, 
         widget=forms.TextInput(
             attrs={
                 'class':'form-control col-sm-8 admin-hmpg-form-input'
             }
-        )
+        ),
+        required=False
     )
     number = forms.IntegerField(
         label='Count', 
@@ -128,12 +133,30 @@ class SingleDist(MultipleForm):
                 'class': 'form-control col-sm-8 admin-hmpg-form-input',
                 'placeholder': 'Number of passes the member will receive.'
             }
-        )
+        ),
+        required=False
     )
     source = forms.CharField(
         max_length=50, 
         widget=forms.HiddenInput()
     )
+    def clean_person(self):
+        target = self.cleaned_data['person']
+        if len(Student.objects.all().filter(NetId=target)) == 0:
+            raise forms.ValidationError("You have inputted an invalid NetId.")
+        return target
+
+    def clean_number(self):
+        number = self.cleaned_data['number']
+        if number is None:
+            raise forms.ValidationError("You must select a positive number of passes")
+        return number
+
+    def clean_pass(self):
+        _pass = self.cleaned_data['pass']
+        if _pass is None:
+            raise forms.ValidationError("You must select a pass")
+        return _pass
 
     def __init__(self, *args, **kwargs):
         super(SingleDist, self).__init__(*args, **kwargs)
@@ -152,7 +175,8 @@ class MakePassForm(MultipleForm):
                 'class': 'form-control datetime-input col-sm-8 admin-hmpg-form-input',
                 'placeholder': 'What date should this pass be used on?'
             }
-        )
+        ),
+        required=False
     )
     color = forms.CharField(
         label='Color', 
@@ -162,23 +186,45 @@ class MakePassForm(MultipleForm):
                 'class': 'form-control col-sm-8 admin-hmpg-form-input',
                 'placeholder': 'What color should this pass be?'
             }
-        )
+        ),
+        required=False
     )
-    number = forms.IntegerField(
+    number_pass = forms.IntegerField(
         label='Count', 
-        min_value=0,
+        min_value=1,
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control col-sm-8 admin-hmpg-form-input',
                 'placeholder': 'Number of passes each member will receive.'
             }
-        )
+        ),
+        required=False
     )
     source = forms.CharField(
         max_length=50, 
         widget=forms.HiddenInput()
     )
 
+    def clean_pass_date(self):
+        pass_date = self.cleaned_data['pass_date']
+        if pass_date == None:
+            raise forms.ValidationError("You must select a valid date")
+        elif pass_date < datetime.today().date():
+            raise forms.ValidationError("You must select a date that's not in the past")
+        return pass_date
+
+    def clean_number_pass(self):
+        number = self.cleaned_data['number_pass']
+        if number is None:
+            raise forms.ValidationError("You must select a positive number of passes")
+        return number
+
 class UploadFileForm(MultipleForm):
-    file = forms.FileField()
-    source = forms.CharField(max_length=50, widget=forms.HiddenInput())
+    file = forms.FileField(required=False)
+    source = forms.CharField(max_length=50, widget=forms.HiddenInput(), required=False)
+
+    def clean_file(self):
+        _pass = self.cleaned_data['file']
+        if _pass is None:
+            raise forms.ValidationError("You must upload a valid file")
+        return _pass
