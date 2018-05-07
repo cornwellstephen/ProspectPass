@@ -142,6 +142,29 @@ label {
     .active-li-nav {
         border: 0px !important;
     }
+
+    .pagination {
+        display: inline;
+    }
+
+    .page-item:first-child .page-link {
+        border-top-left-radius: .25rem; 
+        border-top-right-radius: .25rem !important;
+        border-bottom-left-radius: 0rem !important;
+        margin: 0px;
+    }
+
+    .page-item:last-child .page-link {
+        border-bottom-left-radius: .25rem; 
+        border-bottom-right-radius: .25rem !important;
+        border-top-right-radius: 0rem !important;
+        
+    }
+
+    .page-link {
+        margin-left: 0px;
+        margin-top: -1px;
+    }
 }
 
 .navbar-brand {
