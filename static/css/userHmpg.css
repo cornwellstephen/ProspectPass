@@ -82,6 +82,8 @@ body {
 
 form.admin-hmpg-form {
     padding: 20px;
+    padding-top: 70px;
+    margin-top: -50px;
     border-bottom: 1px solid #eee;
 }
 
@@ -89,8 +91,20 @@ form.admin-hmpg-form {
     margin-bottom: 10px;
 }
 
+.page-link {
+    color: #666;
+}
+
+..page-link:hover {
+    color: #666;
+}
+
 label {
     width: 120px;
+}
+
+.form-text  {
+    margin-bottom: 10px;
 }
 
 .admin-hmpg-form-input {
@@ -124,7 +138,7 @@ label {
     padding-bottom: 5px;
 }
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .active-li-nav {
         border: 0px !important;
     }

@@ -62,7 +62,7 @@ class AddOfficerForm(MultipleForm):
         max_length=100, 
         widget=forms.TextInput(
             attrs={
-                'class':'form-control col-sm-8 admin-hmpg-form-input'
+                'class':'form-control admin-hmpg-form-input'
             }
         ),
         required=False
@@ -98,7 +98,7 @@ class SingleDist(MultipleForm):
         label='Pass', 
         widget=forms.Select(
             attrs={
-                'class': 'form-control col-sm-8 admin-hmpg-form-input',
+                'class': 'form-control admin-hmpg-form-input',
                 'placeholder': 'What pass do you want to send?'
             }
         ),
@@ -120,7 +120,7 @@ class SingleDist(MultipleForm):
         max_length=100, 
         widget=forms.TextInput(
             attrs={
-                'class':'form-control col-sm-8 admin-hmpg-form-input'
+                'class':'form-control admin-hmpg-form-input'
             }
         ),
         required=False
@@ -130,7 +130,7 @@ class SingleDist(MultipleForm):
         min_value=1,
         widget=forms.NumberInput(
             attrs={
-                'class': 'form-control col-sm-8 admin-hmpg-form-input',
+                'class': 'form-control admin-hmpg-form-input',
                 'placeholder': 'Number of passes the member will receive.'
             }
         ),
@@ -172,7 +172,7 @@ class MakePassForm(MultipleForm):
         label='Date',
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control datetime-input col-sm-8 admin-hmpg-form-input',
+                'class': 'form-control datetime-input admin-hmpg-form-input',
                 'placeholder': 'What date should this pass be used on?'
             }
         ),
@@ -183,7 +183,7 @@ class MakePassForm(MultipleForm):
         widget=forms.Select(
             choices=COLOR_CHOICES, 
             attrs={
-                'class': 'form-control col-sm-8 admin-hmpg-form-input',
+                'class': 'form-control admin-hmpg-form-input',
                 'placeholder': 'What color should this pass be?'
             }
         ),
@@ -194,7 +194,7 @@ class MakePassForm(MultipleForm):
         min_value=1,
         widget=forms.NumberInput(
             attrs={
-                'class': 'form-control col-sm-8 admin-hmpg-form-input',
+                'class': 'form-control admin-hmpg-form-input',
                 'placeholder': 'Number of passes each member will receive.'
             }
         ),
@@ -221,7 +221,11 @@ class MakePassForm(MultipleForm):
 
 class UploadFileForm(MultipleForm):
     file = forms.FileField(required=False)
-    source = forms.CharField(max_length=50, widget=forms.HiddenInput(), required=False)
+    source = forms.CharField(
+        max_length=50, 
+        widget=forms.HiddenInput(), 
+        required=False
+    )
 
     def clean_file(self):
         _pass = self.cleaned_data['file']
