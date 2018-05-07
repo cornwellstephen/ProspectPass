@@ -34,18 +34,21 @@
 
     <body>
 
-        <nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top navbar-hmpg-format">
+        <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
             <a class="navbar-brand" 
                 href="../">
-                ProspectPass
-            </a>
-            <div id="navbarText">
-                <ul class="navbar-nav justify-content-end">
+                    ProspectPass
+                </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="../homepage">Passes</a>
                     </li>
                     {% if user.officer_status %}
-                    <li class="nav-item">
+                    <li class="nav-item active-li-nav">
                         <a class="nav-link active" href="../admin-homepage">Admin</a>
                     </li>
                     {% endif %}

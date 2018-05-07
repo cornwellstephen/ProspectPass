@@ -71,13 +71,6 @@ body {
     flex-direction: column;
 }
 
-.active {
-    border-bottom: 2px solid #e24e42;
-    border-top: 2px solid #e24e42;
-    color: #062f4f;
-    margin-top: -2px;
-}
-
 .main-hmpg-pass-date-cont {
     display: inline-block;
     flex-wrap: wrap;
@@ -113,14 +106,65 @@ label {
     color: #e24e42;
 }
 
+.user-hmpg-navbar-link-cont {
+    height: 100%;
+}
+
+.navbar-collapse.collapse.in {
+  display: block!important;
+}
+
+.navbar-brand.active {
+    border-bottom: 3px solid #e24e42;
+    padding-bottom: 2px;
+}
+
+.active {
+    color: #e24e42 !important;
+    padding-bottom: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+    .active-li-nav {
+        border: 0px !important;
+    }
+}
+
 .navbar-brand {
     font-weight: 600;
-    color: #062f4f !important;
+/*    color: #062f4f !important;*/
     margin-top: 0px; 
 }
 
+.active:hover  {
+    color: #d13d31 !important;
+}
+
+/*li.nav-item:hover {
+    background-color: #e7e8e9;
+}*/
+
+.nav-link {
+    font-weight: 600;
+}
+
+.nav-item  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.active-li-nav  {
+    border-bottom: 3px solid #e24e42;
+}
+
 .navbar-hmpg-format {
-    height: 70px;
+    height: 60px;
+    padding: 0px 16px;
+}
+
+.user-hmpg-navbar-list  {
+    height: 100%;
 }
 
 .hmpg-welcome-banner {
