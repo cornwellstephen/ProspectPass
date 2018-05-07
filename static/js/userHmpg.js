@@ -17,5 +17,22 @@ angular.module('ProspectPassApp')
             return true;
         }
 
+        this.$onInit = function() {
+            for (var i = 0; i < 11; i++) {
+                var label = $("#id_color").find("[for='id_color_"+i+"']")[0].innerText;
+                $("#id_color").find("[for='id_color_"+i+"']")[0].innerHtml =
+                    '<input type="radio"' +
+                        'name="color"' +
+                        'value="'+i+'" ' +
+                        'class="admin-hmpg-form-radios"' +
+                        'placeholder="What color should this pass be?"' +
+                        'id="id_color_'+i+'"' +
+                        '>';
+                $("#id_color").find("[for='id_color_"+i+"']").css({
+                    'background-color': label,
+                    'color': label
+                });
+            }
+        };
     }
 );

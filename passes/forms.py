@@ -5,18 +5,17 @@ from django.utils.timezone import datetime
 
 
 COLOR_CHOICES= [
-        ('-1', 'Pick a color for this pass'),
-        ('0', 'Red'),
-        ('1', 'Yellow'),
-        ('2', 'Pink'),
-        ('3', 'Turqoise'),
-        ('4', 'Purple'),
-        ('5', 'Light Blue'),
-        ('6', 'Dark Blue'),
-        ('7', 'Bright Pink'),
-        ('8', 'Bright Green'),
-        ('9', 'Super Light Blue'),
-        ('10', 'Green'),
+        ('0', '#e24e42'),
+        ('1', '#e9b000'),
+        ('2', '#eb6e80'),
+        ('3', '#008f95'),
+        ('4', '#94618e'),
+        ('5', '#8fd8f2'),
+        ('6', '#273f5f'),
+        ('7', '#ee3377'),
+        ('8', '#e5e358'),
+        ('9', '#a7d2cb'),
+        ('10', '#11895a'),
     ]
 
 NETID = ''
@@ -179,11 +178,11 @@ class MakePassForm(MultipleForm):
         required=False
     )
     color = forms.CharField(
-        label='Color', 
-        widget=forms.Select(
+        label='Pick a color for this pass:', 
+        widget=forms.RadioSelect(
             choices=COLOR_CHOICES, 
             attrs={
-                'class': 'form-control admin-hmpg-form-input',
+                'class': 'admin-hmpg-form-radios',
                 'placeholder': 'What color should this pass be?'
             }
         ),
