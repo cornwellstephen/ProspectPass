@@ -18,6 +18,8 @@
             src="logos/{[$ctrl.passObj.image]}"> -->
 </button>
 
+<!-- <button id="openModalButton{[$ctrl.passNum]}" hidden="true" data-toggle="modal" data-target="#passTransferModal{[$ctrl.passNum]}">Open Modal</button> -->
+
 <!-- Modal -->
 <div class="modal" 
     id="passDetailModal{[$ctrl.passNum]}" 
@@ -142,7 +144,7 @@
             </div>
             <div class="modal-body">
                 <!-- <iframe src={{$ctrl.sendUrl}} frameborder="0"> -->
-                <form name="TransferForm">
+                <form name="TransferForm" ng-model="TransferForm" required my-directive>
                     <div style="margin-bottom: 20px;">
                         <p ng-if="$ctrl.transferError"> Error: you entered an invalid NetId </p>
                         <p class="modal-transfer-field-label">
@@ -190,3 +192,5 @@
         </div>
     </div>
 </div>
+
+
