@@ -5,18 +5,17 @@ from django.utils.timezone import datetime
 from django.http import HttpResponseRedirect
 
 COLOR_CHOICES= [
-        ('-1', 'Pick a color for this pass'),
-        ('0', 'Red'),
-        ('1', 'Yellow'),
-        ('2', 'Pink'),
-        ('3', 'Turqoise'),
-        ('4', 'Purple'),
-        ('5', 'Light Blue'),
-        ('6', 'Dark Blue'),
-        ('7', 'Bright Pink'),
-        ('8', 'Bright Green'),
-        ('9', 'Super Light Blue'),
-        ('10', 'Green'),
+        ('0', '#e24e42'),
+        ('1', '#e9b000'),
+        ('2', '#eb6e80'),
+        ('3', '#008f95'),
+        ('4', '#94618e'),
+        ('5', '#8fd8f2'),
+        ('6', '#273f5f'),
+        ('7', '#ee3377'),
+        ('8', '#e5e358'),
+        ('9', '#a7d2cb'),
+        ('10', '#11895a'),
     ]
 
 NETID = ''
@@ -62,7 +61,7 @@ class AddOfficerForm(MultipleForm):
         max_length=100, 
         widget=forms.TextInput(
             attrs={
-                'class':'form-control col-sm-8 admin-hmpg-form-input'
+                'class':'form-control admin-hmpg-form-input'
             }
         ),
         required=False
@@ -97,7 +96,7 @@ class SingleDist(MultipleForm):
         label='Pass', 
         widget=forms.Select(
             attrs={
-                'class': 'form-control col-sm-8 admin-hmpg-form-input',
+                'class': 'form-control admin-hmpg-form-input',
                 'placeholder': 'What pass do you want to send?'
             }
         ),
@@ -119,7 +118,7 @@ class SingleDist(MultipleForm):
         max_length=100, 
         widget=forms.TextInput(
             attrs={
-                'class':'form-control col-sm-8 admin-hmpg-form-input'
+                'class':'form-control admin-hmpg-form-input'
             }
         ),
         required=False
@@ -129,7 +128,7 @@ class SingleDist(MultipleForm):
         min_value=1,
         widget=forms.NumberInput(
             attrs={
-                'class': 'form-control col-sm-8 admin-hmpg-form-input',
+                'class': 'form-control admin-hmpg-form-input',
                 'placeholder': 'Number of passes the member will receive.'
             }
         ),
@@ -171,18 +170,18 @@ class MakePassForm(MultipleForm):
         label='Date',
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control datetime-input col-sm-8 admin-hmpg-form-input',
+                'class': 'form-control datetime-input admin-hmpg-form-input',
                 'placeholder': 'What date should this pass be used on?'
             }
         ),
         required=False
     )
     color = forms.CharField(
-        label='Color', 
-        widget=forms.Select(
+        label='Pick a color for this pass:', 
+        widget=forms.RadioSelect(
             choices=COLOR_CHOICES, 
             attrs={
-                'class': 'form-control col-sm-8 admin-hmpg-form-input',
+                'class': 'admin-hmpg-form-radios',
                 'placeholder': 'What color should this pass be?'
             }
         ),
@@ -193,7 +192,7 @@ class MakePassForm(MultipleForm):
         min_value=1,
         widget=forms.NumberInput(
             attrs={
-                'class': 'form-control col-sm-8 admin-hmpg-form-input',
+                'class': 'form-control admin-hmpg-form-input',
                 'placeholder': 'Number of passes each member will receive.'
             }
         ),
@@ -221,10 +220,12 @@ class MakePassForm(MultipleForm):
 
 class UploadFileForm(MultipleForm):
     file = forms.FileField(required=False)
-    source = forms.CharField(max_length=50, widget=forms.HiddenInput(), required=False)
-    # def __init__(self, *args, **kwargs):
-    #     super(UploadFileForm, self).__init__(*args, **kwargs)
-    #     print(self.is_bound)
+    source = forms.CharField(
+        max_length=50, 
+        widget=forms.HiddenInput(), 
+        required=False
+    )
+
     def clean_file(self):
         _pass = self.cleaned_data['file']
         if _pass is None:

@@ -34,108 +34,138 @@
 
     <body>
 
-        <nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top navbar-hmpg-format">
+        <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
             <a class="navbar-brand" 
                 href="../">
-                ProspectPass
-            </a>
-            <div id="navbarText">
-                <ul class="navbar-nav justify-content-end">
+                    ProspectPass
+                </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="../homepage">Passes</a>
                     </li>
                     {% if user.officer_status %}
-                    <li class="nav-item">
+                    <li class="nav-item active-li-nav">
                         <a class="nav-link active" href="../admin-homepage">Admin</a>
                     </li>
                     {% endif %}
                 </ul>
             </div>
         </nav>
+
         {% if user.officer_status %}
         <div class="page-main-content">
             <h1 class="hmpg-welcome-banner">Welcome, {{user.name}}</h1>
+
             <div class="main-cont-club-admin" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
-                <p><strong>
-                    Club: {{ user.user_club }}
-                </strong></p>
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="../admin-homepage/#NewClubOfficer">Set New Club Officer</a></li>
+                        <li class="page-item"><a class="page-link" href="../admin-homepage/#CreatePassForm">Create and Distribute Pass</a></li>
+                        <li class="page-item"><a class="page-link" href="../admin-homepage/#DistributePassForm">Distribute Pass</a></li>
+                        <li class="page-item"><a class="page-link" href="../admin-homepage/#UpdateMembersForm">Update Members</a></li>
+                    </ul>
+                </nav>
+
                 <form method="post"
-                    class="admin-hmpg-form"
-                    action="{% url 'admin-homepage' %}">
+                    class="admin-hmpg-form container-fluid row"
+                    action="{% url 'admin-homepage' %}"
+                    id="NewClubOfficer">
                     {% csrf_token %}
-                    <h3>Set New Club Officer</h3>
-                    <p class="text-muted form-text">
+                    <div class="col-lg-4">
+                        <h3>Set New Club Officer</h3>
+                        <small class="text-muted form-text">
                         Anyone you indicate in this field will have full officer privileges. This means they will be able to create unlimited passes for your club, distribute passes to anyone with a netid, and appoint other students who will also have unlimited site privileges.
-                    </p>
-                    {{ forms.addofficer.as_p }}
-                    <input type = "hidden" 
-                        name = "source" 
-                        value = "{{user.username}}" />
-                    <p class="admin-hmpg-form-confirm">
-                        Check that the entered NetId is correct before submitting.
-                    </p>
-                    <button name='action'
-                        value='addofficer'
-                        type="submit"
-                        class="btn btn-lg btn-default admin-hmpg-submit-button"> Add Officer </button>
+                        </small>
+                    </div>
+                    <div class="col-lg-8">
+                        {{ forms.addofficer.as_p }}
+                        <input type = "hidden" 
+                            name = "source" 
+                            value = "{{user.username}}" />
+                        <p class="admin-hmpg-form-confirm">
+                            Check that the entered NetId is correct before submitting.
+                        </p>
+                        <button name='action'
+                            value='addofficer'
+                            type="submit"
+                            class="btn btn-lg btn-default admin-hmpg-submit-button"> Add Officer </button>
+                    </div>
                 </form>
 
                 <form method="post"
-                    class="admin-hmpg-form"
-                    action="{% url 'admin-homepage' %}">
+                    class="admin-hmpg-form container-fluid row"
+                    action="{% url 'admin-homepage' %}"
+                    id="CreatePassForm">
                     {% csrf_token %}
-                    <h3>Create and Distribute New Pass</h3>
-                    <p class="text-muted form-text">
-                        On submit, a pass will be created for your club with the provided attributes and distributed to all of the club members. Once a pass is created, it cannot be recollected. The default pass color is red.
-                    </p>
-                    {{ forms.addpass.as_p }}
-                    <input type="hidden" 
-                        name="source" 
-                        value= "{{user.username}}" />
-                    <button name='action'
-                        value='addpass'
-                        type="submit"
-                        class="btn btn-lg btn-default admin-hmpg-submit-button"> Add Pass </button>
+                    <div class="col-lg-4">
+                        <h3>Create and Distribute New Pass</h3>
+                        <small class="text-muted form-text">
+                            On submit, a pass will be created for your club with the provided attributes and distributed to all of the club members. Once a pass is created, it cannot be recollected. The default pass color is red.
+                        </small>
+                    </div>
+                    <div class="col-lg-8">
+                        {{ forms.addpass.as_p }}
+                        <input type="hidden" 
+                            name="source" 
+                            value= "{{user.username}}" />
+                        <button name='action'
+                            value='addpass'
+                            type="submit"
+                            class="btn btn-lg btn-default admin-hmpg-submit-button"> Add Pass</button>
+                    </div>
                 </form>
 
                 <form method="post"
-                    class="admin-hmpg-form"
-                    action="{% url 'admin-homepage' %}">
+                    class="admin-hmpg-form container-fluid row"
+                    action="{% url 'admin-homepage' %}"
+                    id="DistributePassForm">
                     {% csrf_token %}
-                    <h3>Distribute a pass</h3>
-                    <p class="text-muted form-text">
-                        Distribute to a single person a pass you have already created.
-                    </p>
-                    {{ forms.singledist.as_p }}
-                    <input type="hidden" 
-                        name="source" 
-                        value= "{{user.username}}" />
-                    <button name='action'
-                        value='singledist'
-                        type="submit"
-                        class="btn btn-lg btn-default admin-hmpg-submit-button"> Distribute </button>
+                    <div class="col-lg-4">
+                        <h3>Distribute a pass</h3>
+                        <small class="text-muted form-text">
+                            Distribute extra copies of a pass that has already been created to any student. This will allow you  to give any student extra passes for a night out, and will create the passes from scratch, meaning that if you distribute two passes, you will be putting another 2 passes into circulation.
+                        </small>
+                    </div>
+                    <div class="col-lg-8">
+                        {{ forms.singledist.as_p }}
+                        <input type="hidden" 
+                            name="source" 
+                            value= "{{user.username}}" />
+                        <button name='action'
+                            value='singledist'
+                            type="submit"
+                            class="btn btn-lg btn-default admin-hmpg-submit-button"> Distribute </button>
+                    </div>
                 </form>
 
-                <form method="post" 
-                class="admin-hmpg-form"
-                action="{% url 'admin-homepage' %}" 
-                enctype="multipart/form-data">
+                <form method="post"
+                    class="admin-hmpg-form container-fluid row"
+                    action="{% url 'admin-homepage' %}"
+                    id="UpdateMembersForm">
                     {% csrf_token %}
-                    <h3>Upload Members</h3>
-                    <p class="text-muted form-text">
-                        Upload a .csv file where one of the columns begins with "NetId" and 
-                        contains the NetId's of the clubs members.
-                    </p>
-                    {{ forms.uploadfile.as_p }}
-                    <input type="hidden" 
-                    name="source" 
-                    value= {{user.username}} />
-                    <button name='action' 
-                        value='uploadfile'
-                        type="submit"
-                        class="btn btn-lg btn-default admin-hmpg-submit-button"> Upload </button>
+                    <div class="col-lg-4">
+                        <h3>Update Members List</h3>
+                        <small class="text-muted form-text">
+                            Upload a .csv file where one of the columns begins with "NetId" and contains the NetId's of the clubs members. Any member whose NetId is listed in this column  will receive passes when they are distributed. Only members who are listed in the .csv will receive passes.
+                        </small>
+                    </div>
+                    <div class="col-lg-8">
+                        {{ forms.uploadfile.as_p }}
+                        <input type="hidden" 
+                        name="source" 
+                        value= {{user.username}} />
+                        <button name='action' 
+                            value='uploadfile'
+                            type="submit"
+                            class="btn btn-lg btn-default admin-hmpg-submit-button"> Update Members</button>
+                    </div>
                 </form>
             </div>
 

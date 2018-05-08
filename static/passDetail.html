@@ -5,6 +5,9 @@
     data-toggle="modal" 
     data-target="#passDetailModal{[$ctrl.passNum]}"> 
     <!-- <div class="pass-detail-hmpg-feedback"> -->
+        <p class="pass-detail-hmpg-activated"
+            ng-if="!($ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated)"
+            style="color:{[$ctrl.colors[$ctrl.passObj[0].fields.color]]};">Activated</p>
         <p class="pass-detail-modal-hmpg-club">
             {[$ctrl.passObj[0].fields.club_name]}
         </p>
@@ -96,8 +99,7 @@
             </div>
             <!-- FOOTER WITH COLORED BAR -->
             <div class="modal-footer pass-detail-modal-footer pass-detail-modal-footer-activated"
-                ng-if="(!$ctrl.passObj.transferable || $ctrl.passObj[0].fields.activated) 
-                    && !($ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated)"
+                ng-if="!($ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated)"
                 style="background-color: {{$ctrl.colors[$ctrl.passObj[0].fields.color]}}">
                     <p class="pass-detail-modal-btn-activate">Activated Pass</p>
             </div>
