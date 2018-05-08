@@ -2,7 +2,7 @@ from django import forms
 from passes.serializers import PassSerializer
 from passes.models import Pass, Student
 from django.utils.timezone import datetime
-
+from django.http import HttpResponseRedirect
 
 COLOR_CHOICES= [
         ('-1', 'Pick a color for this pass'),
@@ -74,13 +74,12 @@ class AddOfficerForm(MultipleForm):
 
     def clean_target(self):
         target = self.cleaned_data['target']
-        print(target)
         if target == None or len(Student.objects.all().filter(NetId=target)) == 0:
-            raise forms.ValidationError("You have inputted an invalid NetId.")
+            return "person_wrong"
         else: # check if already officer
             student = Student.objects.all().filter(NetId=target)[0]
             if student.officer_status == True:
-                raise forms.ValidationError("This person is already an officer.")
+                return "officer_already"
         return target
 
 
@@ -143,19 +142,19 @@ class SingleDist(MultipleForm):
     def clean_person(self):
         target = self.cleaned_data['person']
         if len(Student.objects.all().filter(NetId=target)) == 0:
-            raise forms.ValidationError("You have inputted an invalid NetId.")
+            return "person_wrong"
         return target
 
     def clean_number(self):
         number = self.cleaned_data['number']
         if number is None:
-            raise forms.ValidationError("You must select a positive number of passes")
+            return "number_wrong"
         return number
 
-    def clean_pass(self):
-        _pass = self.cleaned_data['pass']
+    def clean_passes(self):
+        _pass = self.cleaned_data['passes']
         if _pass is None:
-            raise forms.ValidationError("You must select a pass")
+            return "pass_wrong"
         return _pass
 
     def __init__(self, *args, **kwargs):
@@ -208,23 +207,26 @@ class MakePassForm(MultipleForm):
     def clean_pass_date(self):
         pass_date = self.cleaned_data['pass_date']
         if pass_date == None:
-            raise forms.ValidationError("You must select a valid date")
+            return "date_wrong"
         elif pass_date < datetime.today().date():
-            raise forms.ValidationError("You must select a date that's not in the past")
+            return "date_wrong"
         return pass_date
 
     def clean_number_pass(self):
         number = self.cleaned_data['number_pass']
         if number is None:
-            raise forms.ValidationError("You must select a positive number of passes")
+            return "number_wrong"
         return number
+
 
 class UploadFileForm(MultipleForm):
     file = forms.FileField(required=False)
     source = forms.CharField(max_length=50, widget=forms.HiddenInput(), required=False)
-
+    # def __init__(self, *args, **kwargs):
+    #     super(UploadFileForm, self).__init__(*args, **kwargs)
+    #     print(self.is_bound)
     def clean_file(self):
         _pass = self.cleaned_data['file']
         if _pass is None:
-            raise forms.ValidationError("You must upload a valid file")
+            return "upload_fail"
         return _pass
