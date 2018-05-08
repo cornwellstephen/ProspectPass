@@ -46,7 +46,8 @@
             </div>
         </nav>
         <div class="page-main-content">
-            <h1 class="hmpg-welcome-banner">Welcome, {{user.name}}</h1>
+            <p class="user-login-info"><strong>User: </strong>{{user.name}}, <strong>Club Affiliation: </strong>{{user.user_club}}</p>
+            <h1 class="hmpg-welcome-banner">Your Passes</h1>
             <div class="main-cont" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">

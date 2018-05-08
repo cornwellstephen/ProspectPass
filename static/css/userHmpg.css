@@ -233,6 +233,13 @@ form.admin-hmpg-form {
     height: 100%;
 }
 
+.user-login-info {
+    text-align: right;
+    padding: 20px 25px 0px 0px;
+    margin-bottom: 0px;
+    color: #666;
+}
+
 .admin-hmpg-form-radios {
     list-style: none;
     /*width: 30px;
@@ -240,13 +247,14 @@ form.admin-hmpg-form {
 }
 
 .hmpg-welcome-banner {
-    margin: 30px 20px 10px 20px;
+    margin: 20px 20px 10px 20px;
     color: #062f4f;
     font-weight: bolder;
-    font-size: 45px;
-    border-left: 2px solid #062f4f;
-    padding: 15px 30px;
+    font-size: xx-large;
+    /* border: 1px solid #062f4f; */
+    padding: 10px 15px;
     background-color: #8fd8f2;
+    border-radius: 5px;
 }
 
 .modal-backdrop
