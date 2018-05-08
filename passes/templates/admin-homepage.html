@@ -186,13 +186,14 @@
                 <form method="post"
                     class="admin-hmpg-form container-fluid row"
                     action="{% url 'admin-homepage' %}"
-                    id="UpdateMembersForm">
+                    id="UpdateMembersForm"
+                    enctype="multipart/form-data">
 
                     {% csrf_token %}
                     <div class="col-lg-4">
                         <h3>Update Members List</h3>
                         <small class="text-muted form-text">
-                            Upload a .csv file where one of the columns begins with "NetId" and contains the NetId's of the clubs members. Any member whose NetId is listed in this column  will receive passes when they are distributed. Only members who are listed in the .csv will receive passes.
+                            Upload a .csv file where one of the columns begins with "NetId" and contains the NetId's of the clubs members. Any member whose NetId is listed in this column will receive passes when they are distributed. Only members who are listed in the .csv will receive passes. Note: Max file size of 
                         </small>
                     </div>
                     <div class="col-lg-8">
@@ -201,6 +202,12 @@
                             ng-if="ctrl.uploadfail"
                             ng-style="{'display' : (ctrl.uploadfail) ? 'block' : 'none' }">
                             The uploaded file is invalid.
+                        </div>
+                        <div class="alert alert-danger" 
+                            role="alert"
+                            ng-if="ctrl.invalidnetidfail"
+                            ng-style="{'display' : (ctrl.invalidnetidfail) ? 'block' : 'none' }">
+                            At least one NetId is invalid.
                         </div>
                         <div class="alert alert-success" 
                             role="alert"

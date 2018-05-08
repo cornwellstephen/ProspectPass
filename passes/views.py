@@ -194,10 +194,8 @@ class MultipleFormsDemoView(MultiFormsView):
         if csv_file == "upload_fail":
             return HttpResponseRedirect('/admin-homepage/#UpdateMembersForm/uploadfail/')
         source = form.cleaned_data['source']
-        # if not csv_file.name.endswith('.csv'):
-        #     messages.error(request,'File is not CSV type')
-        #     return HttpResponseRedirect(reverse("myapp:upload_csv"))
-        #if file is too large, return
+
+        # if file is too large, return
         # if csv_file.multiple_chunks():
         #     messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
         #     return HttpResponseRedirect(reverse("myapp:upload_csv"))
@@ -208,6 +206,7 @@ class MultipleFormsDemoView(MultiFormsView):
         source_user = Student.objects.all().filter(NetId=source)[0]
         source_user.clear_club()
         i=-1
+        error = False
         for line in lines:       
             if i == -1:
                 j = 0
@@ -219,7 +218,14 @@ class MultipleFormsDemoView(MultiFormsView):
             else:
                 fields = line.split(",")
                 source_user = Student.objects.all().filter(NetId=source)[0]
-                source_user.addToClub(fields[i].strip())
+                if len(Student.objects.all().filter(NetId=fields[i].strip())) != 0:
+                    source_user.addToClub(fields[i].strip())
+                else:
+                    error = True
+        if i == -1:
+            return HttpResponseRedirect('/admin-homepage/#UpdateMembersForm/uploadfail/')
+        elif error:
+            return HttpResponseRedirect('/admin-homepage/#UpdateMembersForm/invalidnetidfail/')
         return HttpResponseRedirect('/admin-homepage/#UpdateMembersForm/uploadsuccess/')
 
 # def add_officer(request):
