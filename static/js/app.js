@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('ProspectPassApp', ['ngRoute']);
+var app = angular.module('ProspectPassApp', []);
 
 app.config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[');
