@@ -18,6 +18,11 @@ from .multiforms import MultiFormsView
 from django.urls import reverse, reverse_lazy
 import json
 from rest_framework import filters
+
+ERROR_CODES= {'uploadError':False,
+        'addOfficerError':False,
+        'distributePassError':False,
+        'singleDistError':False}
 # Create your views here.
 class Index(generic.ListView):
     template_name = 'index.html'
@@ -138,19 +143,25 @@ class MultipleFormsDemoView(MultiFormsView):
 
     def addofficer_form_valid(self, form):
         netid = form.cleaned_data['target']
+        if netid == "person_wrong":
+            return HttpResponseRedirect('/admin-homepage/#NewClubOfficer/netidfail/')
+        elif netid == "officer_already":
+            return HttpResponseRedirect('/admin-homepage/#NewClubOfficer/officeralready/')
         source = form.cleaned_data['source']
         source_user = Student.objects.all().filter(NetId=source)[0]
         target_user = Student.objects.all().filter(NetId=netid)[0]
-        if target_user.officer_status is True:
-            return HttpResponseRedirect('/admin-homepage/officer-already-added')
         if source_user.officer_status is True:
             source_user.assignOfficer(netid)
         return HttpResponseRedirect('/addedofficer')
 
     def addpass_form_valid(self, form):
         pass_date = form.cleaned_data['pass_date']
+        if pass_date == "date_wrong":
+            return HttpResponseRedirect('/admin-homepage/#CreatePassForm/createfail/')
         color = form.cleaned_data['color']
         number = form.cleaned_data['number_pass']
+        if number == "number_wrong":
+            return HttpResponseRedirect('/admin-homepage/#CreatePassForm/createfail/')
         source = form.cleaned_data['source']
         source_user = Student.objects.all().filter(NetId=source)[0]
         # need to add stuff here
@@ -160,9 +171,15 @@ class MultipleFormsDemoView(MultiFormsView):
 
     def singledist_form_valid(self, form):
         pk = form.cleaned_data['passes']
+        if pk == "pass_wrong":
+            return HttpResponseRedirect('/admin-homepage/#DistributePassForm/distributefail')
         number = form.cleaned_data['number']
+        if number == "number_wrong":
+            return HttpResponseRedirect('/admin-homepage/#DistributePassForm/distributefail')
         source = form.cleaned_data['source']
         netid = form.cleaned_data['person']
+        if netid == "person_wrong":
+            return HttpResponseRedirect('/admin-homepage/#DistributePassForm/distributefail')
         transferrable = form.cleaned_data['transferrable']
         source_user = Student.objects.all().filter(NetId=source)[0]
         target_pass = Pass.objects.all().filter(pk=pk)[0]
@@ -174,6 +191,8 @@ class MultipleFormsDemoView(MultiFormsView):
 
     def uploadfile_form_valid(self, form):
         csv_file = form.cleaned_data['file']
+        if csv_file == "upload_fail":
+            return HttpResponseRedirect('/admin-homepage/#UpdateMembersForm/uploadfail/')
         source = form.cleaned_data['source']
         # if not csv_file.name.endswith('.csv'):
         #     messages.error(request,'File is not CSV type')
