@@ -1,4 +1,4 @@
-function PassDetailController($scope, $attrs, $element, $http, $window) {
+function PassDetailController($scope, $attrs, $element, $http, $window, $route, $document) {
     
     this.swapModalDetailToTransfer = function() {
         $("#passDetailModal"+this.passNum).modal('hide');
@@ -40,6 +40,7 @@ function PassDetailController($scope, $attrs, $element, $http, $window) {
 
     $scope.sendUrl;
     $scope.passUserNetid
+    $scope.passId
     this.getUser;
     this.transferError = false;
 
@@ -67,7 +68,23 @@ function PassDetailController($scope, $attrs, $element, $http, $window) {
     this.$onInit = function() {
         $scope.sendUrl = "/sendpass/" + this.passId + "/";
         $scope.passUserNetid = this.passUserNetid
+        $scope.passId = this.passId
         this.buttonColor = this.colors[this.passObj[0].fields.color];
+        var url = $window.location.href;
+        if (url.includes("homepage")) {
+            if (url.includes("transferfail") && url.includes($scope.passId)) {
+                this.transferError = true;
+                // how to get modal to show up?
+                    // $("#passTransferModal"+this.passNum).modal('show');
+                    // console.log("openModalButton" + this.passNum);
+                    // console.log(document.getElementById("openModalButton" + this.passNum));
+                    // window.onload(function() {
+                    //     document.getElementById("openModalButton" + this.passNum).click()
+                    // });
+                    
+
+            }
+        }
     };
 
     this.activate = function(passId) {
@@ -77,9 +94,6 @@ function PassDetailController($scope, $attrs, $element, $http, $window) {
     }
 
     this.transfer = function(netid, transferrable) {
-        if ($scope.transferrable != true) {
-            $scope.transferrable = false
-        }
         this.getUser = "/restapi/students/" + $scope.netid + "/"; 
         $http({
         method: 'GET',
@@ -92,7 +106,8 @@ function PassDetailController($scope, $attrs, $element, $http, $window) {
                 'transferrable': $scope.transferrable
                 });
             }, function errorCallback(response) {
-                this.transferError = true;
+                $window.location.href = '/homepage/#transferfail/' + $scope.passId;
+                $route.reload();
                 return;
             });
     }
