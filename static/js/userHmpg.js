@@ -30,59 +30,49 @@ angular.module('ProspectPassApp')
         this.uploadsuccess = false;
 
         this.$onInit = function() {
-            this.officerfail = false;
-            this.createfail = false;
-            this.distributefail = false;
-            this.uploadfail = false;
-            this.officersuccess = false;
-            this.createsuccess = false;
-            this.distributesuccess = false;
-            this.uploadsuccess = false;
 
             var url = $window.location.href;
-            urlFiltered = url.split('%2F').filter(word => {
-              return word.length > 0;  
-            });
-
-            if (urlFiltered[urlFiltered.length - 1] == "officerfail") {
-                this.officerfail = true;
-                $location.hash(urlFiltered[urlFiltered.length - 2].split("#!#")[1]);
-                $anchorScroll();
-            }
-            if (urlFiltered[urlFiltered.length - 1] == "officersuccess") {
-                this.officersuccess = true;
-                $location.hash(urlFiltered[urlFiltered.length - 2].split("#!#")[1]);
-                $anchorScroll();
-            }
-            else if (urlFiltered[urlFiltered.length - 1] == "createfail") {
-                this.createfail = true;
-                $location.hash(urlFiltered[urlFiltered.length - 2].split("#!#")[1]);
-                $anchorScroll();
-            }
-            else if (urlFiltered[urlFiltered.length - 1] == "createsuccess") {
-                this.createsuccess = true;
-                $location.hash(urlFiltered[urlFiltered.length - 2].split("#!#")[1]);
-                $anchorScroll();
-            }
-            else if (urlFiltered[urlFiltered.length - 1] == "distributefail") {
-                this.distributefail = true;
-                $location.hash(urlFiltered[urlFiltered.length - 2].split("#!#")[1]);
-                $anchorScroll();
-            }
-            else if (urlFiltered[urlFiltered.length - 1] == "distributesuccess") {
-                this.distributesuccess = true;
-                $location.hash(urlFiltered[urlFiltered.length - 2].split("#!#")[1]);
-                $anchorScroll();
-            }
-            else if (urlFiltered[urlFiltered.length - 1] == "uploadfail") {
-                this.uploadfail = true;
-                $location.hash(urlFiltered[urlFiltered.length - 2].split("#!#")[1]);
-                $anchorScroll();
-            }
-            else if (urlFiltered[urlFiltered.length - 1] == "uploadsuccess") {
-                this.uploadsuccess = true;
-                $location.hash(urlFiltered[urlFiltered.length - 2].split("#!#")[1]);
-                $anchorScroll();
+            if (url.includes("admin-homepage")) {
+                if (url.includes("officerfail")) {
+                    this.officerfail = true;
+                    $location.hash("NewClubOfficer");
+                    $anchorScroll();
+                }
+                else if (url.includes("officersuccess")) {
+                    this.officersuccess = true;
+                    $location.hash("NewClubOfficer");
+                    $anchorScroll();
+                }
+                else if (url.includes("createfail")) {
+                    this.createfail = true;
+                    $location.hash("CreatePassForm");
+                    $anchorScroll();
+                }
+                else if (url.includes("createsuccess")) {
+                    this.createsuccess = true;
+                    $location.hash("CreatePassForm");
+                    $anchorScroll();
+                }
+                else if (url.includes("distributefail")) {
+                    this.distributefail = true;
+                    $location.hash("DistributePassForm");
+                    $anchorScroll();
+                }
+                else if (url.includes("distributesuccess")) {
+                    this.distributesuccess = true;
+                    $location.hash("DistributePassForm");
+                    $anchorScroll();
+                }
+                else if (url.includes("uploadfail")) {
+                    this.uploadfail = true;
+                    $location.hash("UpdateMembersForm");
+                    $anchorScroll();
+                }
+                else if (url.includes("uploadsuccess")) {
+                    this.uploadsuccess = true;
+                    $location.hash("UpdateMembersForm");
+                    $anchorScroll();
+                }
             }
 
             for (var i = 0; i < 11; i++) {
