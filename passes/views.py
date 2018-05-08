@@ -121,7 +121,7 @@ def activate_pass(request):
             target_pass = Pass.objects.all().filter(pk=pass_id)[0]
             target_pass.activated = True
             target_pass.save()
-            return HttpResponseRedirect('/homepage/')
+            return HttpResponseRedirect('/homepage')
     else:
         form = ActivateForm()
     return render(request, 'homepage.html', {'form': form})
