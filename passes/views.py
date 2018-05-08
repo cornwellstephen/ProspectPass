@@ -144,7 +144,7 @@ class MultipleFormsDemoView(MultiFormsView):
     def addofficer_form_valid(self, form):
         netid = form.cleaned_data['target']
         if netid == "person_wrong":
-            return HttpResponseRedirect('/admin-homepage/#NewClubOfficer/netidfail/')
+            return HttpResponseRedirect('/admin-homepage/#NewClubOfficer/officerfail/')
         elif netid == "officer_already":
             return HttpResponseRedirect('/admin-homepage/#NewClubOfficer/officeralready/')
         source = form.cleaned_data['source']
@@ -152,7 +152,7 @@ class MultipleFormsDemoView(MultiFormsView):
         target_user = Student.objects.all().filter(NetId=netid)[0]
         if source_user.officer_status is True:
             source_user.assignOfficer(netid)
-        return HttpResponseRedirect('/addedofficer')
+        return HttpResponseRedirect('/admin-homepage/#NewClubOfficer/officersuccess/')
 
     def addpass_form_valid(self, form):
         pass_date = form.cleaned_data['pass_date']
@@ -166,7 +166,7 @@ class MultipleFormsDemoView(MultiFormsView):
         source_user = Student.objects.all().filter(NetId=source)[0]
         # need to add stuff here
         source_user.officerClubSend(pass_date, number, color)
-        return HttpResponseRedirect('/madepass')
+        return HttpResponseRedirect('/admin-homepage/#CreatePassForm/createsuccess/')
 
 
     def singledist_form_valid(self, form):
@@ -187,7 +187,7 @@ class MultipleFormsDemoView(MultiFormsView):
         while number > 0:
             source_user.officerDirectSend(target_pass, netid, transferrable)
             number = number - 1
-        return HttpResponseRedirect('/distributed')
+        return HttpResponseRedirect('/admin-homepage/#DistributePassForm/distributesuccess')
 
     def uploadfile_form_valid(self, form):
         csv_file = form.cleaned_data['file']
@@ -220,7 +220,7 @@ class MultipleFormsDemoView(MultiFormsView):
                 fields = line.split(",")
                 source_user = Student.objects.all().filter(NetId=source)[0]
                 source_user.addToClub(fields[i].strip())
-        return HttpResponseRedirect('/fileuploaded')
+        return HttpResponseRedirect('/admin-homepage/#UpdateMembersForm/uploadsuccess/')
 
 # def add_officer(request):
 #     if request.method == 'POST':

@@ -85,6 +85,18 @@
                         </small>
                     </div>
                     <div class="col-lg-8">
+                        <div class="alert alert-danger" 
+                            role="alert"
+                            ng-if="ctrl.officerfail"
+                            ng-style="{'display' : (ctrl.officerfail) ? 'block' : 'none' }">
+                            The inputed NetId is not a valid officer.
+                        </div>
+                        <div class="alert alert-success" 
+                            role="alert"
+                            ng-if="ctrl.officersuccess"
+                            ng-style="{'display' : (ctrl.officersuccess) ? 'block' : 'none' }">
+                            User successfully appointed as an officer!
+                        </div>
                         {{ forms.addofficer.as_p }}
                         <input type = "hidden" 
                             name = "source" 
@@ -107,10 +119,22 @@
                     <div class="col-lg-4">
                         <h3>Create and Distribute New Pass</h3>
                         <small class="text-muted form-text">
-                            On submit, a pass will be created for your club with the provided attributes and distributed to all of the club members. Once a pass is created, it cannot be recollected. The default pass color is red.
+                            On submit, a pass will be created for your club with the provided attributes and distributed to all of the club members. Once a pass is created, it cannot be recollected.
                         </small>
                     </div>
                     <div class="col-lg-8">
+                        <div class="alert alert-danger" 
+                            role="alert"
+                            ng-if="ctrl.createfail"
+                            ng-style="{'display' : (ctrl.createfail) ? 'block' : 'none' }">
+                            One or more of the fields on this form wasn't filled out correctly!
+                        </div>
+                        <div class="alert alert-success" 
+                            role="alert"
+                            ng-if="ctrl.createsuccess"
+                            ng-style="{'display' : (ctrl.createsuccess) ? 'block' : 'none' }">
+                            Pass successfully created and distributed!
+                        </div>
                         {{ forms.addpass.as_p }}
                         <input type="hidden" 
                             name="source" 
@@ -134,6 +158,19 @@
                         </small>
                     </div>
                     <div class="col-lg-8">
+                        <div class="alert alert-danger" 
+                            role="alert"
+                            ng-if="ctrl.distributefail"
+                            ng-style="{'display' : (ctrl.distributefail) ? 'block' : 'none' }"
+                            >
+                            One or more of the fields on this form wasn't filled out correctly!
+                        </div>
+                        <div class="alert alert-success" 
+                            role="alert"
+                            ng-if="ctrl.distributesuccess"
+                            ng-style="{'display' : (ctrl.distributesuccess) ? 'block' : 'none' }">
+                            Pass successfully distributed!
+                        </div>
                         {{ forms.singledist.as_p }}
                         <input type="hidden" 
                             name="source" 
@@ -149,6 +186,7 @@
                     class="admin-hmpg-form container-fluid row"
                     action="{% url 'admin-homepage' %}"
                     id="UpdateMembersForm">
+
                     {% csrf_token %}
                     <div class="col-lg-4">
                         <h3>Update Members List</h3>
@@ -157,6 +195,18 @@
                         </small>
                     </div>
                     <div class="col-lg-8">
+                        <div class="alert alert-danger" 
+                            role="alert"
+                            ng-if="ctrl.uploadfail"
+                            ng-style="{'display' : (ctrl.uploadfail) ? 'block' : 'none' }">
+                            The uploaded file is invalid.
+                        </div>
+                        <div class="alert alert-success" 
+                            role="alert"
+                            ng-if="ctrl.uploadsuccess"
+                            ng-style="{'display' : (ctrl.uploadsuccess) ? 'block' : 'none' }">
+                            Members list successfully updated!
+                        </div>
                         {{ forms.uploadfile.as_p }}
                         <input type="hidden" 
                         name="source" 

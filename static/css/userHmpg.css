@@ -221,6 +221,10 @@ form.admin-hmpg-form {
     height: 44px;
 }
 
+.alert {
+    display: none;
+}
+
 #id_color {
     padding: 0px;
 }
