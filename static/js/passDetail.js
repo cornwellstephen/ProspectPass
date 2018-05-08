@@ -96,6 +96,9 @@ function PassDetailController($scope, $attrs, $element, $http, $window, $locatio
     }
 
     this.transfer = function(netid, transferrable) {
+        if ($scope.transferrable != true) {
+            $scope.transferrable = false
+        }
         this.getUser = "/restapi/students/" + $scope.netid + "/"; 
         $http({
         method: 'GET',
