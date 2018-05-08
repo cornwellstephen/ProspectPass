@@ -19,6 +19,8 @@
 </button>
 
 <button id="openModal{[$ctrl.passNum]}" hidden="true" data-toggle="modal" data-target="#passTransferModal{[$ctrl.passNum]}">Open Modal</button>
+
+<button id="activateModal{[$ctrl.passNum]}" hidden="true" data-toggle="modal" data-target="#passDetailModal{[$ctrl.passNum]}">Activate Modal</button>
 <!-- Modal -->
 <div class="modal" 
     id="passDetailModal{[$ctrl.passNum]}" 
@@ -87,7 +89,7 @@
                     class="btn btn-light pass-detail-modal-btn" 
                     data-dismiss="modal"
                     ng-click="$ctrl.activate($ctrl.passObj[0].fields.passId)"
-                    onclick="location.href='/homepage/';">
+                    >
                     Activate
                 </button>
                 <button type="button" 
