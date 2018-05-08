@@ -28,8 +28,9 @@ class Student(AbstractUser): # It's now an abstract base user
 		student.user_club = self.user_club
 		student.save()
 
+	@property
 	def get_passes(self):
-		return self.passes.all()
+		return serializers.serialize('json', self.passes.all())
 
 	def sendpass(self, _pass, user_netid, transferrable):
 		user = Student.objects.all().filter(NetId=user_netid)[0]
