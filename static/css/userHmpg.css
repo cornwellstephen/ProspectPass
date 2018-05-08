@@ -95,7 +95,7 @@ form.admin-hmpg-form {
     color: #666;
 }
 
-..page-link:hover {
+.page-link:hover {
     color: #666;
 }
 
@@ -211,7 +211,7 @@ form.admin-hmpg-form {
     padding: 8px 15px;
     color: #fff;
     height: 44px;
-    width: 44px;
+    /*width: 44px;*/
     display: flex;
     justify-content: left;
     align-items: center;
@@ -231,6 +231,8 @@ form.admin-hmpg-form {
 
 .admin-hmpg-form-radios {
     list-style: none;
+    /*width: 30px;
+    height: 30px;*/
 }
 
 .hmpg-welcome-banner {

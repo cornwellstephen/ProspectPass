@@ -1,5 +1,5 @@
 angular.module('ProspectPassApp')
-    .controller('ProspectUserCtrl', function ProspectUserCtrl() {
+    .controller('ProspectUserCtrl', function ProspectUserCtrl($window) {
     
         this.hasDatePassed = function(dateString) {
             // console.log(dateString);
@@ -18,20 +18,28 @@ angular.module('ProspectPassApp')
         }
 
         this.$onInit = function() {
+            // console.log($window.location.href);
+
             for (var i = 0; i < 11; i++) {
-                var label = $("#id_color").find("[for='id_color_"+i+"']")[0].innerText;
-                $("#id_color").find("[for='id_color_"+i+"']")[0].innerHtml =
-                    '<input type="radio"' +
-                        'name="color"' +
-                        'value="'+i+'" ' +
-                        'class="admin-hmpg-form-radios"' +
-                        'placeholder="What color should this pass be?"' +
-                        'id="id_color_'+i+'"' +
-                        '>';
-                $("#id_color").find("[for='id_color_"+i+"']").css({
-                    'background-color': label,
-                    'color': label
-                });
+                if ($("#id_color").find("[for='id_color_"+i+"']")[0] != undefined) {
+                    var label = $("#id_color").find("[for='id_color_"+i+"']")[0].innerText;
+                    // $("#id_color").find("[for='id_color_"+i+"']")[0].empty();
+                    $("#id_color").find("[for='id_color_"+i+"']")[0].innerHtml =
+                        '<input type="radio"' +
+                            'name="color"' +
+                            'value="'+i+'" ' +
+                            'class="admin-hmpg-form-radios"' +
+                            'placeholder="What color should this pass be?"' +
+                            'id="id_color_'+i+'"' +
+                            '>';
+                    $("#id_color").find("[for='id_color_"+i+"']").css({
+                        'background-color': label,
+                        'color': label
+                    });
+                    $("#id_color").find('li').find(':contains('+label+')').each(function(){
+                        $(this).html($(this).html().split(label).join(""));
+                    });
+                }
             }
         };
     }
