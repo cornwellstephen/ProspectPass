@@ -55,13 +55,13 @@
             <div class="main-cont" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
-                <div class="alert alert-success" 
+     <!--            <div class="alert alert-success" 
                     role="alert"
                     ng-if="ctrl.transfersuccess"
                     ng-style="{'display' : (ctrl.transfersuccess) ? 'block' : 'none' }">
                     Successfully transferred pass!
                 </div>
-                <div class="user-hmpg-pass-date-cont">
+     -->            <div class="user-hmpg-pass-date-cont">
                 {% for pass in user.get_passes %}
                     {% ifchanged pass.pass_date %}
                         </div>
