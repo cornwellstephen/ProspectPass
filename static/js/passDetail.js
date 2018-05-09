@@ -81,12 +81,14 @@ function PassDetailController($scope, $attrs, $element, $http, $window, $locatio
                     // console.log("openModalButton" + this.passNum);
                     // console.log(document.getElementById("openModalButton" + this.passNum));
                     $(window).load(function() {
-                        document.getElementById("openModal" + $scope.passNum).click()
+                        $("#passTransferModal"+$scope.passNum).modal('show');
+                        // document.getElementById("openModal" + $scope.passNum).click()
                     });
             }
             if (url.includes("activate") && url.includes($scope.passId)) {
                 $(window).load(function() {
-                    document.getElementById("activateModal" + $scope.passNum).click()
+                    $("#passDetailModal"+$scope.passNum).modal('show');
+                    // document.getElementById("activateModal" + $scope.passNum).click()
                 });
             }
         }
