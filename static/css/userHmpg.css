@@ -293,6 +293,14 @@ form.admin-hmpg-form {
     opacity:0.8 !important;
 }
 
+#id_file {
+    width: 250px;
+}
+
+input[type="file"] {
+    width: 250px;
+}
+
 .navbar-text.footer {
     width: 100%;
     text-align: center;
