@@ -77,10 +77,6 @@ class AddOfficerForm(MultipleForm):
         target = self.cleaned_data['target'].lower().strip()
         if target == None or len(Student.objects.all().filter(NetId=target)) == 0:
             return "person_wrong"
-        else: # check if already officer
-            student = Student.objects.all().filter(NetId=target)[0]
-            if student.officer_status == True:
-                return "officer_already"
         return target
 
 
