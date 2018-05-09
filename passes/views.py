@@ -126,7 +126,9 @@ def activate_pass(request):
         form = ActivateForm()
     return render(request, 'homepage.html', {'form': form})
 
-class MultipleFormsDemoView(MultiFormsView):
+class MultipleFormsDemoView(LoginRequiredMixin, MultiFormsView):
+    login_url = 'login/'
+    raise_exception = False
     template_name = "admin-homepage.html"
     form_classes = {'addofficer': AddOfficerForm,
                     'addpass': MakePassForm,
@@ -193,6 +195,8 @@ class MultipleFormsDemoView(MultiFormsView):
         csv_file = form.cleaned_data['file']
         if csv_file == "upload_fail":
             return HttpResponseRedirect('/admin-homepage/#UpdateMembersForm/uploadfail/')
+        elif csv_file == "upload_size_fail":
+            return HttpResponseRedirect('/admin-homepage/#UpdateMembersForm/uploadsizefail/')
         source = form.cleaned_data['source']
 
         # if file is too large, return
@@ -218,8 +222,8 @@ class MultipleFormsDemoView(MultiFormsView):
             else:
                 fields = line.split(",")
                 source_user = Student.objects.all().filter(NetId=source)[0]
-                if len(Student.objects.all().filter(NetId=fields[i].strip())) != 0:
-                    source_user.addToClub(fields[i].strip())
+                if len(Student.objects.all().filter(NetId=fields[i].lower().strip())) != 0:
+                    source_user.addToClub(fields[i].lower().strip())
                 else:
                     error = True
         if i == -1:

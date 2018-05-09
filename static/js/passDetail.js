@@ -106,14 +106,15 @@ function PassDetailController($scope, $attrs, $element, $http, $window, $locatio
         if ($scope.transferrable != true) {
             $scope.transferrable = false
         }
-        this.getUser = "/restapi/students/" + $scope.netid + "/"; 
+        this.getUser = "/restapi/students/" + $scope.netid.toLowerCase() + "/"; 
         $http({
         method: 'GET',
         url: this.getUser,
         }).then(function successCallback(response) {
-                $window.location.href = '/homepage';
+                $window.location.href = '/homepage/#transfersuccess/';
+                location.reload();
                 return $http.post($scope.sendUrl, {
-                'target': $scope.netid,
+                'target': $scope.netid.toLowerCase(),
                 'source': $scope.passUserNetid,
                 'transferrable': $scope.transferrable
                 });
