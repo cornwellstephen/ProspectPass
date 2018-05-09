@@ -228,6 +228,9 @@ class UploadFileForm(MultipleForm):
 
     def clean_file(self):
         _pass = self.cleaned_data['file']
+        print(_pass)
         if _pass is None:
+            return "upload_fail"
+        elif not _pass.name.endswith('.csv'):
             return "upload_fail"
         return _pass

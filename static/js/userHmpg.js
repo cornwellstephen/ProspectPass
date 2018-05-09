@@ -43,6 +43,7 @@ angular.module('ProspectPassApp')
         this.createsuccess = false;
         this.distributesuccess = false;
         this.uploadsuccess = false;
+        this.invalidnetidfail = false;
 
         this.$onInit = function() {
 
@@ -80,6 +81,11 @@ angular.module('ProspectPassApp')
                 }
                 else if (url.includes("uploadfail")) {
                     this.uploadfail = true;
+                    $location.hash("UpdateMembersForm");
+                    $anchorScroll();
+                }
+                else if (url.includes("invalidnetidfail")) {
+                    this.invalidnetidfail = true;
                     $location.hash("UpdateMembersForm");
                     $anchorScroll();
                 }

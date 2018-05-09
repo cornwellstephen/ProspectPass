@@ -83,13 +83,18 @@ function PassDetailController($scope, $attrs, $element, $http, $window, $locatio
                     $(window).load(function() {
                         document.getElementById("openModal" + $scope.passNum).click()
                     });
-                
-
+            }
+            if (url.includes("activate") && url.includes($scope.passId)) {
+                $(window).load(function() {
+                    document.getElementById("activateModal" + $scope.passNum).click()
+                });
             }
         }
     };
 
     this.activate = function(passId) {
+      $window.location.href = '/homepage/#activate/' + $scope.passId;
+      location.reload();
       return $http.post('/activatepass/', {
         'pass_id': this.passId,
       });
