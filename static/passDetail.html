@@ -90,6 +90,7 @@
                     class="btn btn-light pass-detail-modal-btn" 
                     data-dismiss="modal"
                     ng-click="$ctrl.activate($ctrl.passObj[0].fields.passId)"
+                    ng-if="$ctrl.passUser != $ctrl.passObj[0].fields.pass_source"
                     >
                     Activate
                 </button>
@@ -148,7 +149,12 @@
                 <!-- <iframe src={{$ctrl.sendUrl}} frameborder="0"> -->
                 <form name="TransferForm">
                     <div style="margin-bottom: 20px;">
-                        <p ng-if="$ctrl.transferError"> Error: you entered an invalid NetId </p>
+                        <div class="alert alert-danger" 
+                            role="alert"
+                            ng-if="$ctrl.transferError"
+                            ng-style="{'display' : ($ctrl.transferError) ? 'block' : 'none' }">
+                            Error: you entered an invalid NetId 
+                        </div>
                         <p class="modal-transfer-field-label">
                             <strong>NetId</strong>
                         </p>
