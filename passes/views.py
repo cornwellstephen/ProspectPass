@@ -152,6 +152,8 @@ class MultipleFormsDemoView(LoginRequiredMixin, MultiFormsView):
         source = form.cleaned_data['source']
         source_user = Student.objects.all().filter(NetId=source)[0]
         target_user = Student.objects.all().filter(NetId=netid)[0]
+        if target_user.user_club != source_user.user_club:
+            return HttpResponseRedirect('/admin-homepage/#NewClubOfficer/officerwrongclub/')
         if source_user.officer_status is True:
             source_user.assignOfficer(netid)
         return HttpResponseRedirect('/admin-homepage/#NewClubOfficer/officersuccess/')

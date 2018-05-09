@@ -40,6 +40,8 @@ angular.module('ProspectPassApp')
         this.distributefail = false;
         this.uploadfail = false;
         this.officersuccess = false;
+        this.officeralready = false;
+        this.officerwrongclub = false;
         this.createsuccess = false;
         this.distributesuccess = false;
         this.uploadsuccess = false;
@@ -58,6 +60,16 @@ angular.module('ProspectPassApp')
                 }
                 else if (url.includes("officersuccess")) {
                     this.officersuccess = true;
+                    $location.hash("NewClubOfficer");
+                    $anchorScroll();
+                }
+                else if (url.includes("officeralready")) {
+                    this.officeralready = true;
+                    $location.hash("NewClubOfficer");
+                    $anchorScroll();
+                }
+                else if (url.includes("officerwrongclub")) {
+                    this.officerwrongclub = true;
                     $location.hash("NewClubOfficer");
                     $anchorScroll();
                 }

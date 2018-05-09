@@ -92,7 +92,19 @@
                             role="alert"
                             ng-if="ctrl.officerfail"
                             ng-style="{'display' : (ctrl.officerfail) ? 'block' : 'none' }">
-                            The inputed NetId is not a valid officer.
+                            The inputed NetId is not valid.
+                        </div>
+                        <div class="alert alert-danger" 
+                            role="alert"
+                            ng-if="ctrl.officeralready"
+                            ng-style="{'display' : (ctrl.officeralready) ? 'block' : 'none' }">
+                            The inputed NetId is already an officer of your club.
+                        </div>
+                        <div class="alert alert-danger" 
+                            role="alert"
+                            ng-if="ctrl.officerwrongclub"
+                            ng-style="{'display' : (ctrl.officerwrongclub) ? 'block' : 'none' }">
+                            The inputed NetId is not a member of your club, and thus cannot be an officer.
                         </div>
                         <div class="alert alert-success" 
                             role="alert"
