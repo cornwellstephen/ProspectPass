@@ -217,6 +217,12 @@
                             ng-style="{'display' : (ctrl.uploadsuccess) ? 'block' : 'none' }">
                             Members list successfully updated!
                         </div>
+                        <div class="alert alert-danger" 
+                            role="alert"
+                            ng-if="ctrl.uploadsizefail"
+                            ng-style="{'display' : (ctrl.uploadsizefail) ? 'block' : 'none' }">
+                            The file you uploaded is too large!
+                        </div>
                         {{ forms.uploadfile.as_p }}
                         <input type="hidden" 
                         name="source" 

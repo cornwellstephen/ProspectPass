@@ -44,6 +44,8 @@ angular.module('ProspectPassApp')
         this.distributesuccess = false;
         this.uploadsuccess = false;
         this.invalidnetidfail = false;
+        this.uploadsizefail = false;
+        this.transfersuccess = false;
 
         this.$onInit = function() {
 
@@ -93,6 +95,16 @@ angular.module('ProspectPassApp')
                     this.uploadsuccess = true;
                     $location.hash("UpdateMembersForm");
                     $anchorScroll();
+                }
+                else if (url.includes("uploadsizefail")) {
+                    this.uploadsizefail = true;
+                    $location.hash("UpdateMembersForm");
+                    $anchorScroll();
+                }
+            }
+            else if (url.includes("homepage")) {
+                if (url.includes("transfersuccess")) {
+                    this.transfersuccess = true;
                 }
             }
 

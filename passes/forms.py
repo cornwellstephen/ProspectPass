@@ -20,6 +20,8 @@ COLOR_CHOICES= [
 
 NETID = ''
 
+MAX_UPLOAD_SIZE = 5242880
+
 def setNetId(netid):
     global NETID
     NETID = netid
@@ -72,7 +74,7 @@ class AddOfficerForm(MultipleForm):
     )
 
     def clean_target(self):
-        target = self.cleaned_data['target']
+        target = self.cleaned_data['target'].lower().strip()
         if target == None or len(Student.objects.all().filter(NetId=target)) == 0:
             return "person_wrong"
         else: # check if already officer
@@ -126,6 +128,7 @@ class SingleDist(MultipleForm):
     number = forms.IntegerField(
         label='Count', 
         min_value=1,
+        max_value=10,
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control admin-hmpg-form-input',
@@ -139,7 +142,7 @@ class SingleDist(MultipleForm):
         widget=forms.HiddenInput()
     )
     def clean_person(self):
-        target = self.cleaned_data['person']
+        target = self.cleaned_data['person'].lower().strip()
         if len(Student.objects.all().filter(NetId=target)) == 0:
             return "person_wrong"
         return target
@@ -190,6 +193,7 @@ class MakePassForm(MultipleForm):
     number_pass = forms.IntegerField(
         label='Count', 
         min_value=1,
+        max_value=5,
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control admin-hmpg-form-input',
@@ -227,10 +231,11 @@ class UploadFileForm(MultipleForm):
     )
 
     def clean_file(self):
-        _pass = self.cleaned_data['file']
-        print(_pass)
-        if _pass is None:
+        file = self.cleaned_data['file']
+        if file is None:
             return "upload_fail"
-        elif not _pass.name.endswith('.csv'):
+        elif not file.name.endswith('.csv'):
             return "upload_fail"
-        return _pass
+        elif file._size > MAX_UPLOAD_SIZE:
+            return "upload_size_fail"
+        return file
