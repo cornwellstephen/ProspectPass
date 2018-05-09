@@ -39,21 +39,44 @@
                     </li>
                     {% if user.officer_status %}
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin-homepage">Admin</a>
+                        <a class="nav-link" href="../admin-homepage">Officer</a>
                     </li>
                     {% endif %}
                 </ul>
+                <span class="navbar-text">
+                    User: <span class="navbar-text-field">{{user.name}}</span>, Club Affiliation: <span class="navbar-text-field">{{user.user_club}}</span>
+                </span>
             </div>
         </nav>
         <div class="page-main-content">
-            <p class="user-login-info"><strong>User: </strong>{{user.name}}, <strong>Club Affiliation: </strong>{{user.user_club}}</p>
-            <h1 class="hmpg-welcome-banner">Your Passes</h1>
+            <h1 class="hmpg-welcome-banner">Student Passbook</h1>
+            <!-- <p class="user-login-info"><strong>User: </strong>{{user.name}}, <strong>Club Affiliation: </strong>{{user.user_club}}</p> -->
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
             <div class="main-cont" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
-                {% for pass in user.passes.all %}
+                
+                <div class="user-hmpg-pass-date-cont">
+                {% for pass in user.get_passes %}
+                    {% ifchanged pass.pass_date %}
+                        </div>
+                        <h4 ng-if="!ctrl.hasDatePassed('{{ pass.pass_date }}')"
+                            class="user-hmpg-pass-date-section">
+                            {{pass.pass_date}}
+                        </h4>
+                        <div class="user-hmpg-pass-date-cont">
+
+                    {% endifchanged %}
+
                     <div class="main-hmpg-pass-date-cont"
-                        ng-if="ctrl.hasDatePassed('{{ pass.pass_date }}')">
+                        ng-if="!ctrl.hasDatePassed('{{ pass.pass_date }}')">
+                        
                         <pass-detail
                             pass-num="{{ forloop.counter }}"
                             pass-obj= "{{ pass }}"
@@ -64,6 +87,7 @@
                         </pass-detail>
                     </div>
                 {% endfor %}
+                </div>
 
                 {% if user.passes.all|length == 0 %}
                     <h3 class="text-muted">You do not have any passes yet!</h3>
@@ -76,10 +100,8 @@
         </div>
 
         <nav class="navbar bottom navbar-light bg-light">
-            <p class="navbar-text">
-                <strong>ProspectPass</strong> was created for COS 333, Spring 2018.
-            </p>
-            <p class="navbar-text">
+            <p class="navbar-text footer">
+                <strong>ProspectPass</strong> was created for COS 333, Spring 2018. <br/>
                 Stephen Cornwell '20, Yijia Liang '19, Sam Arnesen '20, and Olivia Johnston '20.
             </p>
         </nav>

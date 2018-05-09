@@ -1,10 +1,13 @@
+<!-- {[$ctrl.passObj]} -->
+
+
+
 <button class="pass-detail-cont"
     style="background-color: {[$ctrl.buttonColor]}"
     ng-mouseenter="$ctrl.changeBackgroundColorDark()"
     ng-mouseleave="$ctrl.changeBackgroundColorLight()"
     data-toggle="modal" 
     data-target="#passDetailModal{[$ctrl.passNum]}"> 
-    <!-- <div class="pass-detail-hmpg-feedback"> -->
         <p class="pass-detail-hmpg-activated"
             ng-if="!($ctrl.passObj[0].fields.transferrable && !$ctrl.passObj[0].fields.activated)"
             style="color:{[$ctrl.colors[$ctrl.passObj[0].fields.color]]};">Activated</p>
@@ -14,10 +17,9 @@
         <p class="pass-detail-hmpg-date">
             <em>{[ $ctrl.getFormattedDate($ctrl.passObj[0].fields.pass_date) ]}</em>
         </p>
-        <!-- <img class="pass-detail-hmpg-logo" 
-            src="logos/{[$ctrl.passObj.image]}"> -->
 </button>
 
+<button id="openModal{[$ctrl.passNum]}" hidden="true" data-toggle="modal" data-target="#passTransferModal{[$ctrl.passNum]}">Open Modal</button>
 <!-- Modal -->
 <div class="modal" 
     id="passDetailModal{[$ctrl.passNum]}" 

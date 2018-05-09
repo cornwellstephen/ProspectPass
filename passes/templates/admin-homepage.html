@@ -49,24 +49,26 @@
                     </li>
                     {% if user.officer_status %}
                     <li class="nav-item active-li-nav">
-                        <a class="nav-link active" href="../admin-homepage">Admin</a>
+                        <a class="nav-link active" href="../admin-homepage">Officer</a>
                     </li>
                     {% endif %}
                 </ul>
+                <span class="navbar-text">
+                    User: <span class="navbar-text-field">{{user.name}}</span>, Club Affiliation: <span class="navbar-text-field">{{user.user_club}}</span>
+                </span>
             </div>
         </nav>
 
         {% if user.officer_status %}
         <div class="page-main-content">
-            <p class="user-login-info"><strong>User: </strong>{{user.name}}, <strong>Club Affiliation: </strong>{{user.user_club}}</p>
-            <h1 class="hmpg-welcome-banner">Admin Homepage</h1>
+            <h1 class="hmpg-welcome-banner">Officer Homepage</h1>
 
             <div class="main-cont-club-admin" 
                 ng-app="ProspectPassApp" 
                 ng-controller="ProspectUserCtrl as ctrl">
 
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination">
+                    <ul class="pagination justify-content-center">
                         <li class="page-item"><a class="page-link" href="../admin-homepage/#NewClubOfficer">Set New Club Officer</a></li>
                         <li class="page-item"><a class="page-link" href="../admin-homepage/#CreatePassForm">Create and Distribute Pass</a></li>
                         <li class="page-item"><a class="page-link" href="../admin-homepage/#DistributePassForm">Distribute Pass</a></li>
@@ -236,10 +238,8 @@
         {% endif %}
 
         <nav class="navbar bottom navbar-light bg-light">
-            <p class="navbar-text">
-                <strong>ProspectPass</strong> was created for COS 333, Spring 2018.
-            </p>
-            <p class="navbar-text">
+            <p class="navbar-text footer">
+                <strong>ProspectPass</strong> was created for COS 333, Spring 2018. <br/>
                 Stephen Cornwell '20, Yijia Liang '19, Sam Arnesen '20, and Olivia Johnston '20.
             </p>
         </nav>

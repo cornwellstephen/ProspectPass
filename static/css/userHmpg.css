@@ -37,18 +37,35 @@ body {
     padding: 15px 50px;
 }
 
+h3 {
+    color: #062f4f;
+}
+
+.user-hmpg-pass-date-section {
+    /*border: 1px solid #8fd8f2;*/
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0px 20px 0px;
+    color: #062f4f;
+    font-weight: 600;
+    /* text-align: center; */
+    background-color: #f8f9fa;
+}
+
 .admin-hmpg-submit-button {
-    font-size: 21px;
-    text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: 3px;
-    color: #fff;
-    background-color: #11895a;
-    padding: 5px 25px;
+    font-size: large;
+    /* text-transform: uppercase; */
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #062f4f;
+    background-color: #fff;
+    padding: 5px 15px;
+    border: 1px solid #062f4f;
 }
 
 .admin-hmpg-submit-button:hover {
-    background-color: #e24e42;
+    background-color: #062f4f;
+    color: #fff;
 }
 
 .cover-heading {
@@ -61,10 +78,15 @@ body {
 }
 
 .main-cont, .main-cont-club-admin {
-    padding: 20px;
+    padding: 0px 20px 20px 20px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    /* align-items: center; */
     justify-content: center;
+}
+
+.user-hmpg-pass-date-cont {
+
 }
 
 .main-cont-club-admin {
@@ -125,12 +147,12 @@ form.admin-hmpg-form {
 }
 
 .navbar-brand.active {
-    border-bottom: 3px solid #e24e42;
+    border-bottom: 3px solid #062f4f;
     padding-bottom: 2px;
 }
 
 .active {
-    color: #e24e42 !important;
+    color: #062f4f !important;
     padding-bottom: 5px;
 }
 
@@ -160,16 +182,23 @@ form.admin-hmpg-form {
         margin-left: 0px;
         margin-top: -1px;
     }
+
+    .user-hmpg-pass-date-cont  {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+    }
 }
 
 .navbar-brand {
     font-weight: 600;
-/*    color: #062f4f !important;*/
+    color: #062f4f !important;
     margin-top: 0px; 
 }
 
-.active:hover  {
-    color: #d13d31 !important;
+.active.navbar-brand:hover  {
+    border-bottom: 3px solid #062f4f;
 }
 
 /*li.nav-item:hover {
@@ -187,7 +216,7 @@ form.admin-hmpg-form {
 }
 
 .active-li-nav  {
-    border-bottom: 3px solid #e24e42;
+    border-bottom: 3px solid #062f4f;
 }
 
 .navbar-hmpg-format {
@@ -235,9 +264,10 @@ form.admin-hmpg-form {
 
 .user-login-info {
     text-align: right;
-    padding: 20px 25px 0px 0px;
+    padding: 20px 25px 0px 25px;
     margin-bottom: 0px;
     color: #666;
+    font-size: small;
 }
 
 .admin-hmpg-form-radios {
@@ -250,11 +280,12 @@ form.admin-hmpg-form {
     margin: 20px 20px 10px 20px;
     color: #062f4f;
     font-weight: bolder;
-    font-size: xx-large;
+    font-size: 45px;
     /* border: 1px solid #062f4f; */
     padding: 10px 15px;
-    background-color: #8fd8f2;
+    /* background-color: #8fd8f2; */
     border-radius: 5px;
+    text-align: center;
 }
 
 .modal-backdrop
@@ -262,9 +293,54 @@ form.admin-hmpg-form {
     opacity:0.8 !important;
 }
 
-.navbar-text {
+.navbar-text.footer {
     width: 100%;
     text-align: center;
     margin-bottom: 0px;
-    padding: 10px 0px 10px 0px;
+    padding: 15px 0px 20px 0px;
 }
+
+.navbar-text {
+    text-align: right;
+    font-size: small;
+    margin-bottom: 0px;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+}
+
+.navbar-text-field {
+    color: #273f5f;
+}
+
+@media (max-width: 768px) {
+    .pass-detail-cont {
+        height: 145px;
+    }
+
+    .hmpg-welcome-banner {
+        margin: 20px 20px 10px 20px;
+        color: #062f4f;
+        font-weight: bolder;
+        font-size: 35px;
+        /* font-size: 45px; */
+        /* border: 1px solid #062f4f; */
+        padding: 10px 15px;
+         background-color: #fff; 
+        /*background-color: #8fd8f2;*/
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .main-cont {
+        padding: 0px;
+    }
+
+    .user-hmpg-pass-date-section {
+        text-align: center;
+    }
+
+    .navbar-text {
+        text-align: center;
+    }
+}
+

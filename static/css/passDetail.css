@@ -17,12 +17,6 @@
     border-radius: 5px;
 }
 
-@media (max-width: 768px) {
-    .pass-detail-cont {
-        height: 145px;
-    }
-}
-
 .pass-detail-hmpg-activated {
     background-color: #fff;
     font-weight: 700;
@@ -265,3 +259,10 @@
     background-color: #2FA6D4;
   }
 }
+
+@media (max-width: 768px) {
+    .pass-detail-cont {
+        height: 145px;
+    }
+}
+

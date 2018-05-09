@@ -1,4 +1,4 @@
-function PassDetailController($scope, $attrs, $element, $http, $window) {
+function PassDetailController($scope, $attrs, $element, $http, $window, $location, $document) {
     
     this.swapModalDetailToTransfer = function() {
         $("#passDetailModal"+this.passNum).modal('hide');
@@ -40,6 +40,8 @@ function PassDetailController($scope, $attrs, $element, $http, $window) {
 
     $scope.sendUrl;
     $scope.passUserNetid
+    $scope.passId
+    $scope.passNum
     this.getUser;
     this.transferError = false;
 
@@ -67,7 +69,24 @@ function PassDetailController($scope, $attrs, $element, $http, $window) {
     this.$onInit = function() {
         $scope.sendUrl = "/sendpass/" + this.passId + "/";
         $scope.passUserNetid = this.passUserNetid
+        $scope.passId = this.passId
+        $scope.passNum = this.passNum
         this.buttonColor = this.colors[this.passObj[0].fields.color];
+        var url = $window.location.href;
+        if (url.includes("homepage")) {
+            if (url.includes("transferfail") && url.includes($scope.passId)) {
+                this.transferError = true;
+                // how to get modal to show up?
+                    // $("#passTransferModal"+this.passNum).modal('show');
+                    // console.log("openModalButton" + this.passNum);
+                    // console.log(document.getElementById("openModalButton" + this.passNum));
+                    $(window).load(function() {
+                        document.getElementById("openModal" + $scope.passNum).click()
+                    });
+                
+
+            }
+        }
     };
 
     this.activate = function(passId) {
@@ -92,7 +111,8 @@ function PassDetailController($scope, $attrs, $element, $http, $window) {
                 'transferrable': $scope.transferrable
                 });
             }, function errorCallback(response) {
-                this.transferError = true;
+                $window.location.href = '/homepage/#transferfail/' + $scope.passId;
+                location.reload();
                 return;
             });
     }
