@@ -32,7 +32,7 @@ SECRET_KEY = '34&m^3_w6d*2akgu!a8*bq-jfb$ge_v1jd(*aj!rkz-h583s&m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['prospectpass.herokuapp.com', 'localhost','127.0.0.1']
+ALLOWED_HOSTS = ['prospectpass.herokuapp.com', 'localhost','127.0.0.1', 'prospect-pass.herokuapp.com']
 
 CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
 
@@ -152,7 +152,8 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = (
 'localhost:8081',
 '127.0.0.1:8081',
-'prospectpass.herokuapp.com'
+'prospectpass.herokuapp.com',
+'prospect-pass.herokuapp.com'
 )
 
 AUTH_USER_MODEL = 'passes.Student'
