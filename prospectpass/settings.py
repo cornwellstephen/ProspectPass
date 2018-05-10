@@ -30,7 +30,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '34&m^3_w6d*2akgu!a8*bq-jfb$ge_v1jd(*aj!rkz-h583s&m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['prospectpass.herokuapp.com', 'localhost','127.0.0.1', 'prospect-pass.herokuapp.com']
 
@@ -97,7 +97,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'prospectpass',
-        'USER': 'yijia',
+        'USER': 'Yijia',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
@@ -154,7 +154,7 @@ CORS_ORIGIN_WHITELIST = (
 'localhost:8081',
 '127.0.0.1:8081',
 'prospectpass.herokuapp.com',
-'prospect-pass.herokuapp.com'
+'prospect-pass.herokuapp.com',
 )
 
 AUTH_USER_MODEL = 'passes.Student'
