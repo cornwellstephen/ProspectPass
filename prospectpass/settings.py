@@ -34,6 +34,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['prospectpass.herokuapp.com', 'localhost','127.0.0.1', 'prospect-pass.herokuapp.com']
 
+
 CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
 
 # Application definition
