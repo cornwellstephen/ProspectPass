@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'prospectpass.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL')
+        default='postgres://ebjfdfzpdxuezh:619a15dfa6501a6fec8d0b03e9000c92041197288445d9f2dde3da5ebd980ca9@ec2-75-101-142-91.compute-1.amazonaws.com:5432/d3b2s7trmtcu0d'
     )
 }
 
@@ -105,7 +105,7 @@ DATABASES = {
 #         'NAME': 'postgres',
 #         'USER': 'Yijia',
 #         'PASSWORD': '',
-#         'HOST': 'localhost',
+#         'HOST': '',
 #         'PORT': '',
 #     }
 # }
