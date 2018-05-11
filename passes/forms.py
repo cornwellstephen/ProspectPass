@@ -128,7 +128,7 @@ class SingleDist(MultipleForm):
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control admin-hmpg-form-input',
-                'placeholder': 'Number of passes the member will receive.'
+                'placeholder': 'Number of passes the student will receive.'
             }
         ),
         required=False
