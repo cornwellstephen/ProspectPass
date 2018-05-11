@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import dj_database_url
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,7 +27,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'SECRET_KEY'
+SECRET_KEY = '34&m^3_w6d*2akgu!a8*bq-jfb$ge_v1jd(*aj!rkz-h583s&m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -96,7 +95,7 @@ WSGI_APPLICATION = 'prospectpass.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='DATABASE_URL'
+        default='postgres://bwmskkrbsgjyoc:4ae5e9b7eee21268657942c7c7d167f9c6b6f23299045f1df70cf8f9fa2cea69@ec2-107-20-151-189.compute-1.amazonaws.com:5432/d64rlnpvckmng'
     )
 }
 
@@ -174,4 +173,4 @@ STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
 
 STATIC_URL = '/static/'
 
-django_heroku.settings(locals())
+
