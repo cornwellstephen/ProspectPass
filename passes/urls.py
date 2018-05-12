@@ -10,10 +10,6 @@ router.register(prefix="students", viewset=StudentViewSet, base_name="Student")
 router.register(prefix="passes", viewset=PassViewSet)
 
 
-# urlpatterns = [
-	# url(r'^$', views.Index.as_view(), name = 'index'),
-	# url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
-# ]
 urlpatterns = [
 	url(r'^$', views.Index.as_view(), name = 'index'),
 	url(r'^homepage/$', views.Homepage.as_view(), name = 'homepage'),
@@ -27,6 +23,5 @@ urlpatterns = [
 	url(r'^madepass/$', views.MadePass.as_view(), name = 'madepass'),
 	url(r'^fileuploaded/$', views.FileUploaded.as_view(), name = 'fileuploaded'),
 	url(r'^restapi/', include(router.urls)),
-	# url(r'^restapi/students/(?P<username>.+)/$', )
 	url(r'^api-auth/', include('rest_framework.urls', namespace ='rest_framework')),
 ]
