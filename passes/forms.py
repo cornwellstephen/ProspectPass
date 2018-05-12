@@ -66,7 +66,7 @@ class AddOfficerForm(MultipleForm):
                 'class':'form-control admin-hmpg-form-input'
             }
         ),
-        required=False
+        required=True
     )
     source = forms.CharField(
         max_length=50, 
@@ -104,12 +104,12 @@ class SingleDist(MultipleForm):
         label='Transferable:', 
         initial=True,
         disabled=True,
-        widget=forms.CheckboxInput(
+        widget=forms.HiddenInput(
             attrs={
                 'class': 'form-control admin-hmpg-form-checkbox',
             }
         ),
-        required=False
+        required=False,
     )        
     person = forms.CharField(
         label='NetId', 
@@ -119,7 +119,7 @@ class SingleDist(MultipleForm):
                 'class':'form-control admin-hmpg-form-input'
             }
         ),
-        required=False
+        required=True
     )
     number = forms.IntegerField(
         label='Count', 
@@ -131,7 +131,7 @@ class SingleDist(MultipleForm):
                 'placeholder': 'Number of passes the student will receive.'
             }
         ),
-        required=False
+        required=True
     )
     source = forms.CharField(
         max_length=50, 
@@ -151,7 +151,7 @@ class SingleDist(MultipleForm):
 
     def clean_passes(self):
         _pass = self.cleaned_data['passes']
-        if _pass is None:
+        if _pass is None or _pass == "":
             return "pass_wrong"
         return _pass
 
@@ -173,7 +173,7 @@ class MakePassForm(MultipleForm):
                 'placeholder': 'What date should this pass be used on?'
             }
         ),
-        required=False
+        required=True
     )
     color = forms.CharField(
         label='Pick a color for this pass:', 
@@ -184,7 +184,7 @@ class MakePassForm(MultipleForm):
                 'placeholder': 'What color should this pass be?'
             }
         ),
-        required=False
+        required=True
     )
     number_pass = forms.IntegerField(
         label='Count', 
@@ -196,7 +196,7 @@ class MakePassForm(MultipleForm):
                 'placeholder': 'Number of passes each member will receive.'
             }
         ),
-        required=False
+        required=True
     )
     source = forms.CharField(
         max_length=50, 
@@ -219,7 +219,7 @@ class MakePassForm(MultipleForm):
 
 
 class UploadFileForm(MultipleForm):
-    file = forms.FileField(required=False)
+    file = forms.FileField(required=True)
     source = forms.CharField(
         max_length=50, 
         widget=forms.HiddenInput(), 

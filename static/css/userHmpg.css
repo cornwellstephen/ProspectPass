@@ -15,6 +15,16 @@ body {
     flex: 1;
 }
 
+.user-hmpg-logout {
+    color: #273f5f;
+    text-decoration: dotted underline;
+}
+
+.user-hmpg-logout:hover {
+    color: #062f4f;
+    text-decoration: underline;
+}
+
 .index-hmpg-cont {
     background-color: #8fd8f2;
     display: flex;

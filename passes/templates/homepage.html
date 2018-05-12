@@ -24,7 +24,7 @@
 
     <body>
 
-        <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
+        <nav class="navbar sticky-top navbar-expand-md navbar-light bg-light">
             <a class="navbar-brand" 
                 href="../">
                     ProspectPass
@@ -43,9 +43,14 @@
                     </li>
                     {% endif %}
                 </ul>
-                <span class="navbar-text">
-                    User: <span class="navbar-text-field">{{user.name}}</span>, Club Affiliation: <span class="navbar-text-field">{{user.user_club}}</span>
-                </span>
+                
+                    <span class="navbar-text">
+                        User: <span class="navbar-text-field">{{user.name}}</span>, Club Affiliation: <span class="navbar-text-field">{{user.user_club}}</span><br/>
+                        <a href="../logout" class="user-hmpg-logout">LOGOUT</a>
+                    </span>
+
+                        <!-- <a href="../logout">LOGOUT</a> -->
+
             </div>
         </nav>
         <div class="page-main-content">

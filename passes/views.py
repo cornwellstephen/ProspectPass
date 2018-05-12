@@ -164,7 +164,7 @@ class MultipleFormsDemoView(LoginRequiredMixin, MultiFormsView):
         pass_date = form.cleaned_data['pass_date']
         if pass_date == "date_wrong":
             return HttpResponseRedirect('/admin-homepage/#CreatePassForm/createfail/')
-        color = form.cleaned_data['color']
+        color = form.cleaned_data['color']    
         number = form.cleaned_data['number_pass']
         if number == "number_wrong":
             return HttpResponseRedirect('/admin-homepage/#CreatePassForm/createfail/')
