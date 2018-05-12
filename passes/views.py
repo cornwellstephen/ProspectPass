@@ -26,7 +26,6 @@ ERROR_CODES= {'uploadError':False,
 # Create your views here.
 class Index(generic.ListView):
     template_name = 'index.html'
-
     def get_queryset(self):
         return
 
@@ -56,31 +55,43 @@ class PassViewSet(viewsets.ModelViewSet):
 
 class SentPass(generic.ListView):
     template_name = 'sentpass.html'
+    login_url = 'login/'
+    raise_exception = False
     def get_queryset(self):
         return
 
 class AddedOfficer(generic.ListView):
     template_name = 'addedofficer.html'
+    login_url = 'login/'
+    raise_exception = False
     def get_queryset(self):
         return
 
 class FileUploaded(generic.ListView):
     template_name = 'fileuploaded.html'
+    login_url = 'login/'
+    raise_exception = False
     def get_queryset(self):
         return
 
 class OfficerAlreadyAdded(generic.ListView):
     template_name = 'officer-already-added.html'
+    login_url = 'login/'
+    raise_exception = False
     def get_queryset(self):
         return
 
 class MadePass(generic.ListView):
     template_name = 'madepass.html'
+    login_url = 'login/'
+    raise_exception = False
     def get_queryset(self):
         return
 
 class Distributed(generic.ListView):
     template_name = 'distributed.html'
+    login_url = 'login/'
+    raise_exception = False
     def get_queryset(self):
         return
 
