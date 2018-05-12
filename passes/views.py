@@ -101,6 +101,8 @@ def send_pass(request, pk):
             # passId = form.cleaned_data['passId']
             source_user = Student.objects.all().filter(NetId=source)[0]
             target_pass = Pass.objects.all().filter(pk=pk)[0]
+            if target_pass.activated == True:
+                return HttpResponseRedirect('/homepage/#transferfail/');
             if source_user.officer_status is True and source_user.user_club == target_pass.club_name:
                 source_user.officerDirectSend(target_pass, netid, transferrable)
             else:
